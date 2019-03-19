@@ -1,0 +1,98 @@
+<div class="row form">
+		
+
+		
+		<form action="">
+	  	<h1 class="text-left">Dejanos tu consulta</h1>		
+	  			<div class="row">
+	  				<div class="col-sm-6">
+	  					<input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre">
+	  					<div class="error" id="nombre-error">Ingrese un nombre</div>
+	  				</div>
+	  				<div class="col-sm-6">
+	  					<input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido">
+	  					<div class="error" id="apellido-error">Ingrese un apellido</div>
+	  				</div>
+	  			</div>
+
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="col-sm-6 no-padding">
+							<select name="tipo-doc" id="tipo-doc" class="form-control form-small">
+				  				<option value="DNI">DNI</option>
+				  				<option value="DNI2">DNI2</option>
+				  				<option value="DNI3">DNI2</option>
+		  					</select>		
+		  					<div class="error" id="tipo-evento-error">Ingrese un tipo de evento</div>
+						</div>
+						<div class="col-sm-6 ">
+							<input type="text" class="form-control" name="documento" id="documento" placeholder="N° de doc">
+		  					<div class="error" id="documento-error">Ingrese un documento</div>	
+						</div>
+	  				</div>
+	  				<div class="col-sm-6">
+	  					<input type="text" class="form-control" name="telefono" id="telefono" placeholder="Tel de contacto">
+	  					<div class="error" id="telefono-error">Ingrese un telefono</div>		
+	  				</div>
+	  			</div>
+
+
+
+	  			<div class="row">
+	  				<div class="col-sm-12">
+	  					<input type="text" class="form-control" name="email" id="email"placeholder="Mail">
+	  					<div class="error" id="email-error">Ingrese un email valido</div>
+	  				</div>
+	  			</div>
+
+	  			<div class="row">
+	  				<div class="col-sm-12">
+	  					<input type="text" class="form-control" name="domicilio" id="domicilio" placeholder="Domicilio particular">
+	  					<div class="error" id="domicilio-error">Ingrese un domicilio valido</div>
+	  				</div>
+	  			</div>
+
+
+	  			<div class="row">
+	  				<div class="col-sm-12">
+	  					<div class="col-sm-6 no-padding">
+	  						<input type="text" class="form-control" name="numero-piso-depto" id="numero-piso-depto" placeholder="Número Piso Depto">
+	  						<div class="error" id="domicilio-error">Ingrese datos validos</div>
+	  					</div>
+	  					<div class="col-sm-6">
+	  						<input type="text" class="form-control" name="provincia" id="provincia" placeholder="Provincia">
+	  						<div class="error" id="provincia-error">Ingrese una provincia valida</div>
+	  					</div>
+	  					
+	  				</div>
+	  			</div>
+				
+				<div class="row">
+	  				<div class="col-sm-12">
+	  					<div class="col-sm-6 no-padding">
+	  						<input type="text" class="form-control" name="localidad" id="localidad" placeholder="Localidad">
+	  						<div class="error" id="localidad-error">Ingrese una localidad valida</div>
+	  					</div>
+	  					<div class="col-sm-6">
+	  						<input type="text" class="form-control" name="cod-postal" id="cod-postal" placeholder="Cod. Postal">
+	  						<div class="error" id="cod-postal-error">Ingrese un codigo postal valido</div>
+	  					</div>
+	  					
+	  				</div>
+	  			</div>
+	  			
+	  			<div class="row">
+	  				<div class="col-sm-12">
+	  					<label for="comentarios">Consulta:</label>
+	  					<textarea name="mensaje" id="mensaje" cols="30" rows="5" id="comentarios" class="form-control"></textarea>		
+	  				</div>
+	  			</div>
+
+	  			<div class="row">
+	  				<div class="col-sm-12">
+	  					
+	  					<a class="btn" onClick="validar()">ENVIAR</a>		
+	  				</div>
+	  			</div>
+	  		</form>
+	</div>

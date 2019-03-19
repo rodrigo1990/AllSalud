@@ -1,0 +1,562 @@
+
+@font-face {
+    font-family: GothamMedium;
+    src: url(../fonts/GothamMedium.otf);
+}
+
+@font-face {
+    font-family: GothamBook;
+    src: url(../fonts/GothamBook.otf);
+}
+
+@font-face {
+    font-family: GothamBold;
+    src: url(../fonts/Gotham-Bold.otf);
+}
+
+
+@font-face {
+    font-family: RobotoBold;
+    src: url(../fonts/RobotoSlab-Bold.ttf);
+}
+
+
+
+
+/******************************************************/
+
+.bk-gris{
+	background-color:#F8F8F8;
+}
+
+.bk-lightblue{
+	background-color:rgba(0,188,213,0.8);
+
+}
+
+.bk-blue{
+	background-color:rgba(17,73,128,0.8);
+}
+
+.no-padding{
+	padding:0;
+}
+
+body{
+	overflow-x: hidden;
+}
+
+
+h5{
+    font-family: GothamMedium
+}
+
+p{
+    font-family: GothamBook;
+}
+
+p b {
+    font-family: GothamBold;
+}
+
+h1,h2,h4{
+    font-family: RobotoBold;
+}
+
+/*---------------------------------------------*/
+                /*SLIDER*/
+/*----------------------------------------------*/
+
+#owl-1{
+	margin-top: 116px;
+}
+
+
+.slide{
+    position:relative;
+    width:100%;
+    height: 45vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#owl-1 #slide-1{
+	background-image:url(../storage/slider/slide-1.jpg);
+}
+
+
+#owl-1 #slide-2{
+	background-image:url(../storage/slider/slide-2.jpg);
+}
+
+
+#owl-1 #slide-3{
+    background-image:url(../storage/slider/slide-3.jpg);
+}
+
+
+.owl-carousel .owl-stage-outer{
+  z-index: -1 !important;
+}
+
+.owl-theme .owl-nav.disabled+.owl-dots {
+    margin-top: -47px !important;
+}
+
+.owl-theme .owl-dots .owl-dot span{
+      background: white !important;
+    width: 5px;
+    height: 5px;
+    margin: auto;
+
+}
+
+.owl-theme .owl-dots .owl-dot.active {
+      background: transparent !important;
+      border-color:white;
+      animation: opacity_animation 1s;
+}
+.owl-theme .owl-dots .owl-dot{
+  outline:none;
+}
+
+.slider-footer {
+    margin-top: 22px;
+    background-color: #114980;
+        padding: 6px;
+}
+
+
+.slider-footer ul, footer ul {
+    text-align: center;
+    margin: auto;
+    padding: 0;
+    width: 434px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background-color: #114980;
+    height: 23px;
+    color: white;
+}
+
+
+.slider-footer ul li{
+	margin-left:50px;
+	float:left;
+	list-style: none;
+}
+
+
+
+
+/*---------------------------------------------*/
+                /*HEADER*/
+/*----------------------------------------------*/
+
+header{
+    padding: 1.5% 1% 1.5% 1%;
+    position:fixed;
+    top:0;
+    z-index: 3;
+    width: 100%;
+    font-family: GothamBook ;
+}
+
+
+header ul {
+	list-style: none;
+	float:right;
+    margin-top: 13px;
+    padding: 0;
+}
+
+header ul li {
+	float:left;
+}
+
+
+header ul li:not(:first-child){
+	margin-left:25px;
+}
+
+
+header ul li a {
+    color:#114980;
+    transition:color 0.5s;
+    letter-spacing: 5px;
+}
+
+header ul li a:hover{
+    color:#6EC39A;
+    transition: color 0.5s;
+    text-decoration: none;
+}
+
+header ul li a:active,header ul li a:focus{
+    color:#6EC39A;
+    text-decoration: none;
+}
+
+header ul li a i {
+    color:white;
+    transition: color 0.5s;
+}
+
+header ul li a i:hover{
+    color:#6EC39A;
+    transition: color 0.5s;
+}
+
+
+.close-menu-xs{
+    float:right;
+    margin-top: 4%;
+    margin-right: 4%;
+}
+
+
+
+.close-menu-xs i{
+    font-size: 2rem;
+    color:#6EC39A;
+}
+.xs-row img{
+    float:left;
+}
+
+
+ .logo{
+    width: 148px !important;
+}
+
+.xs-row{
+    position:absolute;
+    top:0;
+    z-index: 2;
+}
+
+
+.xs-row i{
+    float:right;
+    font-size: 13rem;
+    color:#6EC39A;
+}
+
+
+.btn-cont{
+    height: 48.875px;
+}
+
+
+.overlay-xs-menu {
+    width: 100vw;
+    height: 0;
+    position: fixed;
+    z-index: 50000;
+    display: block;
+        background-color: rgba(45,45,45,0.9);
+    animation: openMenu 0.9s cubic-bezier(.19,1,.22,1) forwards;
+    padding-left: 0;
+    text-align: center;
+    display: none;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.overlay-xs-menu li {
+    margin-top: 14%;
+}
+
+
+
+
+
+.overlay-xs-menu .left {
+    float:left;
+        margin-left: 16px;
+}
+
+.overlay-xs-menu li a.xs-btn {
+    font-size: 2.3rem;
+    color: #6EC39A;
+    transition: color 0.5s;
+}
+
+
+.overlay-xs-menu li a.xs-btn:hover {
+    color: white;
+    text-decoration: none;
+    transition: color 0.5s
+}
+
+.overlay-xs-menu .center-block{
+    width: 87px;
+}
+
+@keyframes openMenu{
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 100%;
+    }
+}
+
+
+.addBkground{
+    background:rgba(45,45,45,0.70);
+    transition:background 0.5s;
+}
+
+.removeBkground{
+    background:transparent;
+    transition:background 0.5s;
+}
+
+/*---------------------------------------------*/
+                /*ICONS*/
+/*----------------------------------------------*/
+
+.icons{
+	margin-top:60px;
+}
+
+
+.icons ul{
+    display: flex;
+    flex-direction: row;
+    width: 436px;
+    margin: auto;
+    padding: 0;
+}
+
+
+.icons ul li {
+	margin-left:25px;
+	list-style:none;
+	text-align: center;
+    font-family: GothamMedium
+}
+
+.icons ul li img{
+	    width: 74px;
+}
+
+
+/*---------------------------------------------*/
+                /*CONOCE-ALL*/
+/*----------------------------------------------*/
+
+.conoce-all{
+	text-align: center;
+	margin-top:60px;
+}
+
+
+/*---------------------------------------------*/
+                /*QUIERO SER SOCIO*/
+/*----------------------------------------------*/
+
+
+.quiero-ser-socio{
+	margin-top:60px;
+}
+
+
+
+/*---------------------------------------------*/
+                /*ATENCION AL SOCIO*/
+/*----------------------------------------------*/
+
+.atencion-al-socio{
+	text-align: center;
+}
+
+.atencion-al-socio .nro{
+    width: 225px;
+    margin: auto;
+    height: 39px;
+}
+
+.atencion-al-socio .nro h1,.atencion-al-socio .nro img{
+	float:left;
+}
+
+.atencion-al-socio .nro h1{
+	float:left;
+	margin:0;
+	margin-left:10px;
+}
+
+.atencion-al-socio-cont h2{
+	margin-top:0;
+}
+
+.atencion-al-socio-cont .nro{
+	margin-top:15px;
+}
+
+/*---------------------------------------------*/
+                /*FORMULARIO*/
+/*----------------------------------------------*/
+
+
+ .form{
+
+    width: 100%;
+    height: auto;
+    z-index: 0;
+}
+
+#contacto .row{
+        margin-right: 0;
+    margin-left: 0;
+}
+
+#contacto{
+    background-image: url(../img/galeria/2.jpg);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+
+
+.form form{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    /* color: #6EC39A; */
+    z-index: 100;
+    padding-bottom: 5%;
+
+}
+
+.form form h1{
+  font-family: raleway-b;
+    z-index: 1000000000000000000000000000000000;
+    letter-spacing: 3px;
+    color:white;
+}
+
+.form form label,form input{
+  color:white;
+  font-family: raleway;
+}
+
+@-moz-document url-prefix() {
+   footer form input[type="date"]{
+      color:white;
+      font-family: raleway;
+    }
+}
+
+
+.form form .row{
+  margin-top: 20px;
+}
+
+.form form input,.form form select{
+  background-color: transparent !important;
+      border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom-color: white;
+    border-radius:0px !important;
+  color:white !important;
+  padding-left:0 !important;
+  outline:0;
+  box-shadow: inset 0 0px 0px rgba(0,0,0,.075);
+}
+
+
+input::placeholder { color: white; }
+
+::placeholder {
+  color: white !important;
+}
+
+.form form textarea{
+  background-color: transparent !important;
+  border:1px solid white;
+  color:white;
+}
+
+
+.form .btn{
+  float:right;
+  background-color: transparent;
+  border:1px solid #6EC39A;
+  padding: 5px 19px 5px 19px;
+  color:white;
+  font-family: raleway-m;
+  font-size: 17px;;
+  transition:background-color 0.5s; 
+}
+
+.form .btn:hover{
+  background-color:#6EC39A;
+  transition:background-color 0.5s; 
+}
+
+
+.form-control:focus {
+    border-color: rgba(0,188,213) !important;
+    outline: 0 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    transition:border-color 1s;
+}
+
+
+
+.error{
+  display:none;
+}
+
+.contacto-cont,.atencion-al-socio-cont{
+	padding:40px;
+}
+
+
+.bk-img{
+	background-image:url(../storage/img/bk-img.jpg);
+	background-repeat: no-repeat;
+	    background-position: center;
+    background-size: cover;
+
+}
+
+
+/*---------------------------------------------*/
+                /*FOOTER*/
+/*----------------------------------------------*/
+
+
+footer{
+	background-color: #114980;
+}
+
+footer ul {
+    text-align: center;
+    margin: auto;
+    padding: 0;
+    width: 434px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    height: 23px;
+    color: white;
+}
+
+
+
+footer ul li{
+	margin-left:50px;
+	float:left;
+	list-style: none;
+}
