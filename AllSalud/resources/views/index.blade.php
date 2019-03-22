@@ -65,8 +65,18 @@
 				</div>
 			</div>
 		</div>
-
-
+		
+		<div class="row">
+			<div class="container">
+				<select name="provincias" id="provincia-select" class='' onChange="buscarCiudadSegunProvincia()">
+							<option value="" selected>Selecciona tu provincia</option>
+							@foreach($provincias as $item)
+								<option value="{{$item->id}}">{{$item->provincia_nombre}}</option>
+							@endforeach
+						</select>
+			</div>
+		</div>
+		
 
 		<div class="row bk-img">
 				<div class="col-sm-12 bk-lightblue atencion-al-socio-cont">
