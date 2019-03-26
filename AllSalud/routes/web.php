@@ -12,3 +12,8 @@
 */
 
 Route::get('/','frontController@index');
+
+
+/*AJAX ROUTES*/
+
+Route::post('/buscarCiudadSegunProvincia','AjaxController@buscarCiudadSegunProvincia');

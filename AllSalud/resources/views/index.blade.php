@@ -69,11 +69,15 @@
 		<div class="row">
 			<div class="container">
 				<select name="provincias" id="provincia-select" class='' onChange="buscarCiudadSegunProvincia()">
-							<option value="" selected>Selecciona tu provincia</option>
-							@foreach($provincias as $item)
-								<option value="{{$item->id}}">{{$item->provincia_nombre}}</option>
-							@endforeach
-						</select>
+					<option value="" selected>Selecciona tu provincia</option>
+					@foreach($provincias as $item)
+						<option value="{{$item->id}}">{{$item->provincia_nombre}}</option>
+					@endforeach
+				</select>
+
+				<select name="localidad" id="localidad-select" class=''>
+					<option value="">Seleccionas localidad</option>
+				</select>
 			</div>
 		</div>
 		
@@ -107,5 +111,38 @@
 
 
 	@include('footer')
+	<script>
+		
+		function buscarCiudadSegunProvincia(){
+
+			var provinciaId = $("#provincia-select").val();
+
+		
+				$.ajax({
+					headers: {
+   					 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  					},
+				data:{provinciaId},
+				url:'/buscarCiudadSegunProvincia',
+				type:'post',
+				dataType:"json",
+				success:function(data){
+					$("#localidad-select").empty();
+				//console.log(data);
+						for(var i in data) {	
+
+								$("#localidad-select").append("<option value="+data[i].id+"> "+
+									data[i].ciudad_nombre+"</option>");				
+							}
+
+				
+
+
+
+				}
+				});
+
+		}
+	</script>
 	@stop
 	
