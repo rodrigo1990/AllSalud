@@ -1,3 +1,13 @@
 a{
 	cursor:pointer;
 }
+
+input.controls{
+	    z-index: 0;
+    position: absolute;
+    left: 195px;
+    top: 0px;
+    width: 60%;
+    margin-top: 8px;
+    height: 48px;
+}

@@ -119,7 +119,7 @@
 
 
 	function eliminarLocacion(){
-		$("#locacion"+i+"").empty();
+		$("#locacion"+i+"").remove();
 
 		if(i>1)
 			i--;
