@@ -109,8 +109,6 @@
 							</ul>
 						</div>
 						<div class="col-sm-6  padding-right-0" id="map-cont">
-							    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-
 						</div>
 					</div>
 				</div>
@@ -183,10 +181,7 @@
 		}
 	</script>
 	<script>
-		window.map=0;
-		window.interaccionMapa=0;
-		window.markers=[];
-		window.interaccionPuntoEnMapa=0;
+
 		function ajustarHeightmap(){
 			$("#map").height($(".cartilla .tipos").height());
 		}
@@ -201,34 +196,25 @@
 				type:'post',
 				dataType:"json",
 				success:function(data){
-
 					var k=0;
-
+					console.log(data);
 					var locations=[];
-
 					$(".cartilla .establecimientos").empty();
-
-					interaccionMapa++;
-					console.log("interaccion con mapa");
-					console.log(interaccionMapa);
+					
 
 						for(var i in data) {	
-							
 							k++;					
+							$(".cartilla .establecimientos").append("<li class='animated bounceInLeft'><div class='col-sm-2 nro'>"+k+"</div><div class='col-sm-10'><p>"+
+								data[i].nombre+ "</p><p class='float-left'>"+data[i].domicilio+" </p><p class='float-left margin-left-5'> "+data[i].ciudad_nombre+"</p></div></li>");
 
-							$(".cartilla .establecimientos").append("<li class='animated fadeIn'><div class='col-sm-2 nro'>"+k+"</div><div class='col-sm-10'><p>"+
-								data[i].nombre+ "</p><p class='float-left'>"+data[i].domicilio+" </p><p class='float-left margin-left-5'> "+data[i].ciudad_nombre+"</p><br><a onClick='zoomOnLocation("+data[i].latitud+","+data[i].longitud+")'>Detalle</a></div></li>");
+
 
 							 locations.push([''+data[i].nombre+'<br>'+data[i].domicilio+' '+data[i].ciudad_nombre+'',data[i].latitud,data[i].longitud]);
 
+
 						}//for
 
-						if(interaccionMapa==1)
-							initMap(locations);
-						else
-							deleteMarkers();
-							agregarLocaciones(locations);
-							updateZoom(5);
+						initMap(locations);
 
 
 					}//success
@@ -238,189 +224,33 @@
 	
 
 	function initMap(locations) {
-
-		/****************CREAR MAPA**********************/
 		  var center = {lat: -33.989067, lng: -62.826216};
-		  var locations = locations;
 
-		$("#map-cont").append("<div id='map' class='animated bounceInRight'></div>")
+		$("#map-cont").html("<div id='map' class='animated bounceInRight'></div>")
 		ajustarHeightmap();
-		
-		map = new google.maps.Map(document.getElementById('map'), {
+		var map = new google.maps.Map(document.getElementById('map'), {
 		    zoom: 5,
 		    center: center
 		  });
-
-
-		//evento para elegir lugares
-		 google.maps.event.addListener(map, 'click', function(event) {
-		    placeMarker(event.latLng);
-		  });
-
-		 /******************CREACION DE INPUT PARA BUSCAR LUGARES***************************/
-		 // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-        });
-
-
-
-		
-
-
-		 // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
-
-          if (places.length == 0) {
-            return;
-          }
-
-          // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
-          markers = [];
-
-          // For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-          places.forEach(function(place) {
-            if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
-            }
-            var icon = {
-              url: place.icon,
-              size: new google.maps.Size(71, 71),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-              map: map,
-              icon: icon,
-              title: place.name,
-              position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-
-            getCoordinates();
-
-          });
-          map.fitBounds(bounds);
-        });
-
-        /******************FIN DE CREACION DE INPUT PARA BUSCAR LUGARES***************************/
-		agregarLocaciones(locations);
-
-	
+		var infowindow =  new google.maps.InfoWindow({});
+		var marker, count;
+		for (count = 0; count < locations.length; count++) {
+		    marker = new google.maps.Marker({
+		      position: new google.maps.LatLng(locations[count][1], locations[count][2]),
+		      map: map,
+		      title: locations[count][0]
+		    });
+		google.maps.event.addListener(marker, 'click', (function (marker, count) {
+		      return function () {
+		        infowindow.setContent(locations[count][0]);
+		        infowindow.open(map, marker);
+		      }
+		    })(marker, count));
+		  }
 		}
-
-
-
-		function agregarLocaciones(locations){
-			var infowindow =  new google.maps.InfoWindow({});
-			var marker,count;
-
-			for (count = 0; count < locations.length; count++) {
-			    marker = new google.maps.Marker({
-			      position: new google.maps.LatLng(locations[count][1], locations[count][2]),
-			      map: map,
-			      title: locations[count][0]
-			    });
-			google.maps.event.addListener(marker, 'click', (function (marker, count) {
-			      return function () {
-			        infowindow.setContent(locations[count][0]);
-			        infowindow.open(map, marker);
-			      }
-			    })(marker, count));
-
-				markers.push(marker);
-			  	
-			  }
-
-			  console.log(markers.length);
-		}
-
-
-		 function setMapOnAll(dataMap) {
-	        for (var i = 0; i < markers.length; i++) {
-	          markers[i].setMap(dataMap);
-	        }
-    	  }
-
-	      // Removes the markers from the map, but keeps them in the array.
-	      function clearMarkers() {
-	        setMapOnAll(null);
-	      }
-
-	      // Shows any markers currently in the array.
-	      function showMarkers() {
-	        setMapOnAll(map);
-	      }
-
-	      // Deletes all markers in the array by removing references to them.
-	      function deleteMarkers() {
-	        clearMarkers();
-	        markers = [];
-	      }
-
-
-	      function updateZoom(zoom){
-	      	map.setZoom(zoom);
-	      }
-
-
-	      function zoomOnLocation(latitud,longitud){
-	      	var center = {lat: latitud, lng: longitud};
-
-	      	map.setCenter(center);
-	      	map.setZoom(100);
-
-	      	console.log(map.getCenter().lat());
-	      	console.log(map.getCenter().lng());
-	      }
-
-	      function placeMarker(location) {
-	      	deleteMarkers();
-			  var marker = new google.maps.Marker({
-			      position: location, 
-			      map: map
-			  });
-
-			markers.push(marker);
-
-			  map.setCenter(location);
-
-			  getCoordinates();
-
-			  
-
-
-			}
-
-
-			function getCoordinates(){
-				alert(map.getCenter().lat());
-	      	  alert(map.getCenter().lng());
-			}
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkne1gpPfJ0B3KrE4OQURwPi492LDjg8g&libraries=places">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkne1gpPfJ0B3KrE4OQURwPi492LDjg8g&">
     </script>
     @stop
 	

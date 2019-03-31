@@ -12,8 +12,34 @@
 */
 
 Route::get('/','frontController@index');
+Route::get('/admin','frontController@indexAdmin');
+
+Route::get('/admin/home','frontController@adminHome');
+
+
+Route::get('/prueba/','PruebaController@form');
+Route::post('/prueba/datos/','PruebaController@datos');
 
 
 /*AJAX ROUTES*/
 
 Route::post('/buscarCiudadSegunProvincia','AjaxController@buscarCiudadSegunProvincia');
+Route::post('/buscarPorTipoEstablecimiento','AjaxController@buscarPorTipoEstablecimiento');
+
+
+/*LOGIN ROUTES*/
+
+Route::post('/login','ValidationController@login');
+
+/*ESTABLECIMIENTOS ROUTES*/
+Route::get('admin/altaEstablecimiento','EstablecimientoController@altaEstablecimiento');
+
+Route::post('admin/createEstablecimiento','EstablecimientoController@createEstablecimiento');
+
+Route::get('admin/eliminarEstablecimiento','EstablecimientoController@eliminarEstablecimiento');
+
+Route::get('admin/eliminarEstablecimiento2','EstablecimientoController@eliminarEstablecimiento2');
+
+Route::get('admin/detalleEstablecimiento/{id}','EstablecimientoController@detalleEstablecimiento');
+
+
