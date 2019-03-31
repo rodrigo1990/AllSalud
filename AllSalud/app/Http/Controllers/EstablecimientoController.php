@@ -74,6 +74,16 @@ class EstablecimientoController extends Controller
     }
 
 
+    public function updateEstablecimiento(Request $request){
+
+
+        $this->establecimientoService->updateEstablecimiento($request);
+
+         return redirect()->action('EstablecimientoController@detalleEstablecimiento', ['id' => $request->id]);
+
+    }
+
+
 
 
 }

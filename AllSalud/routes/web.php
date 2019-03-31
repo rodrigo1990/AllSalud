@@ -42,4 +42,6 @@ Route::get('admin/eliminarEstablecimiento2','EstablecimientoController@eliminarE
 
 Route::get('admin/detalleEstablecimiento/{id}','EstablecimientoController@detalleEstablecimiento');
 
+Route::post('admin/updateEstablecimiento/','EstablecimientoController@updateEstablecimiento');
+
 

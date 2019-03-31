@@ -28,6 +28,11 @@ class EstablecimientoService
     }
 
 
+      public function updateEstablecimiento($request){
+
+         $this->establecimientoDao->updateEstablecimiento($request);
+      
+    }
    
    
 }
