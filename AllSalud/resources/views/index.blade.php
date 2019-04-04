@@ -187,6 +187,7 @@
 		window.interaccionMapa=0;
 		window.markers=[];
 		window.interaccionPuntoEnMapa=0;
+		window.centerGlobal = {lat: -33.989067, lng: -62.826216};
 		function ajustarHeightmap(){
 			$("#map").height($(".cartilla .tipos").height());
 		}
@@ -240,7 +241,7 @@
 	function initMap(locations) {
 
 		/****************CREAR MAPA**********************/
-		  var center = {lat: -33.989067, lng: -62.826216};
+		  var center = centerGlobal;
 		  var locations = locations;
 
 		$("#map-cont").append("<div id='map' class='animated bounceInRight'></div>")
@@ -335,6 +336,10 @@
 		function agregarLocaciones(locations){
 			var infowindow =  new google.maps.InfoWindow({});
 			var marker,count;
+
+			map.setZoom(5);
+			map.setCenter(centerGlobal);
+
 
 			for (count = 0; count < locations.length; count++) {
 			    marker = new google.maps.Marker({

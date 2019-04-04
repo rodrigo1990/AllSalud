@@ -1,12 +1,13 @@
 @extends('admin.layouts.principal')
 @section('content')
-<table>
+<div class="container">
+<table class="table table-hover animated bounceInLeft">
 	<thead>
 		<tr>
 			<th>id</th>
 			<th>nombre</th>
 			<th>ciudad</th>
-			<th>actualizar/eliminar</th>
+			<th>actualizar</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -22,9 +23,9 @@
 			@endforeach
 		</td>
 		<td>
-			<a href="/admin/detalleEstablecimiento/{{$establecimiento->id}}/" target="_blank">Actulizar/eliminar</a>
+			<a href="/admin/detalleEstablecimiento/{{$establecimiento->id}}/" >Actulizar/eliminar</a>
 		</td>
-		
+
 
 
 	</tr>
@@ -33,8 +34,14 @@
 
 	</tbody>
 </table>
+</div>
 @stop
+@section('scripts')
+	
+<script>
 
+</script>
+@stop
 
 
 

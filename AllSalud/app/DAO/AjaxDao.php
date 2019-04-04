@@ -39,4 +39,29 @@ class AjaxDAO
 
         return $establecimientos;   
   }
+
+
+
+    public function deleteEstablecimiento( $request){
+      
+      $establecimiento =  Establecimiento::find($request->id);
+
+      $establecimiento->Domicilio()->detach();
+
+      $establecimiento->delete();
+
+      return true;
+    }
+
+    public function deleteLocacion($request){
+
+      DB::table('establecimiento_ciudad')
+          ->where('id',$request->idLocacion)
+          ->delete();
+
+          return true;
+
+    }
+
+
 }

@@ -8,99 +8,157 @@
 			$latitudesJs= array();
 			$longitudesJs= array();
 	 	?>
-	<form action="/admin/updateEstablecimiento" method="POST">
-		@csrf
-		<div id="content">
-			<input type="hidden" name="id" value="{{$establecimiento->id}}">
-			<br>
-			<label for="nombre">Nombre</label>
-			<input type="text" name="nombre" value={{$establecimiento->nombre}}>
-			<br>
-			<label for="">Tipo</label>
-			<select name="tipo_id" id="tipo">
-				@foreach($tipos as $tipo)
-					@if($tipo->id == $establecimiento->tipo->id )
-						<option value="{{$establecimiento->tipo->id}}" selected>{{$establecimiento->tipo->descripcion}}</option>
-					@else
-						<option value="{{$tipo->id}}" >{{$tipo->descripcion}}</option>
-					@endif
-				@endforeach
-			</select>
-			<br><br>
-			
-			@foreach($establecimiento->domicilio as $domicilio)
-				<?php  $i++;?> 
-			
-				<div id="locacion{{$i}}">
-						  <input type="hidden" name="establecimientos[establecimiento{{$i}}][establecimiento_ciudad_id]" value="{{$domicilio->pivot->id}}">
-					<h1>Locacion {{$i}}</h1>
-					<label for="Domicilio{{$i}}">Domicilio {{$i}} </label>
-					<input class="domicilio" type="text" name="establecimientos[establecimiento{{$i}}][domicilio]" id="Domicilio{{$i}}" value="{{$domicilio->pivot->domicilio}}">
-						
-					<br>
-
-					<label for="">provincia</label>
-					<select name="" id="provincia-select{{$i}}" onchange="buscarCiudadSegunProvincia({{$i}})">
-						<option value="0">Seleccione una provincia</option>
-						@foreach($provincias as $provincia)
-							@if($domicilio->provincia_id == $provincia->id)
-								<option value="{{$provincia->id}}" selected>{{$provincia->provincia_nombre}}</option>
-								<!-- CREO VARIABLE AUXILIAR DE PROVINCA PARA TOMAR LA PROVINCIA DEL ESTABLECIMIENTO -->
-								<?php $provinciaId = $provincia->id ?>
-							@endif
-							
-							<option value="{{$provincia->id}}">{{$provincia->provincia_nombre}}</option>
-						@endforeach
-					</select>
-					<br>
-
-					<label for="">ciudad</label>
-					<select name="establecimientos[establecimiento{{$i}}][ciudad]" id="localidad-select{{$i}}">
-						<option value="0">Seleccione una ciudad</option>
-						
-						<!-- BUSCO LAS CIUDADES POR LA PROVINCIA DEL ESTABLECIMIENTO -->
-						 <?php $ciudades = $ciudadService->getCiudadesPorProvincia($provinciaId) ?>
-
-						@foreach($ciudades as $ciudad)
-							@if($ciudad->id == $domicilio->id)
-								<option value="{{$domicilio->id}}" selected>{{$domicilio->ciudad_nombre}}</option>
-							@else
-								<option value="{{$ciudad->id}}">{{$ciudad->ciudad_nombre}}</option>
-							@endif
-
-						@endforeach
-					</select>
-					<br>
-
-
-					<label for="latitud1">Latitud</label>
-					<input class="latitud-input" type="text" name="establecimientos[establecimiento{{$i}}][latitud]" id="latitud{{$i}}" value="{{$domicilio->pivot->latitud}}">
-					<br>
-					<label for="longitud1">Longitud</label>
-					<input type="text" name="establecimientos[establecimiento{{$i}}][longitud]" id="longitud{{$i}}" value="{{$domicilio->pivot->longitud}}">
-					<br>
-					<div id="map-cont{{$i}}" style="width: 100%">
-						 <input id="pac-input{{$i}}" class="controls" type="text" placeholder="Search Box">
-					</div>
-					<br><br>
-
-					
-					<?php $latitudesJs[$i]=$domicilio->pivot->latitud; ?>
-					<?php $longitudesJs[$i]=$domicilio->pivot->longitud; ?>
-
-					<a onClick="eliminarLocacion({{$domicilio->pivot->id}},{{$i}})">Eliminar</a>
-
-				</div><!-- #locacion -->
-			
-
-			@endforeach
-			<br>
-			<a onClick="agregarLocacion()">Agregar</a>
-
-			<button>Guardar</button>
-
+	 		<!-- CONFIRM -->
+		 <div class="confirm-alert-bk" id="confirm" style="display:none">
+		    <div class="panel" >
+		        <h2></h2>
+		        <div class="row">
+		        	<div class="col-lg-6 col-md-6 col-sm-6"><a id="btnYes" class="form-btn"><h2>SI</h2></a></div>
+		        	<div class="col-lg-6 col-md-6 col-sm-6"><a id="btnNo" class="form-btn"><h2>NO</h2></a></div>
+		        </div>
+		    </div>
 		</div>
-	</form>
+		<!-- ALERT -->
+		 <div class="confirm-alert-bk" id="alert" style="display:none">
+		    <div class="panel" >
+		        <h2></h2>
+		        <div class="row">
+		        	<a id="btnAccept" class="form-btn center-block"><h2>ACEPTAR</h2></a>
+		        </div>
+		    </div>
+		</div>
+
+	 <div class=" container animated fadeInLeft">
+	 
+
+
+
+
+		<form action="/admin/updateEstablecimiento" method="POST">
+			@csrf
+			<input type="hidden" name="id" value="{{$establecimiento->id}}">
+			<div id="content">
+				<div class="row">
+					<div class="col-lg-12 col-md-12">
+						<label for="nombre">Nombre</label>
+						<br>
+						<input type="text" name="nombre" class="form-control" value={{$establecimiento->nombre}}>		
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12 col-sm-12">
+						<label for="">Tipo</label>
+						<select name="tipo_id" id="tipo" class="form-control">
+							@foreach($tipos as $tipo)
+								@if($tipo->id == $establecimiento->tipo->id )
+									<option value="{{$establecimiento->tipo->id}}" selected>{{$establecimiento->tipo->descripcion}}</option>
+								@else
+									<option value="{{$tipo->id}}" >{{$tipo->descripcion}}</option>
+								@endif
+							@endforeach
+						</select>
+					</div>
+				</div>
+								
+				@foreach($establecimiento->domicilio as $domicilio)
+					<?php  $i++;?> 
+				
+					<div class="locacion" id="locacion{{$i}}">
+					  	<input type="hidden" name="establecimientos[establecimiento{{$i}}][establecimiento_ciudad_id]" value="{{$domicilio->pivot->id}}">
+						
+						<h1>Locacion</h1>
+
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12	">
+								<label for="Domicilio{{$i}}">Domicilio {{$i}} </label>
+								<input class="domicilio form-control" type="text" name="establecimientos[establecimiento{{$i}}][domicilio]" id="Domicilio{{$i}}" value="{{$domicilio->pivot->domicilio}}">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-sm-6	">
+								<label for="">provincia</label>
+								<br>
+								<select class="form-control" name="" id="provincia-select{{$i}}" onchange="buscarCiudadSegunProvincia({{$i}})">
+									<option value="0">Seleccione una provincia</option>
+									@foreach($provincias as $provincia)
+										@if($domicilio->provincia_id == $provincia->id)
+											<option value="{{$provincia->id}}" selected>{{$provincia->provincia_nombre}}</option>
+											<!-- CREO VARIABLE AUXILIAR DE PROVINCA PARA TOMAR LA PROVINCIA DEL ESTABLECIMIENTO -->
+											<?php $provinciaId = $provincia->id ?>
+										@endif
+										
+										<option value="{{$provincia->id}}">{{$provincia->provincia_nombre}}</option>
+									@endforeach
+								</select>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6">
+								<label for="">ciudad</label>
+								<br>
+								<select class="form-control" name="establecimientos[establecimiento{{$i}}][ciudad]" id="localidad-select{{$i}}">
+									<option value="0">Seleccione una ciudad</option>
+									
+									<!-- BUSCO LAS CIUDADES POR LA PROVINCIA DEL ESTABLECIMIENTO -->
+									 <?php $ciudades = $ciudadService->getCiudadesPorProvincia($provinciaId) ?>
+
+									@foreach($ciudades as $ciudad)
+										@if($ciudad->id == $domicilio->id)
+											<option value="{{$domicilio->id}}" selected>{{$domicilio->ciudad_nombre}}</option>
+										@else
+											<option value="{{$ciudad->id}}">{{$ciudad->ciudad_nombre}}</option>
+										@endif
+
+									@endforeach
+								</select>
+							</div>
+						</div>
+
+							
+
+						<!--  <label for="latitud1">Latitud</label>-->
+						<input class="latitud-input" type="hidden" name="establecimientos[establecimiento{{$i}}][latitud]" id="latitud{{$i}}" value="{{$domicilio->pivot->latitud}}">
+						<br>
+						<!--  <label for="longitud1">Longitud</label>-->
+						<input type="hidden" name="establecimientos[establecimiento{{$i}}][longitud]" id="longitud{{$i}}" value="{{$domicilio->pivot->longitud}}">
+						<br>
+						<div id="map-cont{{$i}}" style="width: 100%">
+							 <input id="pac-input{{$i}}" class="gm-search-input controls" type="text" placeholder="Establece la direccion en el mapa..">
+						</div>
+
+						
+						<?php $latitudesJs[$i]=$domicilio->pivot->latitud; ?>
+						<?php $longitudesJs[$i]=$domicilio->pivot->longitud; ?>
+
+						 <a onClick="eliminarLocacion({{$domicilio->pivot->id}},{{$i}})" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a>
+
+					</div><!-- #locacion -->
+				
+
+				@endforeach
+				</div>
+
+
+					<div class="row" id="buttons">
+						
+
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<a class="full-btn add-locacion-btn" onClick="agregarLocacion()"><i class="fas fa-home"></i></a>
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<a onClick="formSubmit()" class="full-btn save-locacion-btn"><i class="far fa-save"></i></a>
+						</div>	
+
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<a class="full-btn remove-establecimiento-btn" onClick="eliminarEstablecimiento({{$establecimiento->id}})"><i class="fas fa-trash-alt"></i></a>	
+						</div>	
+
+						
+					</div>
+
+			
+		</form>
+	</div>
 
 	<br><br>
 	
@@ -112,215 +170,31 @@
 	   <script 
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkne1gpPfJ0B3KrE4OQURwPi492LDjg8g&libraries=places">
     </script>
-	<script>
-		
+    <script>
+    	
 		window.y = "{{$i}}";//instancia la cantidad de formularios de locaciones creados y controlara su creacion y eliminacion
 		window.i="{{$i}}";//id que tendran los input de locacion y sus mapas
 		window.markers = [];//array que tendra todos los marker de todos los mapas
 		window.latitudes = <?php echo json_encode($latitudesJs) ?>;
 		window.longitudes = <?php echo json_encode($longitudesJs) ?>;
-		console.log(y);
-
+    </script>
+    <script src="/js/buscarCiudadSegunProvincia.js"></script>
+    <script src="/js/mainDetalleEstablecimiento.js"></script>
+	<script src="/js/eliminarEstablecimiento.js"></script>
+	<script src="/js/eliminarLocacion.js"></script>
+	<script>
 		
-
-
-		function inicializarMapas(){
-			for (var mapa_id = 1; mapa_id <= i; mapa_id++) {
-				//inicializo mapas usando el id dinamico window.i="{{$i}}" 
-				//y las longitudes y latitudes dinamicas" 
-			   initMap(mapa_id,parseFloat(latitudes[mapa_id]),parseFloat(longitudes[mapa_id]));
-			}
-		}
-
-
-		function initMap(mapa_id,latitud,longitud) {
-
-			$("#map-cont"+mapa_id+"").append("<div id='map"+mapa_id+"' style='height:350px'></div>")
-		  	// La locacion iniciliada
-		  	var locacion = {lat: latitud, lng: longitud};
-		  	// El mapa centrado en las coordenadas de inicializacion
-		  	var map = new google.maps.Map(
-			      document.getElementById('map'+mapa_id+''), {zoom: 10, center: locacion});
-		  	// The marker, positioned at Uluru
-		  	var marker = new google.maps.Marker({position: locacion, map: map});
-
-		  	//seteo un id a cada mapa usando el id dinamico window.i="{{$i}}" 
-			map.set("id", mapa_id);
-
-
-			//establezco un id al marker, este sera el id del mapa pasado como parametro
-	  		marker.set("id", map.get("id"));
-
-
-			//agrego un nuevo marquer a su mapa correspondiente con su id
-			markers.push(marker);
-
-
-
-  			//evento para elegir lugares
-	 		google.maps.event.addListener(map, 'click', function(event) {
-	    		placeMarker(map,event.latLng,mapa_id);
-		  	});
-
-		  	/******************CREACION DE INPUT PARA BUSCAR LUGARES***************************/
-		 // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input'+mapa_id+'');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-        });
-
-
-
-		
-
-
-		 // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
-
-          if (places.length == 0) {
-            return;
-          }
-
-          // Clear out the old markers.
-         deleteMarkers(mapa_id);
-
-          // For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-          places.forEach(function(place) {
-            if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
-            }
-            var icon = {
-              url: place.icon,
-              size: new google.maps.Size(71, 71),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-             placeMarker(map,place.geometry.location,mapa_id)
-
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-
-            getCoordinates(map,mapa_id);
-
-          });
-          map.fitBounds(bounds);
-        });
-			
-			}//function init maps 
-
-
-			//tomo las coordenadas de cada posicion de cada mapa
-			function getCoordinates(map,mapa_id){
-				$("#latitud"+mapa_id+"").val(map.getCenter().lat());
-				$("#longitud"+mapa_id+"").val(map.getCenter().lng());
-				/*alert();
-	      	  	alert();*/
-			}
-
-			//funcion para fijar marcadores
-		  	function placeMarker(map,location,mapa_id) {
-		  		 
-		  		 
-		  		//creo un nuevo marker 	
-				var marker = new google.maps.Marker({
-				  position: location, //posicion del marker pasado como parametro 
-				  map: map // ese marker tendra el mapa pasado como parametro
-				});
-
-
-				//establezco un id al marker, este sera el id del mapa pasado como parametro
-		  		marker.set("id", map.get("id"));
-				
-		  		//centrar el mapa en la posicion
-				map.setCenter(location);
-
-				//tomo las coordenadas del mapa
-				getCoordinates(map,mapa_id);
-
-				//borro todos los marker con x id (que seran los marker del mapa x)
-				deleteMarkers(marker.get("id"));
-
-				//agrego un nuevo marquer a su mapa correspondiente con su id
-				markers.push(marker);
-
-				  
-
-			}
-
-
-
-
-	      // Deletes all markers in the array by removing references to them.
-	      function deleteMarkers(id) {
-
-	      	//recorro el array markers el cual tendra todos los markers de todos los mapas
-	        for (var i = 0; i <markers.length; i++) {
-
-	        	//busco los marker a eliminar
-				if(markers[i]['id']==id){
-					markers[i].setMap(null);
-				}
-
-				console.log(markers);
-
-	        }//for
-	        
-	      }//function delete marker
-
-
-
-	      function buscarCiudadSegunProvincia(id){
-
-			var provinciaId = $("#provincia-select"+id+"").val();
-
-				$.ajax({
-					headers: {
-   					 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  					},
-				data:{provinciaId},
-				url:'/buscarCiudadSegunProvincia',
-				type:'post',
-				dataType:"json",
-				success:function(data){
-					$("#localidad-select"+id+"").empty();
-						for(var i in data) {	
-
-								$("#localidad-select"+id+"").append("<option value="+data[i].id+"> "+
-									data[i].ciudad_nombre+"</option>");				
-							}
-
-						//$(' option[value="'+ciudad+'"]')
-						 console.log(id);
-						 //console.log(ciudad);
-
-
-
-
-
-				}
-				});
-
-		}
+			$( document ).ready(function() {
+			  inicializarMapas();
+			});
+	</script>
+	<script>
+		      
 
 
 		function agregarLocacion(){
 		y++;
-		$("form #content").append('<div id="locacion'+y+'"><input type="hidden" name="establecimientos[establecimiento'+y+'][establecimiento_ciudad_id]" value="">  <h1>Locacion '+y+'</h1> <label for="Domicilio{{$i}}">Domicilio '+y+' </label> <input class="domicilio" type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="Domicilio'+y+'" value=""> <br> <label for="">provincia'+y+'</label> <select name="" id="provincia-select'+y+'" onchange="buscarCiudadSegunProvincia('+y+')"> <option value="0">Seleccione una provincia</option> @foreach($provincias as $provincia) <option value="{{$provincia->id}}">{{$provincia->provincia_nombre}}</option> @endforeach </select> <br> <label for="">ciudad'+y+'</label> <select name="establecimientos[establecimiento'+y+'][ciudad]" id="localidad-select'+y+'"> <option value="0">Seleccione una ciudad</option> </select> <br> <label for="latitud1">Latitud'+y+'</label> <input class="latitud-input" type="text" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'" value=""> <br> <label for="longitud1">Longitud'+y+'</label> <input type="text" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'" value=""> <br> <div id="map-cont'+y+'" style="width: 100%"> <input id="pac-input'+y+'" class="controls" type="text" placeholder="Search Box"> </div> <br><br> <a onClick="eliminarLocacion(null,'+y+')">Eliminar</a>');
+		$("form #content").append('<div id="locacion'+y+'" class="locacion"><input type="hidden" name="establecimientos[establecimiento'+y+'][establecimiento_ciudad_id]" value=""> <h1>Locacion</h1> <div class="row"> <div class="col-lg-12 col-md-12 col-sm-12	"> <label>Domicilio</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="domicilio" class="form-control"> </div> </div> <div class="row"> <div class="col-lg-6 col-md-6 col-sm-6	"> <label for="provincias">Provincia</label> <select name="provincias" id="provincia-select'+y+'"  onChange="buscarCiudadSegunProvincia('+y+')" class="form-control"> <option value="" selected>Selecciona tu provincia</option> @foreach($provincias as $item) <option value="{{$item->id}}">{{$item->provincia_nombre}}</option> @endforeach </select> </div> <div class="col-lg-6 col-md-6 col-sm-6"> <label for="localidad">Localidad</label> <select name="establecimientos[establecimiento'+y+'][ciudad]" id="localidad-select'+y+'" class="form-control"> <option value="">Seleccionas localidad</option> </select> </div> </div> <br> <input type="hidden" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'"> <input type="hidden" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'"> <div id="map-cont'+y+'"> <input id="pac-input'+y+'" class="controls gm-search-input" type="text" placeholder="Establece la direccion en el mapa.."> </div> <a onClick="eliminarLocacion(null,'+y+')" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a> </div>');
 
  
 
@@ -335,74 +209,23 @@
 		initMap(y,latitud,longitud);
 
 
-
+		$("html, body").animate({ scrollTop: $(document).height() }, 1000);
 
 
 		console.log(y);
 	}
 
-		//id_locacion lo usaremos para borrar la locacion de la base de datos
-		function eliminarLocacion(id_locacion,mapa_id){
-		$("#locacion"+mapa_id+"").remove();
 
-		
-
-		console.log(y);
-	}
-
-
-
-
+	/*<div id="locacion'+y+'"><input type="hidden" name="establecimientos[establecimiento'+y+'][establecimiento_ciudad_id]" value="">  <h1>Locacion '+y+'</h1> <label for="Domicilio{{$i}}">Domicilio '+y+' </label> <input class="domicilio" type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="Domicilio'+y+'" value=""> <br> <label for="">provincia'+y+'</label> <select name="" id="provincia-select'+y+'" onchange="buscarCiudadSegunProvincia('+y+')"> <option value="0">Seleccione una provincia</option> @foreach($provincias as $provincia) <option value="{{$provincia->id}}">{{$provincia->provincia_nombre}}</option> @endforeach </select> <br> <label for="">ciudad'+y+'</label> <select name="establecimientos[establecimiento'+y+'][ciudad]" id="localidad-select'+y+'"> <option value="0">Seleccione una ciudad</option> </select> <br> <!--<label for="latitud1">Latitud'+y+'</label>--> <input class="latitud-input" type="hidden" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'" value=""> <br><!-- <label for="longitud1">Longitud'+y+'</label>--> <input type="hidden" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'" value=""> <br> <div id="map-cont'+y+'" style="width: 100%"> <input id="pac-input'+y+'" class="controls" type="text" placeholder="Search Box"> </div> <br><br> <a onClick="eliminarLocacion(null,'+y+')">Eliminar</a></div>*/
 	</script>
-	<script>
-		
-			$( document ).ready(function() {
-			  inicializarMapas();
-			});
+		<script>
+		function formSubmit(){
+			$("form").submit();
+		}
 	</script>
 
-
+	
 @stop
 
-
-<!--   <input type="hidden" name="establecimientos[establecimiento'+y+'][establecimiento_ciudad_id]" value="">
-				<div id="locacion'+y+'">
-					<h1>Locacion {{$i}}</h1>
-					<label for="Domicilio{{$i}}">Domicilio '+y+' </label>
-					<input class="domicilio" type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="Domicilio'+y+'" value="{{$domicilio->pivot->domicilio}}">
-						
-					<br>
-
-					<label for="">provincia</label>
-					<select name="" id="provincia-select{{$i}}" onchange="buscarCiudadSegunProvincia({{$i}},'')">
-						<option value="0">Seleccione una provincia</option>
-						@foreach($provincias as $provincia)
-							
-													
-							<option value="{{$provincia->id}}">{{$provincia->provincia_nombre}}</option>
-						@endforeach
-					</select>
-					<br>
-
-					<label for="">ciudad</label>
-					<select name="establecimientos[establecimiento'+y+'][ciudad]" id="localidad-select'+y+'">
-						<option value="0">Seleccione una ciudad</option>
-					</select>
-					<br>
-
-
-					<label for="latitud1">Latitud</label>
-					<input class="latitud-input" type="text" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'" value="">
-					<br>
-					<label for="longitud1">Longitud</label>
-					<input type="text" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'" value="">
-					<br>
-					<div id="map-cont'+y+'" style="width: 100%">
-						 <input id="pac-input'+y+'" class="controls" type="text" placeholder="Search Box">
-					</div>
-					<br><br>
-
-					
-					<a onClick="eliminarLocacion(null,'+y+')">Eliminar</a> -->
 
 

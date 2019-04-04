@@ -23,4 +23,14 @@ class AjaxService
   	public function buscarPorTipoEstablecimiento($request){
   		return $this->ajaxDao->buscarPorTipoEstablecimiento($request);	
   	}
+
+      public function deleteEstablecimiento($request){
+      return $this->ajaxDao->deleteEstablecimiento($request);
+    }
+
+
+      public function deleteLocacion(Request $request){
+      return $this->ajaxDao->deleteLocacion($request);
+    }
+   
 }

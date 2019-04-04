@@ -15,9 +15,6 @@ class EstablecimientoService
     }
 
 
-   /* public function createEstablecimiento($request){
-    	$this->establecimientoDao->createEstablecimiento($request);
-    }*/
     public function createEstablecimiento($request){
         return   $this->establecimientoDao->createEstablecimiento($request);
     }
@@ -32,7 +29,13 @@ class EstablecimientoService
 
          $this->establecimientoDao->updateEstablecimiento($request);
       
-    }
-   
+       }
+
+
+       public function getEstablecimientos(){
+       return  $this->establecimientoDao->getEstablecimientos();
+       }
+
+    
    
 }

@@ -31,5 +31,14 @@ class AjaxController extends Controller
         return $this->ajaxService->buscarPorTipoEstablecimiento($request);
   	}
 
+    public function deleteEstablecimiento(Request $request){
+      return json_encode($this->ajaxService->deleteEstablecimiento($request));
+    }
+
+
+    public function deleteLocacion(Request $request){
+      return json_encode($this->ajaxService->deleteLocacion($request));
+    }
+
 
 }

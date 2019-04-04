@@ -86,6 +86,18 @@ class EstablecimientoDao
      }
 
 
+     public function getEstablecimientos(){
+        return Establecimiento::all();
+       }
+
+
+  
+
+
+
+
+
+
 
    
    

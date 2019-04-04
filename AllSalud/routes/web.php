@@ -25,20 +25,33 @@ Route::post('/prueba/datos/','PruebaController@datos');
 
 Route::post('/buscarCiudadSegunProvincia','AjaxController@buscarCiudadSegunProvincia');
 Route::post('/buscarPorTipoEstablecimiento','AjaxController@buscarPorTipoEstablecimiento');
+Route::post('admin/deleteEstablecimiento','AjaxController@deleteEstablecimiento');
+Route::post('admin/deleteLocacion','AjaxController@deleteLocacion');
 
 
-/*LOGIN ROUTES*/
+
+/*LOGIN/LOGOUT ROUTES*/
 
 Route::post('/login','ValidationController@login');
+Route::get('/logout','ValidationController@logout');
 
 /*ESTABLECIMIENTOS ROUTES*/
 Route::get('admin/altaEstablecimiento','EstablecimientoController@altaEstablecimiento');
 
 Route::post('admin/createEstablecimiento','EstablecimientoController@createEstablecimiento');
 
-Route::get('admin/eliminarEstablecimiento','EstablecimientoController@eliminarEstablecimiento');
+Route::get('admin/getEstablecimientos','EstablecimientoController@getEstablecimientos');
 
-Route::get('admin/eliminarEstablecimiento2','EstablecimientoController@eliminarEstablecimiento2');
+
+/*SESSION ROUTES*/
+
+Route::get('session/get','SessionController@accessSessionData');
+Route::get('session/set/{username}','ValidationController@login');
+Route::post('session/remove','SessionController@deleteSessionData');
+
+
+
+
 
 Route::get('admin/detalleEstablecimiento/{id}','EstablecimientoController@detalleEstablecimiento');
 
