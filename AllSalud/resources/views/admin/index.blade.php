@@ -34,7 +34,7 @@
 			<i class="fas fa-power-off"></i>
 		</a>
 	</div>
-<div class=" side-bar col-lg-3"  >
+<div class=" side-bar col-lg-3 col-md-3 col-sm-3"  >
   <img class="logo margin-left-5 text-left float-left" src="<?php echo asset("storage/img/logo.png")?>" id="icon" alt="User Icon" style="width:150px" />
 	<div class="div-btn">
 		<h1>
@@ -47,7 +47,7 @@
 		</h1>
 	</div>
 </div>
-<div class="pageContent float-left col-lg-9" >
+<div class="pageContent float-left col-lg-9 col-md-9 col-sm-9" >
 	  <iframe src="" id="iframe" class="float-left" name="iframe" target="iframe" frameborder="0"></iframe>
 </div>
 </div>

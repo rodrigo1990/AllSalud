@@ -28,6 +28,7 @@
 	<div id="content" class="">
 		<div class="row">
 			<div class="col-lg-12 col-md-12">
+				<h1>Nombre y tipo</h1>
 				<label>Nombre</label>
 				<br>
 				<input type="text" name="nombre" id="nombre" class="form-control">	
@@ -44,6 +45,99 @@
 						<option value="{{$item->id}}">{{$item->descripcion}}</option>
 					@endforeach
 				</select>
+			</div>
+		</div>
+		<div id="especialidades">
+			<div class="row">
+				
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<h1>Especialidades</h1>
+					<ul class="flex" id="especialidades-list">
+						<li id="esp-li-1">
+							<select name="especialidades[]"  class="form-control">
+								<option value="null">Seleccione una especialidad</option>
+								@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+							</select>
+						</li>
+						<li id="esp-li-2"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-3"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-4"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-5"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-6"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+
+						<!-- ROW -->
+
+						<li id="esp-li-7">
+							<select name="especialidades[]" id="" class="form-control">
+								<option value="null">Seleccione una especialidad</option>
+								@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+							</select>
+						</li>
+						<li id="esp-li-8"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-9"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-10"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						
+
+					
+
+
+					</ul>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+					
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+						
+					<a style="display:none" id="remove-esp-btn" onClick="eliminarEspecialidades()" class="small-btn red float-right" ><i class="fas fa-minus"></i></a>
+
+
+					<a onClick="agregarEspecialidades()" class="small-btn blue float-right margin-right-15"><i class="fas fa-plus"></i></a>
+					
+				</div>
 			</div>
 		</div>
 	
@@ -116,6 +210,36 @@
 			window.estado = {{$estado}};
 		</script>
 	<script>
+		function eliminarEspecialidades(){
+			
+			
+			$('#esp-li-'+esp+'').fadeOut(function(){
+				$('#esp-li-'+esp+'').remove();
+
+				esp--;
+
+				if(esp==10){
+					$("#remove-esp-btn").fadeOut();
+				}
+			});
+
+			
+		}
+
+		function agregarEspecialidades(){
+			esp++;
+			if(esp>10){
+				$("#remove-esp-btn").fadeIn();
+			}
+			$("#especialidades-list").append('<li id="esp-li-'+esp+'"> <select name="especialidades[]" id="" class="form-control"> <option value="null">Seleccione una especialidad</option> @foreach($especialidades as $especialidad) <option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option> @endforeach </select> </li>'); 
+
+
+
+		}
+
+
+
+		//Uso esta funcion y no en main, de otra manera no reconoce los comandos blade "foreach.."
 		function agregarLocacion(){
 		y++;
 		$("form #content").append('<div id="locacion'+y+'" class="locacion"> <h1>Locacion</h1> <div class="row"> <div class="col-lg-12 col-md-12 col-sm-12	"> <label>Domicilio</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="domicilio" class="form-control"> </div> </div> <div class="row"> <div class="col-lg-6 col-md-6 col-sm-6	"> <label for="provincias">Provincia</label> <select name="provincias" id="provincia-select'+y+'"  onChange="buscarCiudadSegunProvincia('+y+')" class="form-control"> <option value="" selected>Selecciona tu provincia</option> @foreach($provincias as $item) <option value="{{$item->id}}">{{$item->provincia_nombre}}</option> @endforeach </select> </div> <div class="col-lg-6 col-md-6 col-sm-6"> <label for="localidad">Localidad</label> <select name="establecimientos[establecimiento'+y+'][localidad]" id="localidad-select'+y+'" class="form-control"> <option value="">Seleccionas localidad</option> </select> </div> </div> <br> <input type="hidden" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'"> <input type="hidden" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'"> <div id="map-cont'+y+'"> <input id="pac-input'+y+'" class="controls gm-search-input" type="text" placeholder="Establece la direccion en el mapa.."> </div> <a onClick="eliminarLocacion(null,'+y+')" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a> </div>');

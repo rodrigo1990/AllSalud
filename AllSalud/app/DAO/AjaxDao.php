@@ -41,12 +41,34 @@ class AjaxDAO
   }
 
 
+   public function buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad(Request $request){
+
+    $establecimientos = DB::table('establecimientos')
+                            ->join('especialidades_establecimientos','establecimientos.id','especialidades_establecimientos.establecimiento_id')
+                            ->join('establecimiento_ciudad','establecimientos.id','establecimiento_ciudad.establecimiento_id')
+                            ->join('ciudades','ciudades.id','establecimiento_ciudad.ciudad_id')
+                            ->where('establecimientos.tipo_id',$request->tipo_id)
+                            ->where('establecimiento_ciudad.ciudad_id',$request->ciudad_id)
+                            ->where('especialidades_establecimientos.especialidad_id',$request->especialidad_id)
+                            ->get();
+
+     return $establecimientos;
+
+
+
+
+          
+    }
+
+
 
     public function deleteEstablecimiento( $request){
       
       $establecimiento =  Establecimiento::find($request->id);
 
       $establecimiento->Domicilio()->detach();
+
+      $establecimiento->Especialidad()->detach();
 
       $establecimiento->delete();
 

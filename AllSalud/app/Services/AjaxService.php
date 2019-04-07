@@ -20,9 +20,15 @@ class AjaxService
         return $this->ajaxDao->buscarCiudadSegunProvincia($request);
   	}
 
-  	public function buscarPorTipoEstablecimiento($request){
+  	/*public function buscarPorTipoEstablecimiento($request){
   		return $this->ajaxDao->buscarPorTipoEstablecimiento($request);	
-  	}
+  	}*/
+
+    public function buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad(Request $request){
+
+      return $this->ajaxDao->buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad($request);
+      
+    }
 
       public function deleteEstablecimiento($request){
       return $this->ajaxDao->deleteEstablecimiento($request);

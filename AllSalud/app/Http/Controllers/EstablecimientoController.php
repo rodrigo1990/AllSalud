@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\EstablecimientoService;
 use App\Services\ProvinciaService;
 use App\Services\TipoEstablecimientoService;
+use App\Services\EspecialidadService;
 use App\Services\SessionService;
 use App\Provincia;
 use App\TipoEstablecimiento;
@@ -21,15 +22,18 @@ class EstablecimientoController extends Controller
     protected $establecimientoService;
     protected $provinciaService;
     protected $tipoEstablecimientoService;
+    protected $especialidadService;
     protected $sessionService;
 
-    function __construct(EstablecimientoService $establecimientoService,ProvinciaService $provinciaService,TipoEstablecimientoService $tipoEstablecimientoService,SessionService $sessionService){
+    function __construct(EstablecimientoService $establecimientoService,ProvinciaService $provinciaService,TipoEstablecimientoService $tipoEstablecimientoService,SessionService $sessionService,EspecialidadService $especialidadService ){
 
     	$this->establecimientoService=$establecimientoService;
 
       $this->provinciaService = $provinciaService;
 
       $this->tipoEstablecimientoService=$tipoEstablecimientoService;
+
+      $this->especialidadService = $especialidadService;
 
       $this->sessionService = $sessionService;
 
@@ -39,6 +43,7 @@ class EstablecimientoController extends Controller
 
         $provincias = $this->provinciaService->getProvincias();
      	  $tipos = $this->tipoEstablecimientoService->getTipos();
+        $especialidades = $this->especialidadService->getEspecialidades();
         $session = $this->sessionService->accessSessionData();
 
         if($request->estado)
@@ -49,7 +54,7 @@ class EstablecimientoController extends Controller
 
 
         if($session=="true")
-          return view('admin/altaEstablecimiento',compact('provincias','tipos','ciudades','estado'));
+          return view('admin/altaEstablecimiento',compact('provincias','tipos','ciudades','estado','especialidades'));
         else
           return "No esta autenticado en la aplicacion";
     }
@@ -94,10 +99,12 @@ class EstablecimientoController extends Controller
       
       $tipos = $this->tipoEstablecimientoService->getTipos();
 
+      $especialidades = $this->especialidadService->getEspecialidades();
+
       $session = $this->sessionService->accessSessionData();
 
        if($session=="true")
-          return view('admin/detalleEstablecimiento',compact('establecimiento','provincias','tipos','ciudades'));
+          return view('admin/detalleEstablecimiento',compact('establecimiento','provincias','tipos','ciudades','especialidades'));
         else 
           return "No esta autenticado en la aplicacion";
 

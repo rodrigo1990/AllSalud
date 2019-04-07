@@ -108,7 +108,7 @@
           });
           map.fitBounds(bounds);
         });
-			
+			getCoordinates(map,mapa_id);
 			}//function init maps 
 
 

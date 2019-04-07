@@ -75,7 +75,8 @@
 						<li class="title text-left"><h3>BUSCÁ EN CARTILLA</h3></li>
 						@foreach($tipos as $tipo)
 							<li class="text-left">
-								<a onClick="buscarPorTipoEstablecimiento({{$tipo->id}});">
+								<div class="active"></div>
+								<a class="tipo-link" onClick="buscarPorTipoEstablecimiento({{$tipo->id}});">
 									<h4>{{$tipo->descripcion}}</h4>
 								</a>
 							</li>	
@@ -109,6 +110,7 @@
 							</ul>
 						</div>
 						<div class="col-sm-6  padding-right-0" id="map-cont">
+
 						</div>
 					</div>
 				</div>
@@ -181,7 +183,11 @@
 		}
 	</script>
 	<script>
-
+		window.map=0;
+		window.interaccionMapa=0;
+		window.markers=[];
+		window.interaccionPuntoEnMapa=0;
+		window.centerGlobal = {lat: -33.989067, lng: -62.826216};
 		function ajustarHeightmap(){
 			$("#map").height($(".cartilla .tipos").height());
 		}
@@ -196,25 +202,34 @@
 				type:'post',
 				dataType:"json",
 				success:function(data){
+
 					var k=0;
-					console.log(data);
+
 					var locations=[];
+
 					$(".cartilla .establecimientos").empty();
-					
+
+					interaccionMapa++;
+					console.log("interaccion con mapa");
+					console.log(interaccionMapa);
 
 						for(var i in data) {	
+							
 							k++;					
-							$(".cartilla .establecimientos").append("<li class='animated bounceInLeft'><div class='col-sm-2 nro'>"+k+"</div><div class='col-sm-10'><p>"+
-								data[i].nombre+ "</p><p class='float-left'>"+data[i].domicilio+" </p><p class='float-left margin-left-5'> "+data[i].ciudad_nombre+"</p></div></li>");
 
-
+							$(".cartilla .establecimientos").append("<li class='animated fadeIn'><div class='col-sm-2 nro'>"+k+"</div><div class='col-sm-10'><p>"+
+								data[i].nombre+ "</p><p class='float-left'>"+data[i].domicilio+" </p><p class='float-left margin-left-5'> "+data[i].ciudad_nombre+"</p><br><a onClick='zoomOnLocation("+data[i].latitud+","+data[i].longitud+")'>Detalle</a></div></li>");
 
 							 locations.push([''+data[i].nombre+'<br>'+data[i].domicilio+' '+data[i].ciudad_nombre+'',data[i].latitud,data[i].longitud]);
 
-
 						}//for
 
-						initMap(locations);
+						if(interaccionMapa==1)
+							initMap(locations);
+						else
+							deleteMarkers();
+							agregarLocaciones(locations);
+							updateZoom(5);
 
 
 					}//success
@@ -224,33 +239,133 @@
 	
 
 	function initMap(locations) {
-		  var center = {lat: -33.989067, lng: -62.826216};
 
-		$("#map-cont").html("<div id='map' class='animated bounceInRight'></div>")
+		/****************CREAR MAPA**********************/
+		  var center = centerGlobal;
+		  var locations = locations;
+
+		$("#map-cont").append("<div id='map' class='animated bounceInRight'></div>")
 		ajustarHeightmap();
-		var map = new google.maps.Map(document.getElementById('map'), {
+		
+		map = new google.maps.Map(document.getElementById('map'), {
 		    zoom: 5,
 		    center: center
 		  });
-		var infowindow =  new google.maps.InfoWindow({});
-		var marker, count;
-		for (count = 0; count < locations.length; count++) {
-		    marker = new google.maps.Marker({
-		      position: new google.maps.LatLng(locations[count][1], locations[count][2]),
-		      map: map,
-		      title: locations[count][0]
-		    });
-		google.maps.event.addListener(marker, 'click', (function (marker, count) {
-		      return function () {
-		        infowindow.setContent(locations[count][0]);
-		        infowindow.open(map, marker);
-		      }
-		    })(marker, count));
-		  }
+
+
+		//evento para elegir lugares
+		 google.maps.event.addListener(map, 'click', function(event) {
+		    placeMarker(event.latLng);
+		  });
+
+		
+		agregarLocaciones(locations);
+
+	
 		}
+
+
+
+		function agregarLocaciones(locations){
+			var infowindow =  new google.maps.InfoWindow({});
+			var marker,count;
+
+			map.setZoom(5);
+			map.setCenter(centerGlobal);
+
+
+			for (count = 0; count < locations.length; count++) {
+			    marker = new google.maps.Marker({
+			      position: new google.maps.LatLng(locations[count][1], locations[count][2]),
+			      map: map,
+			      title: locations[count][0]
+			    });
+			google.maps.event.addListener(marker, 'click', (function (marker, count) {
+			      return function () {
+			        infowindow.setContent(locations[count][0]);
+			        infowindow.open(map, marker);
+			      }
+			    })(marker, count));
+
+				markers.push(marker);
+			  	
+			  }
+
+			  console.log(markers.length);
+		}
+
+
+		 function setMapOnAll(dataMap) {
+	        for (var i = 0; i < markers.length; i++) {
+	          markers[i].setMap(dataMap);
+	        }
+    	  }
+
+	      // Removes the markers from the map, but keeps them in the array.
+	      function clearMarkers() {
+	        setMapOnAll(null);
+	      }
+
+	      // Shows any markers currently in the array.
+	      function showMarkers() {
+	        setMapOnAll(map);
+	      }
+
+	      // Deletes all markers in the array by removing references to them.
+	      function deleteMarkers() {
+	        clearMarkers();
+	        markers = [];
+	      }
+
+
+	      function updateZoom(zoom){
+	      	map.setZoom(zoom);
+	      }
+
+
+	      function zoomOnLocation(latitud,longitud){
+	      	var center = {lat: latitud, lng: longitud};
+
+	      	map.setCenter(center);
+	      	map.setZoom(100);
+
+	      	console.log(map.getCenter().lat());
+	      	console.log(map.getCenter().lng());
+	      }
+
+	      function placeMarker(location) {
+	      	deleteMarkers();
+			  var marker = new google.maps.Marker({
+			      position: location, 
+			      map: map
+			  });
+
+			markers.push(marker);
+
+			  map.setCenter(location);
+
+			  getCoordinates();
+
+			  
+
+
+			}
+
+
+			function getCoordinates(){
+				alert(map.getCenter().lat());
+	      	  alert(map.getCenter().lng());
+			}
+
+
+			$('ul.tipos li').click(function() {
+			    $("ul.tipos li .active").fadeOut();
+				$(this).children('.active').fadeIn();
+			    
+			});
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkne1gpPfJ0B3KrE4OQURwPi492LDjg8g&">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkne1gpPfJ0B3KrE4OQURwPi492LDjg8g&libraries=places">
     </script>
     @stop
 	

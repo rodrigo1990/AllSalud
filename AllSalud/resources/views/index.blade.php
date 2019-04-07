@@ -13,15 +13,15 @@
 				<ul>
 					<li>
 						<img src="<?php echo asset("storage/img/1.png")?>"></img> 
-						<h5>Confiable y seguro</h5>
+						<h5 class="margin-top-10">Confiable y seguro</h5>
 					</li>
 					<li>
 						<img src="<?php echo asset("storage/img/2.png")?>"></img>
-						<h5>Especialidad médica</h5> 
+						<h5 class="margin-top-10">Especialidad médica</h5> 
 					</li>
 					<li>
 						<img src="<?php echo asset("storage/img/3.png")?>"></img>
-						<h5>Atención sanatorial</h5> 
+						<h5 class="margin-top-10">Atención sanatorial</h5> 
 					</li>
 				</ul>
 			</div>
@@ -29,10 +29,10 @@
 
 
 
-		<div class="conoce-all bk-gris">
+		<div id="conoce-all" class="conoce-all bk-gris padding-60 margin-top-60">
 			<div class="container">
-				<h1>Conocé AllSalud</h1>
-				<h3>Red de servicios médicos asistenciales de Argentina</h3>
+				<h1 class="margin-bottom-15">Conocé AllSalud</h1>
+				<h3 class="margin-top-10 margin-bottom-15">Red de servicios médicos asistenciales de Argentina</h3>
 				<p><b>AllSalud</b> brinda a cada uno de sus socios la posibilidad de <b>elegir libremente la mejor atención médica.</b><br>
 				 Con el objetivo de generar un vínculo ideal, <b> AllSalud cuenta con un programa de planes abiertos</b> que <br>
 				 brinda acceso directo al mejor servicio de salud con sólo presentar la credencial y el DNI. <br>
@@ -45,13 +45,13 @@
 
 
 
-		<div class="row quiero-ser-socio">
+		<div id="quiero-ser-socio" class="row quiero-ser-socio margin-top-60">
 			<div class="container">
-				<div class="col-sm-6">
-					
+				<div class="col-lg-6 col-sm-12 col-xs-12">
+					<img src="<?php echo asset("storage/img/quienes_somos.jpg")?>"" alt="">
 				</div>
-				<div class="col-sm-6">
-					<h1>Quiero ser socio</h1>
+				<div class="col-lg-6 col-sm-12 col-xs-12">
+					<h1 class="margin-bottom-15">Quiero ser socio</h1>
 					<p>Si trabajás en <b>relación de dependencia o sos monotributista, </b> <br>
 					podes elegirnos y tu <b>plan estará exento de IVA</b> <i>(de acuerdo a las <br> normas impositivas y vigentes).</i></p>
 					<br>
@@ -61,21 +61,22 @@
 					que deseen tener nuestra cobertura en todo el Pais.
 					</p>
 					<br>
-					<h4 class="esp"> ¡LLamanos! 3320-8053</h4>
+					<h3 class="esp"> ¡LLamanos! 3320-8053</h3>
 				</div>
 			</div>
 		</div>
 		
-		<div class="row cartilla">
+		<div id="cartilla" class="row cartilla margin-top-60">
 			<div class="container">
-				<h1 class="text-center">Cartilla AllSalud</h1>
-				<h2 class="text-center">Encontrá lo que necesitas de manera rapida y simple.</h2>
+				<h1 class="text-center margin-bottom-15">Cartilla AllSalud</h1>
+				<h2 class="text-center margin-bottom-30">Encontrá lo que necesitas de manera rapida y simple.</h2>
 				<div class="col-sm-4">
 					<ul class="text-center tipos">
 						<li class="title text-left"><h3>BUSCÁ EN CARTILLA</h3></li>
 						@foreach($tipos as $tipo)
 							<li class="text-left">
-								<a onClick="buscarPorTipoEstablecimiento({{$tipo->id}});">
+								<div class="active"></div>
+								<a class="tipo-link" onClick="setTipo({{$tipo->id}});">
 									<h4>{{$tipo->descripcion}}</h4>
 								</a>
 							</li>	
@@ -84,23 +85,27 @@
 					</ul>
 				</div>
 				<div class="col-sm-8">
+					
 					<div class="row">
-						<select name="provincias" id="provincia-select" class='' onChange="buscarCiudadSegunProvincia()">
+						<select name="provincias" id="provincia-select1" class='form-control' onChange="buscarCiudadSegunProvincia(1);setProvincia();">
 							<option value="" selected>Provincia</option>
 							@foreach($provincias as $item)
 								<option value="{{$item->id}}">{{$item->provincia_nombre}}</option>
 							@endforeach
 						</select>
 
-						<select name="localidad" id="localidad-select" class=''>
+						<select name="localidad" id="localidad-select1" class='form-control' onChange="setCiudad()">
 							<option value="">Seleccion localidad</option>
 						</select>
 
-						<select name="especialidad" id="especialidad" class=''>
-							<option value="">Especialidad</option>
+						<select name="especialidad" id="especialidad-select" class='form-control' onChange="setEspecialidad()">
+							<option value="null">Seleccione una Especialidad</option>
+							@foreach($especialidades as $especialidad)
+								<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+							@endforeach
 						</select>
 
-						<a href="">Buscar</a>
+						<a class="buscar-btn" onClick="buscar()"><i class="fas fa-search"></i></a>
 					</div>
 					<div class="row">
 						<div class="col-sm-6 padding-left-0 padding-right-0">
@@ -109,33 +114,31 @@
 							</ul>
 						</div>
 						<div class="col-sm-6  padding-right-0" id="map-cont">
-							    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>
 		
 
-		<div class="row bk-img">
+		<div id="atencion-al-socio" class="row bk-img margin-top-60">
 				<div class="col-sm-12 bk-lightblue atencion-al-socio-cont">
 					<div class="container atencion-al-socio">
-						<h2>Atención al Socio</h2>
-						<h3>Contactarte con un asesor comercional</h3>
+						<h1 class="margin-bottom-15">Atención al Socio</h1>
+						<h3 class="margin-bottom-15">Contactarte con un asesor comercional</h3>
 						<div class="nro">
-							<img src="<?php echo asset("storage/img/nro-icon.png")?>"></img>
-							&nbsp
-							<h1>3320-8053</h1>
+							<h1><img src="<?php echo asset("storage/img/nro-icon.png")?>"></img> 3320-8053</h1>
 						</div>
 					</div>
 				</div>
 				
 
-				<div class="col-sm-12 bk-blue contacto-cont">
+				<div id="contacto" class="col-sm-12 bk-blue contacto-cont">
 					<div class="container">
 						<div class="col-sm-6">
-							<img src="<?php echo asset("storage/img/logo-white.png")?>"></img>
+							<img class="margin-top-50 padding-bottom-30" src="<?php echo asset("storage/img/logo-white-bg.png")?>"></img>
 							<h4>Para conocer más sobre las <br> diferentes opciones para ser <br> socio, <b>te invitamos a contactarte  <br> con un asesor comercial.</b>   </h4>
 						</div>
 						<div class="col-sm-6">
@@ -149,56 +152,31 @@
 	@include('footer')
 	@stop
 	@section('scripts')
-	<script>
-		
-		function buscarCiudadSegunProvincia(){
-
-			var provinciaId = $("#provincia-select").val();
-
-		
-				$.ajax({
-					headers: {
-   					 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  					},
-				data:{provinciaId},
-				url:'/buscarCiudadSegunProvincia',
-				type:'post',
-				dataType:"json",
-				success:function(data){
-					$("#localidad-select").empty();
-				//console.log(data);
-						for(var i in data) {	
-
-								$("#localidad-select").append("<option value="+data[i].id+"> "+
-									data[i].ciudad_nombre+"</option>");				
-							}
-
-				
-
-
-
-				}
-				});
-
-		}
-	</script>
+	
 	<script>
 		window.map=0;
 		window.interaccionMapa=0;
 		window.markers=[];
 		window.interaccionPuntoEnMapa=0;
 		window.centerGlobal = {lat: -33.989067, lng: -62.826216};
-		function ajustarHeightmap(){
-			$("#map").height($(".cartilla .tipos").height());
-		}
-		function buscarPorTipoEstablecimiento(id){
+
+		window.tipoEstablecimientoGlobal = 0;
+		window.provinciaGlobal = 0;
+		window.ciudadGlobal = 0;
+		window.especialidadGlobal = 0;
+
+		
+		function buscar(){
+
+			if(tipoEstablecimientoGlobal!=0&&provinciaGlobal!=0&&ciudadGlobal!=0&&especialidadGlobal!=0)
+			{
 
 				$.ajax({
 				headers: {
    						 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   						},
-				data:{id:id},
-				url:'/buscarPorTipoEstablecimiento',
+				data:{tipo_id:tipoEstablecimientoGlobal,ciudad_id:ciudadGlobal,especialidad_id:especialidadGlobal},
+				url:'/buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad',
 				type:'post',
 				dataType:"json",
 				success:function(data){
@@ -209,20 +187,21 @@
 
 					$(".cartilla .establecimientos").empty();
 
-					interaccionMapa++;
-					console.log("interaccion con mapa");
-					console.log(interaccionMapa);
+					
 
+					if(data.length!=0){
+						interaccionMapa++;
 						for(var i in data) {	
 							
 							k++;					
 
-							$(".cartilla .establecimientos").append("<li class='animated fadeIn'><div class='col-sm-2 nro'>"+k+"</div><div class='col-sm-10'><p>"+
-								data[i].nombre+ "</p><p class='float-left'>"+data[i].domicilio+" </p><p class='float-left margin-left-5'> "+data[i].ciudad_nombre+"</p><br><a onClick='zoomOnLocation("+data[i].latitud+","+data[i].longitud+")'>Detalle</a></div></li>");
+							$(".cartilla .establecimientos").append("<li class='animated fadeIn'><div class='col-sm-2 nro'><span>"+k+"</span></div><div class='col-sm-10'><p>"+
+								data[i].nombre+ "</p><p class='float-left'>"+data[i].domicilio+" </p><p class='float-left margin-left-5'> "+data[i].ciudad_nombre+"</p><br><a class='float-left detalle-btn' onClick='zoomOnLocation("+data[i].latitud+","+data[i].longitud+")'>Detalle</a></div></li>");
 
 							 locations.push([''+data[i].nombre+'<br>'+data[i].domicilio+' '+data[i].ciudad_nombre+'',data[i].latitud,data[i].longitud]);
 
 						}//for
+
 
 						if(interaccionMapa==1)
 							initMap(locations);
@@ -231,12 +210,56 @@
 							agregarLocaciones(locations);
 							updateZoom(5);
 
+					}else{
+						alertar("no hay resultados para esta busqueda =(");
+						interaccionMapa=0;
+						$("#map-cont").fadeOut(function(){
+									$("#map-cont").empty();
+									$("#map-cont").fadeIn();
+
+								});
+
+					}
+
+						
+
 
 					}//success
-				});
+				});//
+			}//if
+			else{
+				alertar("Seleccione los campos marcados en rojo");
+				validarCampos();
+			}
 		}
 		
 	
+	function validarCampos(){
+
+		if(tipoEstablecimientoGlobal==0){
+			$("ul.tipos").css("border","4px solid #fb5151");
+		}else{
+			$("ul.tipos").css("border","none");
+		}
+
+	 	if(provinciaGlobal==0){
+			$("#provincia-select1").css("border","2px solid #fb5151");
+		}else{
+			$("#provincia-select1").css("border","1px solid #00BCD5");	
+		}
+
+		 if(ciudadGlobal==0){
+			$("#localidad-select1").css("border","2px solid #fb5151");
+		}else{
+			$("#localidad-select1").css("border","1px solid #00BCD5");
+		}
+
+		 if(especialidadGlobal==0){
+			$("#especialidad-select").css("border","2px solid #fb5151");
+		}else{
+			$("#especialidad-select").css("border","1px solid #00BCD5");
+		}
+	}
 
 	function initMap(locations) {
 
@@ -253,79 +276,7 @@
 		  });
 
 
-		//evento para elegir lugares
-		 google.maps.event.addListener(map, 'click', function(event) {
-		    placeMarker(event.latLng);
-		  });
-
-		 /******************CREACION DE INPUT PARA BUSCAR LUGARES***************************/
-		 // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-        });
-
-
-
 		
-
-
-		 // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
-
-          if (places.length == 0) {
-            return;
-          }
-
-          // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
-          markers = [];
-
-          // For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-          places.forEach(function(place) {
-            if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
-            }
-            var icon = {
-              url: place.icon,
-              size: new google.maps.Size(71, 71),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25)
-            };
-
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-              map: map,
-              icon: icon,
-              title: place.name,
-              position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-
-            getCoordinates();
-
-          });
-          map.fitBounds(bounds);
-        });
-
-        /******************FIN DE CREACION DE INPUT PARA BUSCAR LUGARES***************************/
 		agregarLocaciones(locations);
 
 	
@@ -358,7 +309,6 @@
 			  	
 			  }
 
-			  console.log(markers.length);
 		}
 
 
@@ -396,8 +346,7 @@
 	      	map.setCenter(center);
 	      	map.setZoom(100);
 
-	      	console.log(map.getCenter().lat());
-	      	console.log(map.getCenter().lng());
+	
 	      }
 
 	      function placeMarker(location) {
@@ -423,6 +372,43 @@
 				alert(map.getCenter().lat());
 	      	  alert(map.getCenter().lng());
 			}
+
+		function setTipo(id){
+			tipoEstablecimientoGlobal=id;
+			$("ul.tipos").css("border","none");
+		}
+		function setProvincia(){
+			var id = $("#provincia-select1").val();
+			provinciaGlobal=id;
+			ciudadGlobal=0;
+			$("#provincia-select1").css("border","1px solid #a9a9a9");
+
+		}
+
+		function setCiudad(){
+			var id = $("#localidad-select1").val();
+			ciudadGlobal = id;
+			$("#localidad-select1").css("border","1px solid #a9a9a9");
+
+		}
+
+		function setEspecialidad(id){
+			var id = $("#especialidad-select").val();
+			especialidadGlobal=id;
+			$("#especialidad-select").css("border","1px solid #a9a9a9");
+
+		}
+
+
+		function ajustarHeightmap(){
+			//$("#map").height($(".cartilla .tipos").height());
+		}
+
+			$('ul.tipos li').click(function() {
+			    $("ul.tipos li .active").fadeOut();
+				$(this).children('.active').fadeIn();
+			    
+			});
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkne1gpPfJ0B3KrE4OQURwPi492LDjg8g&libraries=places">

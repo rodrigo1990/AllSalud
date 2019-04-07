@@ -26,10 +26,16 @@ class AjaxController extends Controller
 
 
 
-  	public function buscarPorTipoEstablecimiento(Request $request){
+  	/*public function buscarPorTipoEstablecimiento(Request $request){
 
         return $this->ajaxService->buscarPorTipoEstablecimiento($request);
-  	}
+  	}*/
+
+    public function buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad(Request $request){
+
+      return $this->ajaxService->buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad($request);
+      
+    }
 
     public function deleteEstablecimiento(Request $request){
       return json_encode($this->ajaxService->deleteEstablecimiento($request));

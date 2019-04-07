@@ -13,6 +13,7 @@ function buscarCiudadSegunProvincia(id){
 				dataType:"json",
 				success:function(data){
 					$("#localidad-select"+id+"").empty();
+					$("#localidad-select"+id+"").append('<option value="0">Seleccione una ciudad</option>');
 						for(var i in data) {	
 								
 								$("#localidad-select"+id+"").append("<option value="+data[i].id+"> "+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Provincia;
 use App\TipoEstablecimiento;
+use App\Especialidad;
 
 class FrontController extends Controller
 {
@@ -13,9 +14,10 @@ class FrontController extends Controller
 
         $provincias = Provincia::all();
         $tipos = TipoEstablecimiento::all();
+        $especialidades = Especialidad::all();
 
 
-        return view('index',compact('provincias','tipos'));
+        return view('index',compact('provincias','tipos','especialidades'));
     }
 
 

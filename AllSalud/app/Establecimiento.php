@@ -22,6 +22,12 @@ class Establecimiento extends Model
     }
 
 
+    public function Especialidad()
+    {
+        return $this->belongsToMany('App\Especialidad','especialidades_establecimientos','establecimiento_id','especialidad_id')->withPivot('id');
+    }
+
+
 
     
 }

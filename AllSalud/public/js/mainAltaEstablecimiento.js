@@ -1,6 +1,7 @@
 window.y = 1;//instancia la cantidad de formularios de locaciones creados y controlara su creacion y eliminacion
 		window.i=1;//id que tendran los input de locacion y sus mapas
 		window.markers = [];//array que tendra todos los marker de todos los mapas
+		window.esp=10;//variable local que controlara especialidades
 		
 		console.log(y);
 
@@ -96,8 +97,10 @@ window.y = 1;//instancia la cantidad de formularios de locaciones creados y cont
           });
           map.fitBounds(bounds);
         });
+
+        getCoordinates(map,mapa_id);
 			
-			}//function init maps 
+		}//function init maps 
 
 
 			//tomo las coordenadas de cada posicion de cada mapa
@@ -164,10 +167,10 @@ window.y = 1;//instancia la cantidad de formularios de locaciones creados y cont
 		
 
 		//id_locacion lo usaremos para borrar la locacion de la base de datos
-		function eliminarLocacion(id_locacion,mapa_id){
+		/*function eliminarLocacion(id_locacion,mapa_id){
 		$("#locacion"+mapa_id+"").remove();
 
 		
 
 		console.log(y);
-	}
+	}*/

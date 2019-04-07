@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EstablecimientoCiudad extends Migration
+class EspecialidadEstablecimiento extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,13 @@ class EstablecimientoCiudad extends Migration
      */
     public function up()
     {
-        Schema::create('establecimiento_ciudad', function (Blueprint $table) {
+        Schema::create('especialidades_establecimientos', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('establecimiento_id');
-            $table->unsignedInteger('ciudad_id');
-            $table->string('domicilio');
+            $table->unsignedInteger('especialidad_id');
 
-            $table->string('latitud');
-            $table->string('longitud');
-            $table->string('telefono');
-
-
-            
             $table->foreign('establecimiento_id')->references('id')->on('establecimientos');
-            $table->foreign('ciudad_id')->references('id')->on('ciudades');
-
+            $table->foreign('especialidad_id')->references('id')->on('especialidades');
         });
     }
 
@@ -38,6 +30,6 @@ class EstablecimientoCiudad extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('establecimiento_ciudad');
+        Schema::dropIfExists('especialidades_establecimientos');
     }
 }

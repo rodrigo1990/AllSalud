@@ -40,9 +40,10 @@
 			<div id="content">
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
+						<h1>Nombre y tipo</h1>
 						<label for="nombre">Nombre</label>
 						<br>
-						<input type="text" name="nombre" class="form-control" value={{$establecimiento->nombre}}>		
+						<input type="text" name="nombre" class="form-control" value="{{$establecimiento->nombre}}">		
 					</div>
 				</div>
 
@@ -60,6 +61,150 @@
 						</select>
 					</div>
 				</div>
+				
+			<div id="especialidadesExistentes">
+			<div class="row">
+				
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<h1>Especialidades que pertenecen a {{$establecimiento->nombre}}</h1>
+					<ul class="flex" id="especialidades-existentes-list">
+
+						<?php $espExist=0 //especialidades existentes ?>
+
+						@foreach($establecimiento->especialidad as $especialidad)
+						
+						<?php $espExist++; ?>
+
+							<li id="esp-li-{{$espExist}}">
+								<input type="hidden" name="especialidadesExistentes[especialidad{{$espExist}}][registro_id]" value="{{$especialidad->pivot->id}}">
+								<select name="especialidadesExistentes[especialidad{{$espExist}}][especialidad]" class="form-control" id="">
+									<option value="eliminar">Eliminar especialidad</option>
+									<option value="{{$especialidad->id}}" selected>{{$especialidad->descripcion}}</option>
+								</select>
+							</li>
+						@endforeach
+					</ul>
+				</div>
+				<!--  <div class="col-lg-6 col-md-6 col-sm-6">
+					
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+						
+					<a style="display:none" id="remove-esp-btn" onClick="eliminarEspecialidades()" class="small-btn red float-right" ><i class="fas fa-minus"></i></a>
+
+
+					<a onClick="agregarEspecialidades()" class="small-btn blue float-right margin-right-15"><i class="fas fa-plus"></i></a>
+					
+				</div>-->
+			</div>
+		</div>
+
+
+		<div id="especialidades">
+			<div class="row">
+				
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<h1>Añadir especialidades</h1>
+					<ul class="flex" id="especialidades-list">
+						<li id="esp-li-1">
+							<select name="especialidades[]"  class="form-control">
+								<option value="null">Seleccione una especialidad</option>
+								@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+							</select>
+						</li>
+						<li id="esp-li-2"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-3"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-4"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-5"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-6"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+
+						<!-- ROW -->
+
+						<li id="esp-li-7">
+							<select name="especialidades[]" id="" class="form-control">
+								<option value="null">Seleccione una especialidad</option>
+								@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+							</select>
+						</li>
+						<li id="esp-li-8"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-9"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						<li id="esp-li-10"><select name="especialidades[]"  class="form-control" id="">
+							<option value="null">Seleccione una especialidad</option>
+							@foreach($especialidades as $especialidad)
+									<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
+								@endforeach
+						</select></li>
+						
+
+					
+
+
+					</ul>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+					
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+						
+					<a style="display:none" id="remove-esp-btn" onClick="eliminarEspecialidades()" class="small-btn red float-right" ><i class="fas fa-minus"></i></a>
+
+
+					<a onClick="agregarEspecialidades()" class="small-btn blue float-right margin-right-15"><i class="fas fa-plus"></i></a>
+					
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
 								
 				@foreach($establecimiento->domicilio as $domicilio)
 					<?php  $i++;?> 
@@ -175,6 +320,7 @@
 		window.y = "{{$i}}";//instancia la cantidad de formularios de locaciones creados y controlara su creacion y eliminacion
 		window.i="{{$i}}";//id que tendran los input de locacion y sus mapas
 		window.markers = [];//array que tendra todos los marker de todos los mapas
+		window.esp=10;//contador que manejara los campos de especialidades creados
 		window.latitudes = <?php echo json_encode($latitudesJs) ?>;
 		window.longitudes = <?php echo json_encode($longitudesJs) ?>;
     </script>
@@ -189,6 +335,33 @@
 			});
 	</script>
 	<script>
+
+		function eliminarEspecialidades(){
+			
+			
+			$('#esp-li-'+esp+'').fadeOut(function(){
+				$('#esp-li-'+esp+'').remove();
+
+				esp--;
+
+				if(esp==10){
+					$("#remove-esp-btn").fadeOut();
+				}
+			});
+
+			
+		}
+
+		function agregarEspecialidades(){
+			esp++;
+			if(esp>10){
+				$("#remove-esp-btn").fadeIn();
+			}
+			$("#especialidades-list").append('<li id="esp-li-'+esp+'"> <select name="especialidades[]" id="" class="form-control"> <option value="null">Seleccione una especialidad</option> @foreach($especialidades as $especialidad) <option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option> @endforeach </select> </li>'); 
+
+
+
+		}
 		      
 
 

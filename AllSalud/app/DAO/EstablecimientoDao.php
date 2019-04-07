@@ -41,6 +41,14 @@ class EstablecimientoDao
           $establecimiento->Domicilio()->attach($domicilio['localidad'],['domicilio'=>$domicilio['domicilio'],'latitud'=>$domicilio['latitud'],'longitud'=>$domicilio['longitud']]);
 
         }
+
+
+        foreach ($request->especialidades as $especialidad) {
+          
+          if($especialidad!="null")
+            $establecimiento->Especialidad()->attach($especialidad);
+
+        }
         
         
 
@@ -71,6 +79,7 @@ class EstablecimientoDao
 
       $establecimiento->save();
 
+      //actualizo o elimino domicilios
       foreach ($request->establecimientos as $domicilio) {
           
             DB::table('establecimiento_ciudad')
@@ -81,9 +90,26 @@ class EstablecimientoDao
 
         }
 
+      if($request->especialidadesExistentes){
+        //elimino especialidades que tengan como value eliminar
+        foreach($request->especialidadesExistentes as $especialidadExistente){
+            if($especialidadExistente['especialidad']=="eliminar")
+               $establecimiento->Especialidad()->wherePivot('id',$especialidadExistente['registro_id'])->detach();
+            
+        }
+      }
+
+      //creo especialidades nuevas que se hallan seleccionado
+      foreach($request->especialidades as $especialidad){
+
+          if($especialidad!="null")
+            $establecimiento->Especialidad()->attach($especialidad);
+          
+      }
+
 
   
-     }
+     }//function
 
 
      public function getEstablecimientos(){

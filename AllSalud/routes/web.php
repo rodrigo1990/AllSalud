@@ -24,9 +24,12 @@ Route::post('/prueba/datos/','PruebaController@datos');
 /*AJAX ROUTES*/
 
 Route::post('/buscarCiudadSegunProvincia','AjaxController@buscarCiudadSegunProvincia');
-Route::post('/buscarPorTipoEstablecimiento','AjaxController@buscarPorTipoEstablecimiento');
+//Route::post('/buscarPorTipoEstablecimiento','AjaxController@buscarPorTipoEstablecimiento');
+Route::post('/buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad','AjaxController@buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad');
 Route::post('admin/deleteEstablecimiento','AjaxController@deleteEstablecimiento');
 Route::post('admin/deleteLocacion','AjaxController@deleteLocacion');
+
+Route::get('/buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad/{tipo_id}/{ciudad_id}/{especialidad_id}','AjaxController@buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad');
 
 
 
@@ -42,6 +45,11 @@ Route::post('admin/createEstablecimiento','EstablecimientoController@createEstab
 
 Route::get('admin/getEstablecimientos','EstablecimientoController@getEstablecimientos');
 
+Route::get('admin/detalleEstablecimiento/{id}','EstablecimientoController@detalleEstablecimiento');
+
+Route::post('admin/updateEstablecimiento/','EstablecimientoController@updateEstablecimiento');
+
+
 
 /*SESSION ROUTES*/
 
@@ -50,11 +58,14 @@ Route::get('session/set/{username}','ValidationController@login');
 Route::post('session/remove','SessionController@deleteSessionData');
 
 
+/*ESPECIALIDAD ROUTES*/
+
+Route::get('/especialidad','EspecialidadController@getEstablecimientosPorEspecialidad');
 
 
 
-Route::get('admin/detalleEstablecimiento/{id}','EstablecimientoController@detalleEstablecimiento');
 
-Route::post('admin/updateEstablecimiento/','EstablecimientoController@updateEstablecimiento');
+
+
 
 
