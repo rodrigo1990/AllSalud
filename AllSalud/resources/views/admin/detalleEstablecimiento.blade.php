@@ -40,17 +40,22 @@
 			<div id="content">
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
+
 						<h1>Nombre y tipo</h1>
-						<label for="nombre">Nombre</label>
+						<label>Nombre</label>
 						<br>
-						<input type="text" name="nombre" class="form-control" value="{{$establecimiento->nombre}}">		
-					</div>
-				</div>
+						<input type="text" name="nombre" id="nombre" class="datos-generales form-control" value="{{$establecimiento->nombre}}">
+						<div class="error" id="error-nombre">Ingrese un nombre valido</div>		
+							</div>
+						</div>
 
 				<div class="row">
 					<div class="col-lg-12 col-sm-12">
-						<label for="">Tipo</label>
-						<select name="tipo_id" id="tipo" class="form-control">
+
+						<label>Tipo establecimiento</label>
+						<br>	
+						<select name="tipo_id" id="tipo-select" class='datos-generales form-control'>
+							<option value="null">Seleccionas tipo</option>
 							@foreach($tipos as $tipo)
 								@if($tipo->id == $establecimiento->tipo->id )
 									<option value="{{$establecimiento->tipo->id}}" selected>{{$establecimiento->tipo->descripcion}}</option>
@@ -59,6 +64,11 @@
 								@endif
 							@endforeach
 						</select>
+						<div class="error" id="error-tipo">Ingrese un tipo</div>	
+			
+
+
+
 					</div>
 				</div>
 				
@@ -196,15 +206,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 								
 				@foreach($establecimiento->domicilio as $domicilio)
 					<?php  $i++;?> 
@@ -216,32 +217,42 @@
 
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12	">
-								<label for="Domicilio{{$i}}">Domicilio {{$i}} </label>
-								<input class="domicilio form-control" type="text" name="establecimientos[establecimiento{{$i}}][domicilio]" id="Domicilio{{$i}}" value="{{$domicilio->pivot->domicilio}}">
+								<label>Domicilio</label>
+								<br>
+								<input type="text"  name="establecimientos[establecimiento{{$i}}][domicilio]" id="{{$i}}"class="domicilio-domicilio form-control"  value="{{$domicilio->pivot->domicilio}}">	
+								<div class="error" id="error-domicilio-{{$i}}">Ingrese un domicilio</div>
+
+								<label>Telefono</label>
+								<br>
+								<input type="text" name="establecimientos[establecimiento{{$i}}][telefono]" id="{{$i}}"  class="domicilio-telefono form-control" value="{{$domicilio->pivot->telefono}}">	
+								<div class="error" id="error-telefono-{{$i}}">Ingrese un telefono</div>
 							</div>
 						</div>
 
 						<div class="row">
-							<div class="col-lg-6 col-md-6 col-sm-6	">
-								<label for="">provincia</label>
-								<br>
-								<select class="form-control" name="" id="provincia-select{{$i}}" onchange="buscarCiudadSegunProvincia({{$i}})">
-									<option value="0">Seleccione una provincia</option>
-									@foreach($provincias as $provincia)
-										@if($domicilio->provincia_id == $provincia->id)
-											<option value="{{$provincia->id}}" selected>{{$provincia->provincia_nombre}}</option>
-											<!-- CREO VARIABLE AUXILIAR DE PROVINCA PARA TOMAR LA PROVINCIA DEL ESTABLECIMIENTO -->
-											<?php $provinciaId = $provincia->id ?>
-										@endif
-										
-										<option value="{{$provincia->id}}">{{$provincia->provincia_nombre}}</option>
-									@endforeach
-								</select>
+							<div class="col-lg-6 col-md-6 col-sm-6	">								
+								<label for="provincias">Provincia</label>
+
+									<select name="provincias" id="{{$i}}"   onchange="buscarCiudadSegunProvincia({{$i}})" class="provincia-select{{$i}} domicilio-provincia form-control">
+
+										<option value="0">Seleccione una provincia</option>
+											@foreach($provincias as $provincia)
+												@if($domicilio->provincia_id == $provincia->id)
+													<option value="{{$provincia->id}}" selected>{{$provincia->provincia_nombre}}</option>
+													<!-- CREO VARIABLE AUXILIAR DE PROVINCA PARA TOMAR LA PROVINCIA DEL ESTABLECIMIENTO -->
+													<?php $provinciaId = $provincia->id ?>
+												@endif
+												
+												<option value="{{$provincia->id}}">{{$provincia->provincia_nombre}}</option>
+											@endforeach
+									</select>
+									<div class="error" id="error-provincia-1">Ingrese una provincia</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6">
-								<label for="">ciudad</label>
-								<br>
-								<select class="form-control" name="establecimientos[establecimiento{{$i}}][ciudad]" id="localidad-select{{$i}}">
+
+								<label for="localidad">Localidad</label>
+
+								<select name="establecimientos[establecimiento{{$i}}][ciudad]" id="{{$i}}" class="localidad-select{{$i}} domicilio-localidad form-control">
 									<option value="0">Seleccione una ciudad</option>
 									
 									<!-- BUSCO LAS CIUDADES POR LA PROVINCIA DEL ESTABLECIMIENTO -->
@@ -256,6 +267,9 @@
 
 									@endforeach
 								</select>
+
+								<div class="error" id="error-localidad-{{$i}}">Ingrese una localidad</div>
+
 							</div>
 						</div>
 
@@ -291,7 +305,7 @@
 							<a class="full-btn add-locacion-btn" onClick="agregarLocacion()"><i class="fas fa-home"></i></a>
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12">
-							<a onClick="formSubmit()" class="full-btn save-locacion-btn"><i class="far fa-save"></i></a>
+							<a onClick="validarEnviar()" class="full-btn save-locacion-btn"><i class="far fa-save"></i></a>
 						</div>	
 
 						<div class="col-lg-12 col-md-12 col-sm-12">
@@ -328,6 +342,7 @@
     <script src="/js/mainDetalleEstablecimiento.js"></script>
 	<script src="/js/eliminarEstablecimiento.js"></script>
 	<script src="/js/eliminarLocacion.js"></script>
+	<script src="/js/validarYEnviarEstablecimientos.js"></script>
 	<script>
 		
 			$( document ).ready(function() {
@@ -365,10 +380,10 @@
 		      
 
 
+
 		function agregarLocacion(){
 		y++;
-		$("form #content").append('<div id="locacion'+y+'" class="locacion"><input type="hidden" name="establecimientos[establecimiento'+y+'][establecimiento_ciudad_id]" value=""> <h1>Locacion</h1> <div class="row"> <div class="col-lg-12 col-md-12 col-sm-12	"> <label>Domicilio</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="domicilio" class="form-control"> </div> </div> <div class="row"> <div class="col-lg-6 col-md-6 col-sm-6	"> <label for="provincias">Provincia</label> <select name="provincias" id="provincia-select'+y+'"  onChange="buscarCiudadSegunProvincia('+y+')" class="form-control"> <option value="" selected>Selecciona tu provincia</option> @foreach($provincias as $item) <option value="{{$item->id}}">{{$item->provincia_nombre}}</option> @endforeach </select> </div> <div class="col-lg-6 col-md-6 col-sm-6"> <label for="localidad">Localidad</label> <select name="establecimientos[establecimiento'+y+'][ciudad]" id="localidad-select'+y+'" class="form-control"> <option value="">Seleccionas localidad</option> </select> </div> </div> <br> <input type="hidden" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'"> <input type="hidden" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'"> <div id="map-cont'+y+'"> <input id="pac-input'+y+'" class="controls gm-search-input" type="text" placeholder="Establece la direccion en el mapa.."> </div> <a onClick="eliminarLocacion(null,'+y+')" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a> </div>');
-
+		$("form #content").append('<div class="locacion" id="locacion'+y+'"><input type="hidden" name="establecimientos[establecimiento'+y+'][establecimiento_ciudad_id]" value=""><h1>Locacion</h1> <div class="row"> <div class="col-lg-12 col-md-12 col-sm-12	"> <label>Domicilio</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="'+y+'" class="domicilio-domicilio form-control"> <div class="error" id="error-domicilio-'+y+'">Ingrese un domicilio</div> <label>Telefono</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][telefono]" id="'+y+'" class="domicilio-telefono form-control"> <div class="error" id="error-telefono-'+y+'">Ingrese un telefono</div> </div> </div> <div class="row"> <div class="col-lg-6 col-md-6 col-sm-6	"> <label for="provincias">Provincia</label> <select name="provincias" id="'+y+'"  onChange="buscarCiudadSegunProvincia('+y+')" class="provincia-select'+y+' domicilio-provincia form-control"> <option value="" selected>Selecciona tu provincia</option> @foreach($provincias as $item) <option value="{{$item->id}}">{{$item->provincia_nombre}}</option> @endforeach </select> <div class="error" id="error-provincia-'+y+'">Ingrese una provincia</div> </div> <div class="col-lg-6 col-md-6 col-sm-6"> <label for="localidad">Localidad</label> <select name="establecimientos[establecimiento'+y+'][ciudad]" id="'+y+'" class="localidad-select'+y+' domicilio-localidad form-control"> <option value="">Seleccionas localidad</option> </select> <div class="error" id="error-localidad-'+y+'">Ingrese una localidad</div> </div> </div> <br> <input type="hidden" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'"> <input type="hidden" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'"> <div id="map-cont'+y+'"> <input id="pac-input'+y+'" class="controls gm-search-input" type="text" placeholder="Establece la direccion en el mapa.."></div> <a onClick="eliminarLocacion(null,'+y+')" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a </div></div>');
  
 
 
@@ -391,11 +406,7 @@
 
 	/*<div id="locacion'+y+'"><input type="hidden" name="establecimientos[establecimiento'+y+'][establecimiento_ciudad_id]" value="">  <h1>Locacion '+y+'</h1> <label for="Domicilio{{$i}}">Domicilio '+y+' </label> <input class="domicilio" type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="Domicilio'+y+'" value=""> <br> <label for="">provincia'+y+'</label> <select name="" id="provincia-select'+y+'" onchange="buscarCiudadSegunProvincia('+y+')"> <option value="0">Seleccione una provincia</option> @foreach($provincias as $provincia) <option value="{{$provincia->id}}">{{$provincia->provincia_nombre}}</option> @endforeach </select> <br> <label for="">ciudad'+y+'</label> <select name="establecimientos[establecimiento'+y+'][ciudad]" id="localidad-select'+y+'"> <option value="0">Seleccione una ciudad</option> </select> <br> <!--<label for="latitud1">Latitud'+y+'</label>--> <input class="latitud-input" type="hidden" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'" value=""> <br><!-- <label for="longitud1">Longitud'+y+'</label>--> <input type="hidden" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'" value=""> <br> <div id="map-cont'+y+'" style="width: 100%"> <input id="pac-input'+y+'" class="controls" type="text" placeholder="Search Box"> </div> <br><br> <a onClick="eliminarLocacion(null,'+y+')">Eliminar</a></div>*/
 	</script>
-		<script>
-		function formSubmit(){
-			$("form").submit();
-		}
-	</script>
+
 
 	
 @stop

@@ -29,7 +29,8 @@ Route::post('/buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad','AjaxCont
 Route::post('admin/deleteEstablecimiento','AjaxController@deleteEstablecimiento');
 Route::post('admin/deleteLocacion','AjaxController@deleteLocacion');
 
-Route::get('/buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad/{tipo_id}/{ciudad_id}/{especialidad_id}','AjaxController@buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad');
+
+Route::post('admin/existeSesion/','AjaxController@existeSesion');
 
 
 

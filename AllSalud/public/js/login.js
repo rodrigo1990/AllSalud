@@ -17,8 +17,9 @@
 
 
 
+						
 
-					
+
 					if(response==true){
 						 $("#login").fadeOut(function(){
 					    $(".main").fadeIn();
@@ -26,7 +27,7 @@
 						
 						
 					}else{
-						alert(response);
+						alertar("Usuario y/o contraseña invalidos");
 					}
 
 

@@ -38,7 +38,7 @@ class EstablecimientoDao
 
         foreach ($request->establecimientos as $domicilio) {
           
-          $establecimiento->Domicilio()->attach($domicilio['localidad'],['domicilio'=>$domicilio['domicilio'],'latitud'=>$domicilio['latitud'],'longitud'=>$domicilio['longitud']]);
+          $establecimiento->Domicilio()->attach($domicilio['localidad'],['domicilio'=>$domicilio['domicilio'],'latitud'=>$domicilio['latitud'],'longitud'=>$domicilio['longitud'],'telefono'=>$domicilio['telefono']]);
 
         }
 
@@ -85,7 +85,7 @@ class EstablecimientoDao
             DB::table('establecimiento_ciudad')
             ->updateOrInsert(
               ['id' => $domicilio['establecimiento_ciudad_id'],'establecimiento_id' => $request->id  ],
-              ['ciudad_id'=>$domicilio['ciudad'], 'domicilio'=>$domicilio['domicilio'],'latitud'=>$domicilio['latitud'],'longitud'=>$domicilio['longitud']]);  
+              ['ciudad_id'=>$domicilio['ciudad'], 'domicilio'=>$domicilio['domicilio'],'latitud'=>$domicilio['latitud'],'longitud'=>$domicilio['longitud'],'telefono'=>$domicilio['telefono']]);  
           
 
         }

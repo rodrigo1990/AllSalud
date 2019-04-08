@@ -1,8 +1,16 @@
 
 @extends('admin.layouts.principal')
 @section('content')
-
-<div id="login">
+	<!-- ALERT -->
+ <div class="confirm-alert-bk" id="alert" style="display:none">
+    <div class="panel" >
+        <h2></h2>
+        <div class="row">
+        	<a id="btnAccept" class="form-btn center-block"><h2>ACEPTAR</h2></a>
+        </div>
+    </div>
+</div>
+<div id="login" style="display:none">
 	<div class="wrapper fadeInDown">
 	  <div class="formContent">
 	    <!-- Tabs Titles -->

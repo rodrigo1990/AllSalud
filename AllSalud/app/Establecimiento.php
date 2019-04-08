@@ -13,7 +13,7 @@ class Establecimiento extends Model
 
      public function Domicilio()
     {
-        return $this->belongsToMany('App\Ciudad','establecimiento_ciudad','establecimiento_id','ciudad_id')->withPivot('domicilio','id','latitud','longitud');
+        return $this->belongsToMany('App\Ciudad','establecimiento_ciudad','establecimiento_id','ciudad_id')->withPivot('domicilio','id','latitud','longitud','telefono');
     }
 
 

@@ -21,7 +21,7 @@ class EstablecimientoCiudad extends Migration
 
             $table->string('latitud');
             $table->string('longitud');
-            $table->string('telefono');
+            $table->bigInteger('telefono');
 
 
             

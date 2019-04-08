@@ -15,7 +15,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
-	
+
 	@yield('content')
 
 
@@ -23,8 +23,18 @@
 	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/js/confirmar.js"></script>
 	<script type="text/javascript" src="/js/alertar.js"></script>
+	<script type="text/javascript" src="/js/loginToHomeAnimation.js"></script>
+	<script type="text/javascript" src="/js/existeSesion.js"></script>
 	
 	@yield('scripts')
+
+	<script>
+			$( document ).ready(function() {
+			
+				existeSesion();
+
+		});
+	</script>
 
 
 </body>

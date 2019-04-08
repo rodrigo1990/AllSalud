@@ -1,6 +1,6 @@
 function buscarCiudadSegunProvincia(id){
 
-			var provinciaId = $("#provincia-select"+id+"").val();
+			var provinciaId = $(".provincia-select"+id+"").val();
 
 
 				$.ajax({
@@ -12,11 +12,11 @@ function buscarCiudadSegunProvincia(id){
 				type:'post',
 				dataType:"json",
 				success:function(data){
-					$("#localidad-select"+id+"").empty();
-					$("#localidad-select"+id+"").append('<option value="0">Seleccione una ciudad</option>');
+					$(".localidad-select"+id+"").empty();
+					$(".localidad-select"+id+"").append('<option value="0">Seleccione una ciudad</option>');
 						for(var i in data) {	
 								
-								$("#localidad-select"+id+"").append("<option value="+data[i].id+"> "+
+								$(".localidad-select"+id+"").append("<option value="+data[i].id+"> "+
 									data[i].ciudad_nombre+"</option>");				
 							}
 

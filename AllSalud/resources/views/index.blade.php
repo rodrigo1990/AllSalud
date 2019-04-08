@@ -87,14 +87,14 @@
 				<div class="col-sm-8">
 					
 					<div class="row">
-						<select name="provincias" id="provincia-select1" class='form-control' onChange="buscarCiudadSegunProvincia(1);setProvincia();">
+						<select name="provincias" id="provincia-select1" class=' provincia-select1 form-control' onChange="buscarCiudadSegunProvincia(1);setProvincia();">
 							<option value="" selected>Provincia</option>
 							@foreach($provincias as $item)
 								<option value="{{$item->id}}">{{$item->provincia_nombre}}</option>
 							@endforeach
 						</select>
 
-						<select name="localidad" id="localidad-select1" class='form-control' onChange="setCiudad()">
+						<select name="localidad" id="localidad-select1" class='localidad-select1 form-control' onChange="setCiudad()">
 							<option value="">Seleccion localidad</option>
 						</select>
 
@@ -196,7 +196,7 @@
 							k++;					
 
 							$(".cartilla .establecimientos").append("<li class='animated fadeIn'><div class='col-sm-2 nro'><span>"+k+"</span></div><div class='col-sm-10'><p>"+
-								data[i].nombre+ "</p><p class='float-left'>"+data[i].domicilio+" </p><p class='float-left margin-left-5'> "+data[i].ciudad_nombre+"</p><br><a class='float-left detalle-btn' onClick='zoomOnLocation("+data[i].latitud+","+data[i].longitud+")'>Detalle</a></div></li>");
+								data[i].nombre+ "</p><p class='float-left'>"+data[i].domicilio+" </p><p class='float-left margin-left-5'> "+data[i].ciudad_nombre+"</p><br>"+data[i].telefono+"<br><a class='float-left detalle-btn' onClick='zoomOnLocation("+data[i].latitud+","+data[i].longitud+")'>Detalle</a></div></li>");
 
 							 locations.push([''+data[i].nombre+'<br>'+data[i].domicilio+' '+data[i].ciudad_nombre+'',data[i].latitud,data[i].longitud]);
 
@@ -344,7 +344,7 @@
 	      	var center = {lat: latitud, lng: longitud};
 
 	      	map.setCenter(center);
-	      	map.setZoom(100);
+	      	map.setZoom(15);
 
 	
 	      }
