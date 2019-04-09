@@ -40,7 +40,7 @@
 						<ul id="nav">
 							<li><a href="#conoce-all" class=" scroll-spy link-gal" data-offset="50" >Conocé AllSalud</a></li>
 							<li><a href="#quiero-ser-socio" class="scroll-spy" data-offset="-50">Quiero ser Socio</a></li>
-							<li><a href="#cartilla" class="scroll-spy" data-offset="50" >Cartilla</a></li>
+							<li><a href="#cartilla"  data-toggle="modal" data-target="#cartilla-modal" >Cartilla</a></li>
 
 							<li><a href="#atencion-al-socio" class="scroll-spy" data-offset="50">Atención al Socio</a></li>
 							
@@ -67,7 +67,7 @@
 			</div>
 			<li><a href="#conoce-all" class=" xs-btn scroll-spy link-gal" data-offset="50" >Conocé AllSalud</a></li>
 			<li><a href="#quiero-ser-socio" class="xs-btn scroll-spy" data-offset="-50">Quiero ser Socio</a></li>
-			<li><a href="#cartilla" class="xs-btn scroll-spy" data-offset="50" >Cartilla</a></li>
+			<li><a href="#cartilla" class="xs-btn" data-toggle="modal" data-target="#cartilla-modal" >Cartilla</a></li>
 
 			<li><a href="#atencion-al-socio" class="xs-btn scroll-spy" data-offset="50">Atención al Socio</a></li>
 			

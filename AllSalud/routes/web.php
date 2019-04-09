@@ -64,9 +64,13 @@ Route::post('session/remove','SessionController@deleteSessionData');
 Route::get('/especialidad','EspecialidadController@getEstablecimientosPorEspecialidad');
 
 
+/*MAIL ROUTES*/
+Route::post('/enviarMail','MailController@enviarMail');
 
-
-
+//preview email
+Route::get('mailable', function () {
+    return new App\Mail\ConsultasFormulario();
+});
 
 
 

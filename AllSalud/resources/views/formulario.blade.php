@@ -2,7 +2,8 @@
 		
 
 		
-		<form action="">
+		<form action="enviarMail" method="POST">
+		@csrf
 	  	<h1 class="text-left">Dejanos tu consulta</h1>		
 	  			<div class="row">
 	  				<div class="col-sm-6">
@@ -18,12 +19,12 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="col-sm-6 no-padding">
-							<select name="tipo-doc" id="tipo-doc" class="form-control form-small">
+							<select name="tipo_doc" id="tipo_doc" class="form-control form-small">
 				  				<option value="DNI">DNI</option>
 				  				<option value="DNI2">DNI2</option>
 				  				<option value="DNI3">DNI2</option>
 		  					</select>		
-		  					<div class="error" id="tipo-evento-error">Ingrese un tipo de evento</div>
+		  					<div class="error" id="tipo-error">Ingrese un tipo de evento</div>
 						</div>
 						<div class="col-sm-6 ">
 							<input type="text" class="form-control" name="documento" id="documento" placeholder="N° de doc">
@@ -56,8 +57,8 @@
 	  			<div class="row">
 	  				<div class="col-sm-12">
 	  					<div class="col-sm-6 no-padding">
-	  						<input type="text" class="form-control" name="numero-piso-depto" id="numero-piso-depto" placeholder="Número Piso Depto">
-	  						<div class="error" id="domicilio-error">Ingrese datos validos</div>
+	  						<input type="text" class="form-control" name="altura" id="numero-piso-depto" placeholder="Número Piso Depto">
+	  						
 	  					</div>
 	  					<div class="col-sm-6">
 	  						<input type="text" class="form-control" name="provincia" id="provincia" placeholder="Provincia">
@@ -74,7 +75,7 @@
 	  						<div class="error" id="localidad-error">Ingrese una localidad valida</div>
 	  					</div>
 	  					<div class="col-sm-6">
-	  						<input type="text" class="form-control" name="cod-postal" id="cod-postal" placeholder="Cod. Postal">
+	  						<input type="text" class="form-control" name="cod_postal" id="cod_postal" placeholder="Cod. Postal">
 	  						<div class="error" id="cod-postal-error">Ingrese un codigo postal valido</div>
 	  					</div>
 	  					
@@ -84,14 +85,15 @@
 	  			<div class="row">
 	  				<div class="col-sm-12">
 	  					<label for="comentarios">Consulta:</label>
-	  					<textarea name="mensaje" id="mensaje" cols="30" rows="5" id="comentarios" class="form-control"></textarea>		
+	  					<textarea name="consulta" id="consulta" cols="30" rows="5" id="comentarios" class="form-control"></textarea>		
 	  				</div>
 	  			</div>
 
 	  			<div class="row">
 	  				<div class="col-sm-12">
 	  					
-	  					<a class="btn" onClick="validar()">ENVIAR</a>		
+	  					<a class="btn" onClick="validarYEnviarMails()">ENVIAR</a>
+	  					 <button>Enviar</button>		
 	  				</div>
 	  			</div>
 	  		</form>

@@ -13,15 +13,15 @@
 				<ul>
 					<li>
 						<img src="<?php echo asset("storage/img/1.png")?>"></img> 
-						<h5 class="margin-top-10">Confiable y seguro</h5>
+						<h5 class="margin-top-20">Confiable y seguro</h5>
 					</li>
 					<li>
 						<img src="<?php echo asset("storage/img/2.png")?>"></img>
-						<h5 class="margin-top-10">Especialidad médica</h5> 
+						<h5 class="margin-top-20">Especialidad médica</h5> 
 					</li>
 					<li>
 						<img src="<?php echo asset("storage/img/3.png")?>"></img>
-						<h5 class="margin-top-10">Atención sanatorial</h5> 
+						<h5 class="margin-top-20">Atención sanatorial</h5> 
 					</li>
 				</ul>
 			</div>
@@ -40,7 +40,12 @@
 				 Contamos con los reconocidos Centros de Médicos, dando cobertura a todos los niveles de complejidad.
 				</p>
 			</div>
+			<div class="row" id="arrow-row">
+				<img src="<?php echo asset("storage/img/arrows-05.png")?>" style="width: 24px" alt="" class="center-block">
+			</div>
 		</div>
+
+		
 
 
 
@@ -52,7 +57,7 @@
 				</div>
 				<div class="col-lg-6 col-sm-12 col-xs-12">
 					<h1 class="margin-bottom-15">Quiero ser socio</h1>
-					<p>Si trabajás en <b>relación de dependencia o sos monotributista, </b> <br>
+					<p class="margin-bottom-0">Si trabajás en <b>relación de dependencia o sos monotributista, </b> <br>
 					podes elegirnos y tu <b>plan estará exento de IVA</b> <i>(de acuerdo a las <br> normas impositivas y vigentes).</i></p>
 					<br>
 					<p>Además, pueden asociarse todas aquellas personas que, más allá <br>
@@ -67,59 +72,7 @@
 		</div>
 		
 		<div id="cartilla" class="row cartilla margin-top-60">
-			<div class="container">
-				<h1 class="text-center margin-bottom-15">Cartilla AllSalud</h1>
-				<h2 class="text-center margin-bottom-30">Encontrá lo que necesitas de manera rapida y simple.</h2>
-				<div class="col-sm-4">
-					<ul class="text-center tipos">
-						<li class="title text-left"><h3>BUSCÁ EN CARTILLA</h3></li>
-						@foreach($tipos as $tipo)
-							<li class="text-left">
-								<div class="active"></div>
-								<a class="tipo-link" onClick="setTipo({{$tipo->id}});">
-									<h4>{{$tipo->descripcion}}</h4>
-								</a>
-							</li>	
-						@endforeach
-
-					</ul>
-				</div>
-				<div class="col-sm-8">
-					
-					<div class="row">
-						<select name="provincias" id="provincia-select1" class=' provincia-select1 form-control' onChange="buscarCiudadSegunProvincia(1);setProvincia();">
-							<option value="" selected>Provincia</option>
-							@foreach($provincias as $item)
-								<option value="{{$item->id}}">{{$item->provincia_nombre}}</option>
-							@endforeach
-						</select>
-
-						<select name="localidad" id="localidad-select1" class='localidad-select1 form-control' onChange="setCiudad()">
-							<option value="">Seleccion localidad</option>
-						</select>
-
-						<select name="especialidad" id="especialidad-select" class='form-control' onChange="setEspecialidad()">
-							<option value="null">Seleccione una Especialidad</option>
-							@foreach($especialidades as $especialidad)
-								<option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option>
-							@endforeach
-						</select>
-
-						<a class="buscar-btn" onClick="buscar()"><i class="fas fa-search"></i></a>
-					</div>
-					<div class="row">
-						<div class="col-sm-6 padding-left-0 padding-right-0">
-							<ul class="establecimientos padding-left-0 ">
-								
-							</ul>
-						</div>
-						<div class="col-sm-6  padding-right-0" id="map-cont">
-
-						</div>
-					</div>
-
-				</div>
-			</div>
+			@include('cartilla')
 		</div>
 		
 
@@ -195,8 +148,8 @@
 							
 							k++;					
 
-							$(".cartilla .establecimientos").append("<li class='animated fadeIn'><div class='col-sm-2 nro'><span>"+k+"</span></div><div class='col-sm-10'><p>"+
-								data[i].nombre+ "</p><p class='float-left'>"+data[i].domicilio+" </p><p class='float-left margin-left-5'> "+data[i].ciudad_nombre+"</p><br>"+data[i].telefono+"<br><a class='float-left detalle-btn' onClick='zoomOnLocation("+data[i].latitud+","+data[i].longitud+")'>Detalle</a></div></li>");
+							$(".cartilla .establecimientos").append("<li class='animated fadeIn'><div class='col-sm-2 col-xs-2 nro'><span>"+k+"</span></div><div class='col-sm-10 col-xs-10'><p><b>"+
+								data[i].nombre+ "</b></p><p>"+data[i].domicilio+" "+data[i].ciudad_nombre+" </p><p>"+data[i].telefono+"</p><a class='float-left detalle-btn' onClick='zoomOnLocation("+data[i].latitud+","+data[i].longitud+")'>Ver mapa</a></div></li>");
 
 							 locations.push([''+data[i].nombre+'<br>'+data[i].domicilio+' '+data[i].ciudad_nombre+'',data[i].latitud,data[i].longitud]);
 
@@ -237,25 +190,25 @@
 	function validarCampos(){
 
 		if(tipoEstablecimientoGlobal==0){
-			$("ul.tipos").css("border","4px solid #fb5151");
+			$("ul.tipos").css("border","1px solid #fb5151");
 		}else{
 			$("ul.tipos").css("border","none");
 		}
 
 	 	if(provinciaGlobal==0){
-			$("#provincia-select1").css("border","2px solid #fb5151");
+			$("#provincia-select1").css("border","1px solid #fb5151");
 		}else{
 			$("#provincia-select1").css("border","1px solid #00BCD5");	
 		}
 
 		 if(ciudadGlobal==0){
-			$("#localidad-select1").css("border","2px solid #fb5151");
+			$("#localidad-select1").css("border","1px solid #fb5151");
 		}else{
 			$("#localidad-select1").css("border","1px solid #00BCD5");
 		}
 
 		 if(especialidadGlobal==0){
-			$("#especialidad-select").css("border","2px solid #fb5151");
+			$("#especialidad-select").css("border","1px solid #fb5151");
 		}else{
 			$("#especialidad-select").css("border","1px solid #00BCD5");
 		}
@@ -407,8 +360,80 @@
 			$('ul.tipos li').click(function() {
 			    $("ul.tipos li .active").fadeOut();
 				$(this).children('.active').fadeIn();
+				$(this).css("background","white");
 			    
 			});
+    </script>
+    <script>
+    	function validarYEnviarMails(){
+    		var nombre = $("#nombre").val();
+    		var apellido = $("#apellido").val();
+    		var tipo_doc = $("#tipo_doc").val();
+    		var documento = $("#documento").val();
+    		var telefono = $("#telefono").val();
+    		var email = $("#email").val();
+    		var domicilio = $("#domicilio").val();
+    		var numero = $("#numero-piso-depto").val();
+    		var provincia = $("#provincia").val();
+    		var localidad =$("#localidad").val();
+    		var cod_postal = $("#cod_postal").val();
+    		var consulta  =$("#consulta").val();
+
+    		var nombreEstaValidado=false;
+    		var apellidoEstaValidado=false;
+    		var tipoEstaValidado = false;
+    		var documentoEstaValidado = false;
+    		var telefonoEstaValidado = false;
+    		var emailEstaValidado = false;
+    		var domicilioEstaValidado = false;
+    		//var numeroEstaValidado=false;
+    		var provinciaEstaValidado=false;
+    		var localidadEstaValidado=false;
+    		var codPostalEstaValidado = false;
+    		var consultaEstaValidado = false;
+
+    		if(nombre.length==0){
+    			$("#nombre-error").fadeIn();
+    			nombreEstaValidado=false;
+    		}else{
+    			$("#nombre-error").fadeOut();
+    			nombreEstaValidado=false;
+    		}
+
+    		if(apellido.length==0){
+    			$("#apellido-error").fadeIn();
+    			apellidoEstaValidado=false;
+    		}else{
+    			$("#apellido-error").fadeOut();
+    			apellidoEstaValidado=true;
+    		}
+
+    		if(documento.length==8){
+    			$("#documento-error").fadeIn();
+    			documentoEstaValidado=false;
+    		}else{
+    			$("#documento-error").fadeOut();
+    			documentoEstaValidado=true;
+    		}
+
+
+    		$.ajax({
+			headers: {
+   					 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					},
+			data:{nombre:nombre,apellido:apellido,tipo_doc:tipo_doc,documento:documento,telefono:telefono,email:email,domicilio:domicilio,numero:numero,provincia:provincia,localidad:localidad,cod_postal:cod_postal,consulta:consulta},
+			url:'/enviarMail',
+			type:'post',
+			dataType:"json",
+			success:function(response){
+					//alert(response);
+					alertar("Email enviado");
+
+
+				}
+
+			});
+    	}
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkne1gpPfJ0B3KrE4OQURwPi492LDjg8g&libraries=places">
