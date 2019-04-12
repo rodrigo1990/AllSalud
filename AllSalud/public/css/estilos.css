@@ -162,6 +162,10 @@ h1,h2,h3,h4,h5{
     float:left;
 }
 
+.float-right{
+  float:right;
+}
+
 #arrow-row{
   margin-top: 20px;
 }
@@ -193,7 +197,7 @@ h1,h2,h3,h4,h5{
 }
 
 .slider-cont .absolute-div .nro{
-  color:white;
+  color:#114980;
       font-size: 48px;
 }
 
@@ -626,10 +630,10 @@ header ul li a i:hover{
 
 #cartilla-panel{
       background: white;
-    margin-top: 50px;
+    margin-top: 5px;
         border-left: 33px solid white;
     border-right: 33px solid white;
-    border-top: 70px solid white;
+    border-top: 0 solid white;
     border-bottom: 70px solid white;
     width: 80%;
     border-radius: 11px;
@@ -696,7 +700,7 @@ header ul li a i:hover{
     margin-left: 14px;
     font-family: RobotoSlabThin;
     font-weight: bolder;
-    max-width: 200px;
+    max-width: 186px;
     -webkit-box-shadow: unset !important;
     box-shadow: unset !important;
 }
@@ -932,6 +936,8 @@ input::placeholder { color: white; }
 
 .error{
   display:none;
+  color: white;
+    font-family: GothamMedium;
 }
 
 .contacto-cont,.atencion-al-socio-cont{
@@ -1034,6 +1040,7 @@ a.form-btn  {
     margin: auto;
     padding: 55px 0px;
     text-align: center;
+    margin:auto;
     /* padding-top: 4px; */
 }
 
@@ -1211,6 +1218,14 @@ header{
 
 .cartilla ul.tipos li.title {
    padding: 17px 19px;
+}
+
+#cartilla-panel .margin-top-50,#cartilla-panel .margin-top-10{
+  margin-top:0;
+}
+
+#cartilla-panel .close-row button{
+  margin-right: 15px;
 }
 
 }

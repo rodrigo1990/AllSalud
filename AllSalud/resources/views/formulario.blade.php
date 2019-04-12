@@ -93,7 +93,7 @@
 	  				<div class="col-sm-12">
 	  					
 	  					<a class="btn" onClick="validarYEnviarMails()">ENVIAR</a>
-	  					 <button>Enviar</button>		
+	  					 <!-- <button>Enviar</button> -->		
 	  				</div>
 	  			</div>
 	  		</form>

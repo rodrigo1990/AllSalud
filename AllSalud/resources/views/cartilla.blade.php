@@ -3,7 +3,10 @@
 
 <div id="cartilla-modal" class="modal fade" role="dialog">
  <div class="container" id="cartilla-panel">
-				<h1 class="text-center margin-bottom-15">Cartilla AllSalud</h1>
+ 	<div class="row close-row margin-top-10">
+ 		 <button type="button" class="close" data-dismiss="modal">&times;</button>
+ 	</div>
+				<h1 class="text-center margin-bottom-15 margin-top-50">Cartilla AllSalud</h1>
 				<h2 class="text-center margin-bottom-30">Encontrá lo que necesitas de manera rapida y simple.</h2>
 				<div class="col-sm-4">
 					<ul class="text-center tipos">
