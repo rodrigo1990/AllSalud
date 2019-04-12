@@ -39,10 +39,10 @@
 					<div class="col-md-10 hidden-sm hidden-xs btn-cont">
 						<ul id="nav">
 							<li><a href="#conoce-all" class=" scroll-spy link-gal" data-offset="50" >Conocé AllSalud</a></li>
-							<li><a href="#quiero-ser-socio" class="scroll-spy" data-offset="-50">Quiero ser Socio</a></li>
+							<li><a href="#quiero-ser-socio" class="scroll-spy" data-offset="-50">Quiero ser socio</a></li>
 							<li><a href="#cartilla"  data-toggle="modal" data-target="#cartilla-modal" >Cartilla</a></li>
 
-							<li><a href="#atencion-al-socio" class="scroll-spy" data-offset="50">Atención al Socio</a></li>
+							<li><a href="#atencion-al-socio" class="scroll-spy" data-offset="50">Atención al socio</a></li>
 							
 							<li><a href="#contacto" class="scroll-spy" data-offset="50">Contacto</a></li>
 						</ul>

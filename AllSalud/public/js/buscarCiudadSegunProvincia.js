@@ -1,7 +1,7 @@
 function buscarCiudadSegunProvincia(id){
 
 			var provinciaId = $(".provincia-select"+id+"").val();
-
+			
 
 				$.ajax({
 					headers: {

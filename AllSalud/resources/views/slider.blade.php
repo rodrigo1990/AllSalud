@@ -3,7 +3,7 @@
 			<h3 class="bk-title">¡QUIERO ASOCIARME!</h3>
 			<h2 class="nro margin-top-10">3320-8053</h2>
 			<h1 class="margin-top-60 margin-bottom-20 main-title">Brindamos lo mejor <br> Para tu salud</h1>
-			<a class="">Conocenos</a>
+			<a class="scroll-spy" href="#conoce-all">Conocenos</a>
 		</div>
 		<div class="owl-one owl-carousel owl-theme slider" id="owl-1">	
 
@@ -30,6 +30,6 @@
 	<div class="slider-footer padding-16">
 		<ul class="">
 			<li><b>Emergencias</b> 3220-8002</li>
-			<li><b>Atención al socio</b> 3320-853</li>
+			<li><b>Atención al socio</b> 3320-8053</li>
 		</ul>
 	</div>

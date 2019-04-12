@@ -18,15 +18,16 @@
 
 				<div class="row">
 					<div class="col-sm-6">
-						<div class="col-sm-6 no-padding">
+						<div class="col-lg-3 col-sm-6 no-padding">
 							<select name="tipo_doc" id="tipo_doc" class="form-control form-small">
+				  				<option value="null">Tipo doc</option>
 				  				<option value="DNI">DNI</option>
 				  				<option value="DNI2">DNI2</option>
 				  				<option value="DNI3">DNI2</option>
 		  					</select>		
 		  					<div class="error" id="tipo-error">Ingrese un tipo de evento</div>
 						</div>
-						<div class="col-sm-6 ">
+						<div class="col-lg-9 col-sm-6 padding-right-0">
 							<input type="text" class="form-control" name="documento" id="documento" placeholder="N° de doc">
 		  					<div class="error" id="documento-error">Ingrese un documento</div>	
 						</div>
@@ -57,11 +58,16 @@
 	  			<div class="row">
 	  				<div class="col-sm-12">
 	  					<div class="col-sm-6 no-padding">
-	  						<input type="text" class="form-control" name="altura" id="numero-piso-depto" placeholder="Número Piso Depto">
+	  						<input type="text" class="form-control" name="altura" id="numero-piso-depto" placeholder="Nro Dpto">
 	  						
 	  					</div>
-	  					<div class="col-sm-6">
-	  						<input type="text" class="form-control" name="provincia" id="provincia" placeholder="Provincia">
+	  					<div class="col-sm-6 padding-right-0">
+	  						<select  class="form-control provincia-selectcont" name="provincia" id="provincia" onChange="buscarCiudadSegunProvincia('cont')">
+	  							<option value="null">Seleccione una provincia</option>
+	  							@foreach($provincias as $provincia)
+	  								<option value="{{$provincia->id}}">{{$provincia->provincia_nombre}}</option>
+	  							@endforeach
+	  						</select>
 	  						<div class="error" id="provincia-error">Ingrese una provincia valida</div>
 	  					</div>
 	  					
@@ -71,10 +77,12 @@
 				<div class="row">
 	  				<div class="col-sm-12">
 	  					<div class="col-sm-6 no-padding">
-	  						<input type="text" class="form-control" name="localidad" id="localidad" placeholder="Localidad">
+	  						<select  class="form-control localidad-selectcont" name="localidad" id="localidad" >
+	  							<option value="null">Seleccione una localidad</option>
+	  						</select>
 	  						<div class="error" id="localidad-error">Ingrese una localidad valida</div>
 	  					</div>
-	  					<div class="col-sm-6">
+	  					<div class="col-sm-6 padding-right-0">
 	  						<input type="text" class="form-control" name="cod_postal" id="cod_postal" placeholder="Cod. Postal">
 	  						<div class="error" id="cod-postal-error">Ingrese un codigo postal valido</div>
 	  					</div>
@@ -92,7 +100,7 @@
 	  			<div class="row">
 	  				<div class="col-sm-12">
 	  					
-	  					<a class="btn" onClick="validarYEnviarMails()">ENVIAR</a>
+	  					<a class="btn" onClick="validarYEnviarMails()">Enviar</a>
 	  					 <!-- <button>Enviar</button> -->		
 	  				</div>
 	  			</div>

@@ -6,8 +6,8 @@
  	<div class="row close-row margin-top-10">
  		 <button type="button" class="close" data-dismiss="modal">&times;</button>
  	</div>
-				<h1 class="text-center margin-bottom-15 margin-top-50">Cartilla AllSalud</h1>
-				<h2 class="text-center margin-bottom-30">Encontrá lo que necesitas de manera rapida y simple.</h2>
+				<h1 class="text-center margin-bottom-15 margin-top-30">Cartilla AllSalud</h1>
+				<h2 class="text-center margin-bottom-30">Encontrá lo que necesitás de manera rápida y simple.</h2>
 				<div class="col-sm-4">
 					<ul class="text-center tipos">
 						<li class="title text-left"><h3>BUSCÁ EN CARTILLA</h3></li>

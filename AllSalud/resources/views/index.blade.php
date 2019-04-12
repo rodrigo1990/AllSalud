@@ -79,8 +79,8 @@
 		<div id="atencion-al-socio" class="row bk-img margin-top-60">
 				<div class="col-sm-12 bk-lightblue atencion-al-socio-cont">
 					<div class="container atencion-al-socio">
-						<h1 class="margin-bottom-15">Atención al Socio</h1>
-						<h3 class="margin-bottom-15">Contactarte con un asesor comercional</h3>
+						<h1 class="margin-bottom-15">Atención al socio</h1>
+						<h3 class="margin-bottom-15">Contactate con un asesor comercional</h3>
 						<div class="nro">
 							<h1><img src="<?php echo asset("storage/img/nro-icon.png")?>"></img> 3320-8053</h1>
 						</div>
@@ -129,7 +129,7 @@
    						 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   						},
 				data:{tipo_id:tipoEstablecimientoGlobal,ciudad_id:ciudadGlobal,especialidad_id:especialidadGlobal},
-				url:'/buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad',
+				url:'buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad',
 				type:'post',
 				dataType:"json",
 				success:function(data){
@@ -164,7 +164,7 @@
 							updateZoom(5);
 
 					}else{
-						alertar("no hay resultados para esta busqueda =(");
+						alertar("Disculpe, no hay resultados para esta búsqueda");
 						interaccionMapa=0;
 						$("#map-cont").fadeOut(function(){
 									$("#map-cont").empty();
@@ -352,17 +352,15 @@
 
 		}
 
+		//EVENT
+		$('ul.tipos li').click(function() {
+		    $("ul.tipos li .active").fadeOut();
+			$(this).children('.active').fadeIn();
 
-		function ajustarHeightmap(){
-			//$("#map").height($(".cartilla .tipos").height());
-		}
-
-			$('ul.tipos li').click(function() {
-			    $("ul.tipos li .active").fadeOut();
-				$(this).children('.active').fadeIn();
-				$(this).css("background","white");
-			    
-			});
+			$("ul.tipos li").not($("li.title")).css("background","#F8F8F8");
+			$(this).css("background","white");
+		    
+		});
     </script>
     <script>
     	function validarYEnviarMails(){
@@ -374,7 +372,7 @@
     		var email = $("#email").val();
     		var domicilio = $("#domicilio").val();
     		var numero = $("#numero-piso-depto").val();
-    		var provincia = $("#provincia").val();
+    		var provincia = $("#provincia option:selected").val();
     		var localidad =$("#localidad").val();
     		var cod_postal = $("#cod_postal").val();
     		var consulta  =$("#consulta").val();
@@ -392,6 +390,9 @@
     		var codPostalEstaValidado = false;
     		var consultaEstaValidado = false;
 
+    		var emailValido=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  			var soloNumeros=/^[0-9]*$/;
+
     		if(nombre.length==0){
     			$("#nombre-error").fadeIn();
     			nombreEstaValidado=false;
@@ -408,7 +409,7 @@
     			apellidoEstaValidado=true;
     		}
 
-    		if(documento.length==8){
+    		if(documento.length!=8){
     			$("#documento-error").fadeIn();
     			documentoEstaValidado=false;
     		}else{
@@ -416,13 +417,49 @@
     			documentoEstaValidado=true;
     		}
 
+    		if(telefono.length>13 || telefono.length==0 || telefono.search(soloNumeros)){
+    			$("#telefono-error").fadeIn();
+    			telefonoEstaValidado=false;
+    		}else{
+    			$("#telefono-error").fadeIn();
+    			telefonoEstaValidado=true;
+    		}
+
+    		if(email.length==0||email.search(emailValido)){
+    			$("#email-error").fadeIn();
+    			emailEstaValidado=false;
+    		}else{
+    			$("#email-error").fadeOut();
+    			emailEstaValidado=true;
+    		}
+
+
+    		if(domicilio.length==0){
+    			$("#domicilio-error").fadeIn();
+    			domicilioEstaValidado=false;
+    		}else{
+    			$("#domicilio-error").fadeOut();
+    			domicilioEstaValidado=true;
+    		}
+
+
+    		if(provincia==null){
+    			$("#provincia-error").fadeIn();
+    			provinciaEstaValidado=false;
+    		}else{
+    			$("#provincia-error").fadeOut();
+    			provinciaEstaValidado=true;
+    		}
+
+
+
 
     		$.ajax({
 			headers: {
    					 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					},
 			data:{nombre:nombre,apellido:apellido,tipo_doc:tipo_doc,documento:documento,telefono:telefono,email:email,domicilio:domicilio,numero:numero,provincia:provincia,localidad:localidad,cod_postal:cod_postal,consulta:consulta},
-			url:'/enviarMail',
+			url:'enviarMail',
 			type:'post',
 			dataType:"json",
 			success:function(response){

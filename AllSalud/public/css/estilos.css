@@ -118,6 +118,10 @@ h1,h2,h3,h4,h5{
   padding:16px;
 }
 
+.padding-right-0{
+  padding-right:0;
+}
+
 .margin-left-5{
     margin-left:5px;
 }
@@ -145,6 +149,10 @@ h1,h2,h3,h4,h5{
 
 .margin-bottom-30{
   margin-bottom:30px;
+}
+
+.margin-top-30{
+  margin-top:30px;
 }
 
 .margin-top-50{
@@ -209,7 +217,7 @@ h1,h2,h3,h4,h5{
 
 .slider-cont .absolute-div a{
   color: #114980;
-    padding: 2px 26px;
+    padding: 8px 26px;
     border-radius: 53px;
     border: 2px solid #114980;
     font-size: 20px;
@@ -306,7 +314,7 @@ footer ul li {
     text-align: center;
     margin: auto;
     padding: 0;
-    width: 725px;
+    width: 733px;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -386,7 +394,7 @@ header ul li:not(:first-child){
 header ul li a {
     color:#114980;
     transition:color 0.5s;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
 }
 
 header ul li a:hover{
@@ -420,8 +428,9 @@ header ul li a i:hover{
 
 
 .close-menu-xs i {
-    font-size: 2rem;
+        font-size: 2.3rem;
     color: #00bcd5;
+    margin-right: 16px;
 }
 .xs-row img{
     float:left;
@@ -440,9 +449,10 @@ header ul li a i:hover{
 
 
 .xs-row i{
-    float:right;
-    font-size: 5rem;
-    color:#00bcd5;
+    float: right;
+    font-size: 3rem;
+    color: #00bcd5;
+    margin-top: 6px;
 }
 
 
@@ -684,6 +694,9 @@ header ul li a i:hover{
 
 }
 
+button.close{
+      font-size: 38px;
+}
 
 
 .cartilla ul.establecimientos  li  p{
@@ -832,6 +845,10 @@ header ul li a i:hover{
     margin-left: 0;
 }
 
+#contacto img {
+    width: 260px;
+}
+
 #contacto{
     background-image: url(../img/galeria/2.jpg);
     background-position: center;
@@ -841,9 +858,9 @@ header ul li a i:hover{
 }
 
 .contacto-cont h4{
-      font-family: GothamBook;
-    line-height: 39px;
-    font-size: 32px;
+    font-family: GothamBook;
+    line-height: 34px;
+    font-size: 23px;
     color:white;
 }
 
@@ -863,7 +880,7 @@ header ul li a i:hover{
     color:white;
 }
 
-.form form label,form input{
+.form form label,form input,form select{
   color:white;
   font-family: RalewayRegular;
 }
@@ -910,17 +927,19 @@ input::placeholder { color: white; }
 .form .btn{
   float:right;
   background-color: transparent;
-  border:1px solid #6EC39A;
+  border:1px solid #00B5CE;
   padding: 5px 19px 5px 19px;
-  color:white;
+  color: #00B5CE;
   font-family: RobotoBold;
   font-size: 17px;;
   transition:background-color 0.5s; 
+  border-radius: 17px;
 }
 
 .form .btn:hover{
-  background-color:#6EC39A;
+  background-color:#00B5CE;
   transition:background-color 0.5s; 
+  color:white;
 }
 
 
@@ -1079,8 +1098,41 @@ a.form-btn  {
 
 /*MEDIA QUERIES*/
 
+@media only screen and (width: 320px){
+  
+  .cartilla ul.tipos,.cartilla ul.tipos li.title {
+    width: 259px !important;
+  }
+
+
+  .cartilla ul.tipos li.title h3 {
+    font-size: 20px;
+    margin-top: 3px;
+  }
+
+
+}
+
+
+
 
 @media only screen and (min-width: 10px) and (max-width: 1024px)  {
+
+  footer.padding-16{
+    padding:0 !important;
+    height: 71px;
+  }
+
+
+  .slider-cont .absolute-div {
+    top: 200px;
+    left: 0;
+    right: 0;
+    top: 140px;
+    bottom: 0;
+    margin: auto;
+    padding: 0px 0px 0px 24px;
+}
   .cartilla ul.tipos li h4 {
     line-height: unset;
     padding-top: 17px;
@@ -1173,6 +1225,10 @@ text-align: center; }
     margin-top: unset;
 }
 
+.form .padding-right-0{
+  padding-left:0;
+}
+
 .form input, .form select, .form textarea, .form label, .form a{
   margin-top:20px;
 }
@@ -1216,8 +1272,14 @@ header{
 }
 
 
+.cartilla ul.tipos {
+    margin:auto;
+}
+
+
 .cartilla ul.tipos li.title {
    padding: 17px 19px;
+   position:absolute;
 }
 
 #cartilla-panel .margin-top-50,#cartilla-panel .margin-top-10{
@@ -1228,6 +1290,22 @@ header{
   margin-right: 15px;
 }
 
+.cartilla ul.tipos {
+    height: 239px;
+    overflow-y: scroll;
+        width: 300px;
+
+}
+
+
+
+.cartilla select {
+    width: 300px;
+}
+
+
+.slider-cont 
+
 }
 
 
@@ -1235,15 +1313,9 @@ header{
 @media only screen and (min-width: 320px) and (max-width: 768px) and (orientation:portrait) {
 
 .cartilla ul.tipos li.title {
-    position: absolute;
     width: 300px;
 }
 
-.cartilla ul.tipos {
-    height: 239px;
-    overflow-y: scroll;
-        width: 300px;
-}
 
 
 }
@@ -1252,6 +1324,34 @@ header{
 .overlay-xs-menu li {
     margin-top: 2%;
 }
+
+.slider-cont .absolute-div .bk-title {
+    width: 214px;
+    margin-left: -20px;
+    font-size: 13px;
+}
+.slider-cont .absolute-div .nro {
+    font-size: 27px;
+}
+.slider-cont .absolute-div .main-title {
+    font-size: 22px;
+}
+.slider-cont .main-title.margin-top-60 {
+    margin-top: 14px;
+}
+
+.slider-cont .main-title.margin-bottom-20 {
+    margin-bottom: 17px;
+}
+
+
+
+.slider-cont .absolute-div a {
+    padding: 4px 12px;
+    font-size: 11px;
+}
+
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
@@ -1263,6 +1363,29 @@ header{
 .padding-60{
   padding:0;
   padding-top:40px;
+}
+
+.cartilla ul.tipos li.title {
+    width: 230px;
+}
+
+.cartilla ul.tipos {
+    width: 230px;
+    /* position: relative; */
+}
+
+.cartilla ul.tipos li.title {
+    padding: 21px 19px;
+}
+
+
+.cartilla ul.tipos li.title h3 {
+    font-size: 18px;
+}
+
+#contacto .form .col-sm-6, #contacto .form .col-sm-12 {
+    padding-left: 0;
+    padding-right: 14px !important;
 }
   
 
