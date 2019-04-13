@@ -880,7 +880,7 @@ button.close{
     color:white;
 }
 
-.form form label,form input,form select{
+.form form label,form input{
   color:white;
   font-family: RalewayRegular;
 }
@@ -1310,7 +1310,7 @@ header{
 
 
 
-@media only screen and (min-width: 320px) and (max-width: 768px) and (orientation:portrait) {
+@media only screen and (min-width: 320px) and (max-width: 76px) and (orientation:portrait) {
 
 .cartilla ul.tipos li.title {
     width: 300px;
@@ -1351,6 +1351,10 @@ header{
     font-size: 11px;
 }
 
+.cartilla select {
+     width: 100% !important;
+}
+
 
 }
 
@@ -1386,6 +1390,10 @@ header{
 #contacto .form .col-sm-6, #contacto .form .col-sm-12 {
     padding-left: 0;
     padding-right: 14px !important;
+}
+
+.cartilla select {
+     width: 90% !important;
 }
   
 
