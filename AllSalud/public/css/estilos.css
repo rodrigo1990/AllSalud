@@ -178,6 +178,13 @@ h1,h2,h3,h4,h5{
   margin-top: 20px;
 }
 
+.cartilla select > option {
+    font-weight: bolder; 
+}
+select > option,{
+  color:#114980;
+}
+
 /*---------------------------------------------*/
                 /*SLIDER*/
 /*----------------------------------------------*/
