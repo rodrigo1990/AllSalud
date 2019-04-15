@@ -204,6 +204,25 @@ h1,h2,h3,h4,h5{
     letter-spacing: 2px;
 }
 
+@-moz-document url-prefix() {
+  .slider-cont .absolute-div .bk-title {
+
+    color: white;
+    background: #00bcd5;
+    padding: 15px 20px;
+    width: 347px;
+    border-radius: 30px;
+    margin-left: -20px;
+    letter-spacing: 2px;
+
+}
+}
+
+
+
+
+
+
 .slider-cont .absolute-div .nro{
   color:#114980;
       font-size: 48px;
