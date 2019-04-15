@@ -181,7 +181,7 @@ h1,h2,h3,h4,h5{
 .cartilla select > option {
     font-weight: bolder; 
 }
-select > option,{
+select > option{
   color:#114980;
 }
 
