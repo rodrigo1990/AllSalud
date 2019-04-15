@@ -20,10 +20,11 @@
 					<div class="col-sm-6">
 						<div class="col-lg-3 col-sm-6 no-padding">
 							<select name="tipo_doc" id="tipo_doc" class="form-control form-small">
-				  				<option value="null">Tipo doc</option>
 				  				<option value="DNI">DNI</option>
-				  				<option value="DNI2">DNI2</option>
-				  				<option value="DNI3">DNI2</option>
+				  				<option value="DOC_EXT">DOC_EXT</option>
+				  				<option value="LC">LC</option>
+				  				<option value="CI">CI</option>
+				  				<option value="LE">LE</option>
 		  					</select>		
 		  					<div class="error" id="tipo-error">Ingrese un tipo de evento</div>
 						</div>

@@ -105,6 +105,11 @@
 	@include('footer')
 	@stop
 	@section('scripts')
+	<script>
+		$( document ).ready(function() {
+			preloader();
+		});
+	</script>
 	
 	<script>
 		window.map=0;
@@ -372,7 +377,7 @@
     		var domicilio = $("#domicilio").val();
     		var numero = $("#numero-piso-depto").val();
     		var provincia = $("#provincia option:selected").val();
-    		var localidad =$("#localidad").val();
+    		var localidad =$("#localidad option:selected").val();
     		var cod_postal = $("#cod_postal").val();
     		var consulta  =$("#consulta").val();
 
@@ -397,7 +402,7 @@
     			nombreEstaValidado=false;
     		}else{
     			$("#nombre-error").fadeOut();
-    			nombreEstaValidado=false;
+    			nombreEstaValidado=true;
     		}
 
     		if(apellido.length==0){
@@ -416,11 +421,11 @@
     			documentoEstaValidado=true;
     		}
 
-    		if(telefono.length>13 || telefono.length==0 || telefono.search(soloNumeros)){
+    		if(telefono.length==0 || telefono.search(soloNumeros)){
     			$("#telefono-error").fadeIn();
     			telefonoEstaValidado=false;
     		}else{
-    			$("#telefono-error").fadeIn();
+    			$("#telefono-error").fadeOut();
     			telefonoEstaValidado=true;
     		}
 
@@ -442,7 +447,7 @@
     		}
 
 
-    		if(provincia==null){
+    		if(provincia==null || provincia=="null"){
     			$("#provincia-error").fadeIn();
     			provinciaEstaValidado=false;
     		}else{
@@ -451,24 +456,51 @@
     		}
 
 
+    		if(localidad == null || localidad=="null" || localidad==0){
+    			$("#localidad-error").fadeIn();
+    			localidadEstaValidado=false;
+    		}else{
+    			$("#localidad-error").fadeOut();
+    			localidadEstaValidado=true;
+    		}
 
 
-    		$.ajax({
-			headers: {
-   					 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					},
-			data:{nombre:nombre,apellido:apellido,tipo_doc:tipo_doc,documento:documento,telefono:telefono,email:email,domicilio:domicilio,numero:numero,provincia:provincia,localidad:localidad,cod_postal:cod_postal,consulta:consulta},
-			url:'enviarMail',
-			type:'post',
-			dataType:"json",
-			success:function(response){
-					//alert(response);
-					alertar("Email enviado");
+    		if(cod_postal.length==0 || cod_postal==null || cod_postal=="null"){
+    			$("#cod-postal-error").fadeIn();
+    			codPostalEstaValidado=false;
+    		}else{
+    			$("#cod-postal-error").fadeOut();
+    			codPostalEstaValidado=true;
+    		}
 
 
-				}
+    		if(nombreEstaValidado==true&&apellidoEstaValidado==true&&documentoEstaValidado==true&&telefonoEstaValidado==true&&emailEstaValidado==true&&domicilioEstaValidado==true&&provinciaEstaValidado==true&&localidadEstaValidado==true&&codPostalEstaValidado==true){
 
-			});
+			$( "body" ).prepend( '<div id="preloader"> <div class="preloader"> <span></span> <span></span> <span></span> <span></span> </div> </div>' );
+
+		    		$.ajax({
+					headers: {
+		   					 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							},
+					data:{nombre:nombre,apellido:apellido,tipo_doc:tipo_doc,documento:documento,telefono:telefono,email:email,domicilio:domicilio,numero:numero,provincia:provincia,localidad:localidad,cod_postal:cod_postal,consulta:consulta},
+					url:'enviarMail',
+					type:'post',
+					dataType:"json",
+					success:function(response){
+						$('#preloader .preloader').fadeOut(); // will first fade out the loading animation 
+						$('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website. 
+						$('body').delay(350).css({'overflow':'visible'});
+							//alert(response);
+							alertar("Email enviado");
+
+
+
+
+
+						}
+
+					});
+			}
     	}
     </script>
     <script async defer

@@ -93,6 +93,7 @@
 	<script type="text/javascript" src="/js/headerFunctions.js"></script>
 	<script type="text/javascript" src="/js/scroll-spy.js"></script>
 	<script type="text/javascript" src="/js/manejoDeMenus.js"></script>
+	<script type="text/javascript" src="/js/preloader.js"></script>
 
 	@yield('scripts')
 </body>
