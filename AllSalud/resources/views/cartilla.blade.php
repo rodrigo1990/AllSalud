@@ -8,7 +8,7 @@
  	</div>
 				<h1 class="text-center margin-bottom-15 margin-top-30">Cartilla AllSalud</h1>
 				<h2 class="text-center margin-bottom-30">Encontrá lo que necesitás de manera rápida y simple.</h2>
-				<div class="col-sm-4">
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<ul class="text-center tipos">
 						<li class="title text-left"><h3>BUSCÁ EN CARTILLA</h3></li>
 						@foreach($tipos as $tipo)
@@ -22,7 +22,7 @@
 
 					</ul>
 				</div>
-				<div class="col-sm-8">
+				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 form">
 					
 					<div class="row">
 						<select name="provincias" id="provincia-select1" class=' provincia-select1 form-control' onChange="buscarCiudadSegunProvincia(1);setProvincia();">

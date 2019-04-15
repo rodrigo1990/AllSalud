@@ -221,7 +221,6 @@
 		  var locations = locations;
 
 		$("#map-cont").append("<div id='map' class='animated bounceInRight'></div>")
-		ajustarHeightmap();
 		
 		map = new google.maps.Map(document.getElementById('map'), {
 		    zoom: 5,
