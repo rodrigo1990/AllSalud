@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script async type="text/javascript" src="/js/preloader.js"></script>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>AllSalud || Brindamos lo mejor para tu salud</title>
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/estilos.css">
@@ -11,6 +12,8 @@
 	<link rel="stylesheet" href="OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
 	<link rel="stylesheet" href="/css/animate.css">
 
+
+	<meta name="description" content="AllSalud brinda a cada uno de sus socios la posibilidad de elegir libremente la mejor atención médica. Con el objetivo de generar un vínculo ideal, AllSalud cuenta con un programa de planes abiertos que brinda acceso directo al mejor servicio de salud con sólo presentar la credencial y el DNI. Vos decidís dónde y con quién atenderte, en el momento que lo necesites. Contamos con los reconocidos Centros de Médicos, dando cobertura a todos los niveles de complejidad" />
 
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -72,15 +75,6 @@
 			<li><a href="#atencion-al-socio" class="xs-btn scroll-spy" data-offset="50">Atención al Socio</a></li>
 			
 			<li><a href="#contacto" class="xs-btn scroll-spy" data-offset="50">Contacto</a></li>
-			<li class="center-block">
-				<a href="https://www.instagram.com/darwin.tortugas/" class="xs-btn left" target="_blank">
-					<i class="fab fa-instagram"></i>
-				</a>
-
-				<a href="https://www.facebook.com/Darwin-Tortugas-333188340810073/" class="xs-btn left" target="_blank">
-					<i class="fab fa-facebook-f"></i>
-				</a>
-			</li>
 		</ul>
 		@yield('content')
 	</div>
@@ -93,7 +87,8 @@
 	<script type="text/javascript" src="/js/headerFunctions.js"></script>
 	<script type="text/javascript" src="/js/scroll-spy.js"></script>
 	<script type="text/javascript" src="/js/manejoDeMenus.js"></script>
-	<script type="text/javascript" src="/js/preloader.js"></script>
+	<script type="text/javascript" src="/js/validarYEnviarMails.js"></script>
+	
 
 	@yield('scripts')
 </body>

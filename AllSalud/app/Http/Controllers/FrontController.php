@@ -14,7 +14,7 @@ class FrontController extends Controller
 
         $provincias = Provincia::all();
         $tipos = TipoEstablecimiento::all();
-        $especialidades = Especialidad::all();
+        $especialidades = Especialidad::orderBy('descripcion', 'desc')->get();
 
 
         return view('index',compact('provincias','tipos','especialidades'));

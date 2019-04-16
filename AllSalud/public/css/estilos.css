@@ -59,7 +59,7 @@ ul li {
 }
 
 body{
-	overflow-x: hidden;
+	overflow-x: hidden !important;
 }
 
 
@@ -184,6 +184,8 @@ h1,h2,h3,h4,h5{
 select > option{
   color:#114980;
 }
+
+
 
 /*---------------------------------------------*/
                 /*SLIDER*/
@@ -900,7 +902,7 @@ button.close{
     color:white;
 }
 
-.form form label,form input{
+.form form label,form input,form select{
   color:white;
   font-family: RalewayRegular;
 }
@@ -1056,6 +1058,14 @@ a.form-btn  {
   transition: all 0.3s ease-in-out;
 }
 
+
+a.form-btn:active {
+    -moz-transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -o-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    transform: scale(0.95);
+}
 
 
 

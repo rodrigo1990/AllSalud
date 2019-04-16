@@ -11,7 +11,7 @@ class EspecialidadDao
 {
     
   public function getEspecialidades(){
-    return Especialidad::all();
+    return Especialidad::orderBy('descripcion', 'desc')->get();
   }
    
  

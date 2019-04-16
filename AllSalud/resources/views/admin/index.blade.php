@@ -22,8 +22,8 @@
 
 	    <!-- Login Form -->
 	    <form>
-			<input class="fadeIn second" type="text" name="username" id="username" placeholder="Ingrese su usuario" value="mcd77.1990@gmail.com">
-			<input class="fadeIn third" type="password" name="password" id="password" placeholder="Ingrese password" value="admin">
+			<input class="fadeIn second" type="text" name="username" id="username" placeholder="Ingrese su usuario" value="">
+			<input class="fadeIn third" type="password" name="password" id="password" placeholder="Ingrese password" value="">
 
 			<a class="form-btn fadeIn fourth" onClick="login()">INGRESAR</a>
 			</form>
