@@ -1456,7 +1456,7 @@ header{
 }
 
 .slider-cont .absolute-div .bk-title {
-    width: 214px;
+    width: 227px;
     margin-left: -20px;
     font-size: 13px;
 }
@@ -1576,7 +1576,7 @@ header{
 @media only screen and (min-height: 568px) and (max-height: 660px){
   
   .slider-cont .absolute-div .bk-title {
-      width: 278px;
+      width: 297px;
       font-size: 19px;
   }
 
