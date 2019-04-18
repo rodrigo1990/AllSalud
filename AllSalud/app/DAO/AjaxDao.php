@@ -4,6 +4,7 @@ namespace App\DAO;
 
 use Illuminate\Http\Request;
 use App\Establecimiento;
+use App\Domicilio;
 use Illuminate\Support\Facades\DB;
 
 
@@ -66,7 +67,17 @@ class AjaxDAO
       
       $establecimiento =  Establecimiento::find($request->id);
 
-      $establecimiento->Domicilio()->detach();
+      $domicilios = Domicilio::where('establecimiento_id',$request->id)->get();
+
+      foreach($domicilios as $domicilio){
+
+        $domicilio->Tipo()->detach();
+
+      }
+
+      
+
+      $establecimiento->Domicilio()->delete();
 
       $establecimiento->Especialidad()->detach();
 
@@ -77,11 +88,11 @@ class AjaxDAO
 
     public function deleteLocacion($request){
 
-      DB::table('establecimiento_ciudad')
-          ->where('id',$request->idLocacion)
-          ->delete();
+      $domicilio = Domicilio::find($request->idLocacion);
 
-          return true;
+      $domicilio->Tipo()->detach();
+
+      return true;
 
     }
 

@@ -19,6 +19,13 @@ class CiudadDao
 
     }
 
+
+     public function getCiudadPorId($ciudad_id){
+
+
+    	return Ciudad::find($ciudad_id);
+    }
+
    
     
 }

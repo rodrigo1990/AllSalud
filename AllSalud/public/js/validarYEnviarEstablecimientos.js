@@ -2,7 +2,7 @@
 		function validarEnviar(){
 			
 			var nombre  = $("#nombre").val();
-			var tipo = $("#tipo-select").children("option:selected").val();
+		//	var tipo = $("#tipo-select").children("option:selected").val();
 			var nombreEstaValidado=false;
 			var tipoEstaValidado=false;
 			//contendra todos los inputs de locacion
@@ -22,14 +22,14 @@
 				}
 
 
-			if(tipo==0 || tipo=="null"){
+			/*if(tipo==0 || tipo=="null"){
 				$("#error-tipo").fadeIn();
 				tipoEstaValidado=false;
 			}
 			else{
 				$("#error-tipo").fadeOut();
 				tipoEstaValidado=true;
-			}
+			}*/
 
 
 			$(".domicilio-domicilio").each(function(i){
@@ -137,7 +137,7 @@
 
 
 
-			if(inputs.every(sonTodosVerdaderos)==true && nombreEstaValidado==true &&tipoEstaValidado==true){
+			if(inputs.every(sonTodosVerdaderos)==true && nombreEstaValidado==true){
 				$("form").submit();
 			}else{
 

@@ -1,3 +1,4 @@
+@inject('ciudadService', 'App\Services\CiudadService')
 @extends('admin.layouts.principal')
 @section('content')
 <div class="container">
@@ -19,13 +20,18 @@
 		<td>{{$establecimiento->nombre}}</td>
 		<td>
 			@foreach($establecimiento->Domicilio as $domicilio)
-				{{$domicilio->ciudad_nombre}}
+
+			
+				<?php $ciudad_nombre = $ciudadService->getCiudadPorId($domicilio->ciudad_id) ?>
+				
+				{{$ciudad_nombre->ciudad_nombre}}
+
+				
 			@endforeach
 		</td>
 		<td>
 			<a href="/admin/detalleEstablecimiento/{{$establecimiento->id}}/" >Actulizar/eliminar</a>
 		</td>
-
 
 
 	</tr>

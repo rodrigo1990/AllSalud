@@ -18,11 +18,6 @@ class CreateEstablecimientosTable extends Migration
             $table->string('nombre');
           
 
-            $table->unsignedInteger('tipo_id');
-
-
-            
-            $table->foreign('tipo_id')->references('id')->on('tipo_establecimientos');
 
         });
     }

@@ -36,19 +36,7 @@
 			</div>
 		</div>
 	
-		<div class="row">
-			<div class="col-lg-12 col-sm-12">
-				<label>Tipo establecimiento</label>
-				<br>	
-				<select name="tipo" id="tipo-select" class='datos-generales form-control'>
-					<option value="null">Seleccionas tipo</option>
-					@foreach($tipos as $item)
-						<option value="{{$item->id}}">{{$item->descripcion}}</option>
-					@endforeach
-				</select>
-				<div class="error" id="error-tipo">Ingrese un tipo</div>	
-			</div>
-		</div>
+		
 		<div id="especialidades">
 			<div class="row">
 				
@@ -201,6 +189,111 @@
 			<div id="map-cont1">
 				<input id="pac-input1" class="controls gm-search-input" type="text" placeholder="Establece la direccion en el mapa..">
 			</div>
+			
+			<h1>Servicios</h1>
+			<div class="row margin-top-50">
+				
+				<ul class="flex" id="especialidades-list">
+				<li>
+					<select name="establecimientos[establecimiento1][tipos][0]" id="tipo-select" class='datos-generales form-control'>
+
+						<option value="null">Seleccionas tipo</option>
+						@foreach($tipos as $item)
+							<option value="{{$item->id}}">{{$item->descripcion}}</option>
+						@endforeach
+					</select>
+					<div class="error" id="error-tipo">Ingrese un tipo</div>
+				</li>
+				<li>
+					<select name="establecimientos[establecimiento1][tipos][1]" id="tipo-select" class='datos-generales form-control'>
+
+						<option value="null">Seleccionas tipo</option>
+						@foreach($tipos as $item)
+							<option value="{{$item->id}}">{{$item->descripcion}}</option>
+						@endforeach
+					</select>
+					<div class="error" id="error-tipo">Ingrese un tipo</div>
+				</li>
+
+				<li>
+					<select name="establecimientos[establecimiento1][tipos][2]" id="tipo-select" class='datos-generales form-control'>
+
+						<option value="null">Seleccionas tipo</option>
+						@foreach($tipos as $item)
+							<option value="{{$item->id}}">{{$item->descripcion}}</option>
+						@endforeach
+					</select>
+					<div class="error" id="error-tipo">Ingrese un tipo</div>
+				</li>
+
+				<li>
+					<select name="establecimientos[establecimiento1][tipos][3]" id="tipo-select" class='datos-generales form-control'>
+
+						<option value="null">Seleccionas tipo</option>
+						@foreach($tipos as $item)
+							<option value="{{$item->id}}">{{$item->descripcion}}</option>
+						@endforeach
+					</select>
+					<div class="error" id="error-tipo">Ingrese un tipo</div>
+				</li>
+
+				<li>
+					<select name="establecimientos[establecimiento1][tipos][4]" id="tipo-select" class='datos-generales form-control'>
+
+						<option value="null">Seleccionas tipo</option>
+						@foreach($tipos as $item)
+							<option value="{{$item->id}}">{{$item->descripcion}}</option>
+						@endforeach
+					</select>
+					<div class="error" id="error-tipo">Ingrese un tipo</div>
+				</li>
+
+				<li>
+					<select name="establecimientos[establecimiento1][tipos][5]" id="tipo-select" class='datos-generales form-control'>
+
+						<option value="null">Seleccionas tipo</option>
+						@foreach($tipos as $item)
+							<option value="{{$item->id}}">{{$item->descripcion}}</option>
+						@endforeach
+					</select>
+					<div class="error" id="error-tipo">Ingrese un tipo</div>
+				</li>
+
+				<li>
+					<select name="establecimientos[establecimiento1][tipos][6]" id="tipo-select" class='datos-generales form-control'>
+
+						<option value="null">Seleccionas tipo</option>
+						@foreach($tipos as $item)
+							<option value="{{$item->id}}">{{$item->descripcion}}</option>
+						@endforeach
+					</select>
+					<div class="error" id="error-tipo">Ingrese un tipo</div>
+				</li>
+
+				<li>
+					<select name="establecimientos[establecimiento1][tipos][7]" id="tipo-select" class='datos-generales form-control'>
+
+						<option value="null">Seleccionas tipo</option>
+						@foreach($tipos as $item)
+							<option value="{{$item->id}}">{{$item->descripcion}}</option>
+						@endforeach
+					</select>
+					<div class="error" id="error-tipo">Ingrese un tipo</div>
+				</li>
+
+				<li>
+					<select name="establecimientos[establecimiento1][tipos][8]" id="tipo-select" class='datos-generales form-control'>
+
+						<option value="null">Seleccionas tipo</option>
+						@foreach($tipos as $item)
+							<option value="{{$item->id}}">{{$item->descripcion}}</option>
+						@endforeach
+					</select>
+					<div class="error" id="error-tipo">Ingrese un tipo</div>
+				</li>
+			
+				</ul>
+			</div>
 
 		</div>
 	</div>
@@ -268,7 +361,7 @@
 		//Uso esta funcion y no en main, de otra manera no reconoce los comandos blade "foreach.."
 		function agregarLocacion(){
 		y++;
-		$("form #content").append('<div class="locacion" id="locacion'+y+'"><h1>Locacion</h1> <div class="row"> <div class="col-lg-12 col-md-12 col-sm-12	"> <label>Domicilio</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="'+y+'" class="domicilio-domicilio form-control"> <div class="error" id="error-domicilio-'+y+'">Ingrese un domicilio</div> <label>Telefono</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][telefono]" id="'+y+'" class="domicilio-telefono form-control"> <div class="error" id="error-telefono-'+y+'">Ingrese un telefono</div> </div> </div> <div class="row"> <div class="col-lg-6 col-md-6 col-sm-6	"> <label for="provincias">Provincia</label> <select name="provincias" id="'+y+'"  onChange="buscarCiudadSegunProvincia('+y+')" class="provincia-select'+y+' domicilio-provincia form-control"> <option value="" selected>Selecciona tu provincia</option> @foreach($provincias as $item) <option value="{{$item->id}}">{{$item->provincia_nombre}}</option> @endforeach </select> <div class="error" id="error-provincia-'+y+'">Ingrese una provincia</div> </div> <div class="col-lg-6 col-md-6 col-sm-6"> <label for="localidad">Localidad</label> <select name="establecimientos[establecimiento'+y+'][localidad]" id="'+y+'" class="localidad-select'+y+' domicilio-localidad form-control"> <option value="">Seleccionas localidad</option> </select> <div class="error" id="error-localidad-'+y+'">Ingrese una localidad</div> </div> </div> <br> <input type="hidden" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'"> <input type="hidden" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'"> <div id="map-cont'+y+'"> <input id="pac-input'+y+'" class="controls gm-search-input" type="text" placeholder="Establece la direccion en el mapa.."></div> <a onClick="eliminarLocacion(null,'+y+')" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a </div></div>');
+		$("form #content").append('<div class="locacion" id="locacion'+y+'"><h1>Locacion</h1> <div class="row"> <div class="col-lg-12 col-md-12 col-sm-12	"> <label>Domicilio</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="'+y+'" class="domicilio-domicilio form-control"> <div class="error" id="error-domicilio-'+y+'">Ingrese un domicilio</div> <label>Telefono</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][telefono]" id="'+y+'" class="domicilio-telefono form-control"> <div class="error" id="error-telefono-'+y+'">Ingrese un telefono</div> </div> </div> <div class="row"> <div class="col-lg-6 col-md-6 col-sm-6	"> <label for="provincias">Provincia</label> <select name="provincias" id="'+y+'"  onChange="buscarCiudadSegunProvincia('+y+')" class="provincia-select'+y+' domicilio-provincia form-control"> <option value="" selected>Selecciona tu provincia</option> @foreach($provincias as $item) <option value="{{$item->id}}">{{$item->provincia_nombre}}</option> @endforeach </select> <div class="error" id="error-provincia-'+y+'">Ingrese una provincia</div> </div> <div class="col-lg-6 col-md-6 col-sm-6"> <label for="localidad">Localidad</label> <select name="establecimientos[establecimiento'+y+'][localidad]" id="'+y+'" class="localidad-select'+y+' domicilio-localidad form-control"> <option value="">Seleccionas localidad</option> </select> <div class="error" id="error-localidad-'+y+'">Ingrese una localidad</div> </div> </div> <br> <input type="hidden" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'"> <input type="hidden" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'"> <div id="map-cont'+y+'"> <input id="pac-input'+y+'" class="controls gm-search-input" type="text" placeholder="Establece la direccion en el mapa.."></div> <h1>Servicios</h1> <div class="row margin-top-50"> <ul class="flex" id="especialidades-list"> <li> <select name="establecimientos[establecimiento'+y+'][tipos][0]" id="tipo-select" class="datos-generales form-control"> <option value="null">Seleccionas tipo</option> @foreach($tipos as $item) <option value="{{$item->id}}">{{$item->descripcion}}</option> @endforeach </select> <div class="error" id="error-tipo">Ingrese un tipo</div> </li> <li> <select name="establecimientos[establecimiento'+y+'][tipos][1]" id="tipo-select" class="datos-generales form-control"> <option value="null">Seleccionas tipo</option> @foreach($tipos as $item) <option value="{{$item->id}}">{{$item->descripcion}}</option> @endforeach </select> <div class="error" id="error-tipo">Ingrese un tipo</div> </li> <li> <select name="establecimientos[establecimiento'+y+'][tipos][2]" id="tipo-select" class="datos-generales form-control"> <option value="null">Seleccionas tipo</option> @foreach($tipos as $item) <option value="{{$item->id}}">{{$item->descripcion}}</option> @endforeach </select> <div class="error" id="error-tipo">Ingrese un tipo</div> </li> <li> <select name="establecimientos[establecimiento'+y+'][tipos][3]" id="tipo-select" class="datos-generales form-control"> <option value="null">Seleccionas tipo</option> @foreach($tipos as $item) <option value="{{$item->id}}">{{$item->descripcion}}</option> @endforeach </select> <div class="error" id="error-tipo">Ingrese un tipo</div> </li> <li> <select name="establecimientos[establecimiento'+y+'][tipos][4]" id="tipo-select" class="datos-generales form-control"> <option value="null">Seleccionas tipo</option> @foreach($tipos as $item) <option value="{{$item->id}}">{{$item->descripcion}}</option> @endforeach </select> <div class="error" id="error-tipo">Ingrese un tipo</div> </li> <li> <select name="establecimientos[establecimiento'+y+'][tipos][5]" id="tipo-select" class="datos-generales form-control"> <option value="null">Seleccionas tipo</option> @foreach($tipos as $item) <option value="{{$item->id}}">{{$item->descripcion}}</option> @endforeach </select> <div class="error" id="error-tipo">Ingrese un tipo</div> </li> <li> <select name="establecimientos[establecimiento'+y+'][tipos][6]" id="tipo-select" class="datos-generales form-control"> <option value="null">Seleccionas tipo</option> @foreach($tipos as $item) <option value="{{$item->id}}">{{$item->descripcion}}</option> @endforeach </select> <div class="error" id="error-tipo">Ingrese un tipo</div> </li> <li> <select name="establecimientos[establecimiento'+y+'][tipos][7]" id="tipo-select" class="datos-generales form-control"> <option value="null">Seleccionas tipo</option> @foreach($tipos as $item) <option value="{{$item->id}}">{{$item->descripcion}}</option> @endforeach </select> <div class="error" id="error-tipo">Ingrese un tipo</div> </li> <li> <select name="establecimientos[establecimiento'+y+'][tipos][8]" id="tipo-select" class="datos-generales form-control"> <option value="null">Seleccionas tipo</option> @foreach($tipos as $item) <option value="{{$item->id}}">{{$item->descripcion}}</option> @endforeach </select> <div class="error" id="error-tipo">Ingrese un tipo</div> </li> </ul> </div> <a onClick="eliminarLocacion(null,'+y+')" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a </div></div>');
  
 
 

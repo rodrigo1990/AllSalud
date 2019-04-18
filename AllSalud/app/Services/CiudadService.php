@@ -19,6 +19,11 @@ class CiudadService
     	return $this->ciudadDao->getCiudadesPorProvincia($provincia_id);
     }
 
+
+    public function getCiudadPorId($ciudad_id){
+    	return $this->ciudadDao->getCiudadPorId($ciudad_id);
+    }
+
    
    
 }

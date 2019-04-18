@@ -65,7 +65,7 @@ h2 {
   margin-top:45px;
 }
 
-#especialidades ul.flex,#especialidadesExistentes ul.flex{
+ ul.flex,#especialidadesExistentes ul.flex{
       display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -79,7 +79,7 @@ a{
   cursor:pointer;
 }
 
-#especialidades ul.flex li, #especialidadesExistentes ul.flex li {
+ ul.flex li, #especialidadesExistentes ul.flex li {
         float: left;
     list-style: none;
     margin-left: 15px;
@@ -198,6 +198,10 @@ a{
 
 .margin-right-15{
   margin-right: 15px;
+}
+
+.margin-top-50{
+  margin-top:50px;
 }
 
 .blue{

@@ -1,5 +1,6 @@
 
 @inject('ciudadService', 'App\Services\CiudadService')
+@inject('domicilioService', 'App\Services\DomicilioService')
 @extends('admin.layouts.principal')
 @section('content')
 
@@ -55,14 +56,8 @@
 						<label>Tipo establecimiento</label>
 						<br>	
 						<select name="tipo_id" id="tipo-select" class='datos-generales form-control'>
-							<option value="null">Seleccionas tipo</option>
-							@foreach($tipos as $tipo)
-								@if($tipo->id == $establecimiento->tipo->id )
-									<option value="{{$establecimiento->tipo->id}}" selected>{{$establecimiento->tipo->descripcion}}</option>
-								@else
-									<option value="{{$tipo->id}}" >{{$tipo->descripcion}}</option>
-								@endif
-							@endforeach
+							<option value="1">1</option>
+							
 						</select>
 						<div class="error" id="error-tipo">Ingrese un tipo</div>	
 			
@@ -211,7 +206,7 @@
 					<?php  $i++;?> 
 				
 					<div class="locacion" id="locacion{{$i}}">
-					  	<input type="hidden" name="establecimientos[establecimiento{{$i}}][establecimiento_ciudad_id]" value="{{$domicilio->pivot->id}}">
+					  	<input type="hidden" name="establecimientos[establecimiento{{$i}}][establecimiento_ciudad_id]" value="{{$domicilio->id}}">
 						
 						<h1>Locacion</h1>
 
@@ -219,12 +214,12 @@
 							<div class="col-lg-12 col-md-12 col-sm-12	">
 								<label>Domicilio</label>
 								<br>
-								<input type="text"  name="establecimientos[establecimiento{{$i}}][domicilio]" id="{{$i}}"class="domicilio-domicilio form-control"  value="{{$domicilio->pivot->domicilio}}">	
+								<input type="text"  name="establecimientos[establecimiento{{$i}}][domicilio]" id="{{$i}}"class="domicilio-domicilio form-control"  value="{{$domicilio->domicilio}}">	
 								<div class="error" id="error-domicilio-{{$i}}">Ingrese un domicilio</div>
 
 								<label>Telefono</label>
 								<br>
-								<input type="text" name="establecimientos[establecimiento{{$i}}][telefono]" id="{{$i}}"  class="domicilio-telefono form-control" value="{{$domicilio->pivot->telefono}}">	
+								<input type="text" name="establecimientos[establecimiento{{$i}}][telefono]" id="{{$i}}"  class="domicilio-telefono form-control" value="{{$domicilio->telefono}}">	
 								<div class="error" id="error-telefono-{{$i}}">Ingrese un telefono</div>
 							</div>
 						</div>
@@ -237,13 +232,25 @@
 
 										<option value="0">Seleccione una provincia</option>
 											@foreach($provincias as $provincia)
-												@if($domicilio->provincia_id == $provincia->id)
+
+												<?php $provinciaIdDomicilio = $ciudadService->getCiudadPorId($domicilio->ciudad_id)  ?>
+
+
+
+												@if($provinciaIdDomicilio->provincia_id == $provincia->id)
+
+
 													<option value="{{$provincia->id}}" selected>{{$provincia->provincia_nombre}}</option>
 													<!-- CREO VARIABLE AUXILIAR DE PROVINCA PARA TOMAR LA PROVINCIA DEL ESTABLECIMIENTO -->
 													<?php $provinciaId = $provincia->id ?>
+												
+
+
 												@endif
 												
 												<option value="{{$provincia->id}}">{{$provincia->provincia_nombre}}</option>
+
+
 											@endforeach
 									</select>
 									<div class="error" id="error-provincia-1">Ingrese una provincia</div>
@@ -259,8 +266,8 @@
 									 <?php $ciudades = $ciudadService->getCiudadesPorProvincia($provinciaId) ?>
 
 									@foreach($ciudades as $ciudad)
-										@if($ciudad->id == $domicilio->id)
-											<option value="{{$domicilio->id}}" selected>{{$domicilio->ciudad_nombre}}</option>
+										@if($ciudad->id == $domicilio->ciudad_id)
+											<option value="{{$domicilio->ciudad_id}}" selected>{{$ciudad->ciudad_nombre}}</option>
 										@else
 											<option value="{{$ciudad->id}}">{{$ciudad->ciudad_nombre}}</option>
 										@endif
@@ -276,22 +283,76 @@
 							
 
 						<!--  <label for="latitud1">Latitud</label>-->
-						<input class="latitud-input" type="hidden" name="establecimientos[establecimiento{{$i}}][latitud]" id="latitud{{$i}}" value="{{$domicilio->pivot->latitud}}">
+						<input class="latitud-input" type="hidden" name="establecimientos[establecimiento{{$i}}][latitud]" id="latitud{{$i}}" value="{{$domicilio->latitud}}">
 						<br>
 						<!--  <label for="longitud1">Longitud</label>-->
-						<input type="hidden" name="establecimientos[establecimiento{{$i}}][longitud]" id="longitud{{$i}}" value="{{$domicilio->pivot->longitud}}">
+						<input type="hidden" name="establecimientos[establecimiento{{$i}}][longitud]" id="longitud{{$i}}" value="{{$domicilio->longitud}}">
 						<br>
 						<div id="map-cont{{$i}}" style="width: 100%">
 							 <input id="pac-input{{$i}}" class="gm-search-input controls" type="text" placeholder="Establece la direccion en el mapa..">
 						</div>
 
 						
-						<?php $latitudesJs[$i]=$domicilio->pivot->latitud; ?>
-						<?php $longitudesJs[$i]=$domicilio->pivot->longitud; ?>
+						<?php $latitudesJs[$i]=$domicilio->latitud; ?>
+						<?php $longitudesJs[$i]=$domicilio->longitud; ?>
 
-						 <a onClick="eliminarLocacion({{$domicilio->pivot->id}},{{$i}})" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a>
+						 <a onClick="eliminarLocacion({{$domicilio->id}},{{$i}})" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a>
+					
+					<?php $tiposExistentes = $domicilioService->getTipoPorDomicilio($domicilio->id)  ?>
+					
+
+
+			<h1>Servicios Existentes</h1>
+			<div class="row margin-top-50">
+				
+				<ul class="flex" id="">
+				<?php $tipoExist=0; ?>
+				@foreach($tiposExistentes as $tipo)
+						<?php $tipoExist++; ?>
+						<li id="tipo-li-{{$tipoExist}}">
+								<input type="hidden" name="tiposExistentes[tipo{{$tipoExist}}][registro_id]" value="{{$tipo->id}}">
+								<select name="tiposExistentes[tipo{{$tipoExist}}][tipo]" class="form-control" id="">
+									<option value="eliminar">Eliminar servicio</option>
+									<option value="{{$tipo->tipo_id}}" selected>{{$tipo->descripcion}}</option>
+								</select>
+							</li>
+					
+
+					@endforeach
+					
+				</ul>
+			</div>
+
+			<h1>Añadir Servicios</h1>
+			<div class="row margin-top-50">
+				
+				<ul class="flex" id="">
+				<?php $k=0;  ?>
+				@foreach($tipos as $tipo)
+				<?php $k++; ?>
+						<li id="tipo-li-{{$tipoExist}}">
+								<select name="establecimientos[establecimiento{{$i}}][tipos][{{$k}}]" class="form-control" id="">
+									<option value="null">Seleccionas tipo</option>
+									<option value="{{$tipo->tipo_id}}">{{$tipo->descripcion}}</option>
+								</select>
+							</li>
+					
+
+					@endforeach
+					
+				</ul>
+			</div>
+
+
+
+
+
+					
+
 
 					</div><!-- #locacion -->
+
+
 				
 
 				@endforeach

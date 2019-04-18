@@ -10,8 +10,10 @@ class TipoEstablecimiento extends Model
 	
 
 
-	public function Establecimiento(){
-    	return $this->hasMany('App/Establecimiento');
+	public function Domicilio(){
+
+    	return $this->belongsToMany('App/Domicilio','tipo_establecimiento_domicilio','tipo_id','domicilio_id')->withPivot('id');
+    
     }
 
 }
