@@ -45,16 +45,27 @@ class AjaxDAO
    public function buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad(Request $request){
 
     $establecimientos = DB::table('establecimientos')
-                            ->join('especialidades_establecimientos','establecimientos.id','especialidades_establecimientos.establecimiento_id')
-                            ->join('establecimiento_ciudad','establecimientos.id','establecimiento_ciudad.establecimiento_id')
-                            ->join('ciudades','ciudades.id','establecimiento_ciudad.ciudad_id')
-                            ->where('establecimientos.tipo_id',$request->tipo_id)
-                            ->where('establecimiento_ciudad.ciudad_id',$request->ciudad_id)
-                            ->where('especialidades_establecimientos.especialidad_id',$request->especialidad_id)
+                            ->join('domicilios','establecimientos.id','domicilios.establecimiento_id')
+                            ->join('ciudades','domicilios.ciudad_id','ciudades.id')
+                            ->where('domicilios.ciudad_id',$request->ciudad_id)
+                            ->whereExists(function ($query) use ($request) {
+                                  $query->select(DB::raw(1))
+                                        ->from('tipo_establecimiento_domicilio')
+                                        ->where('tipo_establecimiento_domicilio.tipo_id',$request->tipo_id)
+                                        ->whereRaw('tipo_establecimiento_domicilio.domicilio_id = domicilios.id');
+                              })
+                            ->whereExists(function ($query) use ($request) {
+                                  $query->select(DB::raw(1))
+                                        ->from('especialidades_establecimientos')
+                                        ->where('especialidades_establecimientos.especialidad_id',$request->especialidad_id)
+                                        ->whereRaw('especialidades_establecimientos.establecimiento_id = establecimientos.id');
+                              })
                             ->get();
 
      return $establecimientos;
 
+
+  
 
 
 

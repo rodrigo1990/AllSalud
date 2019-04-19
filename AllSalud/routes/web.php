@@ -25,7 +25,13 @@ Route::post('/prueba/datos/','PruebaController@datos');
 
 Route::post('/buscarCiudadSegunProvincia','AjaxController@buscarCiudadSegunProvincia');
 //Route::post('/buscarPorTipoEstablecimiento','AjaxController@buscarPorTipoEstablecimiento');
+
 Route::post('/buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad','AjaxController@buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad');
+
+
+Route::get('/pruebaBusqueda/{ciudad_id}/{especialidad_id}/{tipo_id}/','AjaxController@buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad');
+
+
 Route::post('admin/deleteEstablecimiento','AjaxController@deleteEstablecimiento');
 Route::post('admin/deleteLocacion','AjaxController@deleteLocacion');
 

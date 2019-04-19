@@ -50,22 +50,7 @@
 							</div>
 						</div>
 
-				<div class="row">
-					<div class="col-lg-12 col-sm-12">
 
-						<label>Tipo establecimiento</label>
-						<br>	
-						<select name="tipo_id" id="tipo-select" class='datos-generales form-control'>
-							<option value="1">1</option>
-							
-						</select>
-						<div class="error" id="error-tipo">Ingrese un tipo</div>	
-			
-
-
-
-					</div>
-				</div>
 				
 			<div id="especialidadesExistentes">
 			<div class="row">
@@ -335,7 +320,7 @@
 				<?php $k++; ?>
 						<li id="tipo-li-{{$tipoExist}}">
 								<select name="establecimientos[establecimiento{{$i}}][tipos][{{$k}}]" class="form-control" id="">
-									<option value="null">Seleccionas tipo</option>
+									<option value="null">Seleccionas servicio</option>
 									<option value="{{$tipo->id}}">{{$tipo->descripcion}}</option>
 								</select>
 							</li>
