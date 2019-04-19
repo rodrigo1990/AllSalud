@@ -296,22 +296,25 @@
 						<?php $latitudesJs[$i]=$domicilio->latitud; ?>
 						<?php $longitudesJs[$i]=$domicilio->longitud; ?>
 
-						 <a onClick="eliminarLocacion({{$domicilio->id}},{{$i}})" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a>
+						
 					
 					<?php $tiposExistentes = $domicilioService->getTipoPorDomicilio($domicilio->id)  ?>
 					
 
 
-			<h1>Servicios Existentes</h1>
-			<div class="row margin-top-50">
+			<h1 class="margin-top-50">Servicios Existentes</h1>
+			<div class="row margin-bottom-25">
 				
-				<ul class="flex" id="">
+				<ul class="flex" id=""> 
 				<?php $tipoExist=0; ?>
+				<?php $k=0; ?>
+				
 				@foreach($tiposExistentes as $tipo)
+				 		<?php $k++; ?>
 						<?php $tipoExist++; ?>
 						<li id="tipo-li-{{$tipoExist}}">
-								<input type="hidden" name="tiposExistentes[tipo{{$tipoExist}}][registro_id]" value="{{$tipo->id}}">
-								<select name="tiposExistentes[tipo{{$tipoExist}}][tipo]" class="form-control" id="">
+								<input type="hidden" name="tiposExistentes[tipo{{$tipoExist}}][registro_id][{{$k}}]" value="{{$tipo->id}}">
+								<select name="tiposExistentes[tipo{{$tipoExist}}][tipo][{{$k}}]" class="form-control" id="">
 									<option value="eliminar">Eliminar servicio</option>
 									<option value="{{$tipo->tipo_id}}" selected>{{$tipo->descripcion}}</option>
 								</select>
@@ -323,8 +326,8 @@
 				</ul>
 			</div>
 
-			<h1>Añadir Servicios</h1>
-			<div class="row margin-top-50">
+			<h1 class="margin-top-25">Añadir Servicios</h1>
+			<div class="row margin-bottom-50">
 				
 				<ul class="flex" id="">
 				<?php $k=0;  ?>
@@ -333,7 +336,7 @@
 						<li id="tipo-li-{{$tipoExist}}">
 								<select name="establecimientos[establecimiento{{$i}}][tipos][{{$k}}]" class="form-control" id="">
 									<option value="null">Seleccionas tipo</option>
-									<option value="{{$tipo->tipo_id}}">{{$tipo->descripcion}}</option>
+									<option value="{{$tipo->id}}">{{$tipo->descripcion}}</option>
 								</select>
 							</li>
 					
@@ -344,7 +347,7 @@
 			</div>
 
 
-
+			 <a onClick="eliminarLocacion({{$domicilio->id}},{{$i}})" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a>
 
 
 					
@@ -444,8 +447,7 @@
 
 		function agregarLocacion(){
 		y++;
-		$("form #content").append('<div class="locacion" id="locacion'+y+'"><input type="hidden" name="establecimientos[establecimiento'+y+'][establecimiento_ciudad_id]" value=""><h1>Locacion</h1> <div class="row"> <div class="col-lg-12 col-md-12 col-sm-12	"> <label>Domicilio</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="'+y+'" class="domicilio-domicilio form-control"> <div class="error" id="error-domicilio-'+y+'">Ingrese un domicilio</div> <label>Telefono</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][telefono]" id="'+y+'" class="domicilio-telefono form-control"> <div class="error" id="error-telefono-'+y+'">Ingrese un telefono</div> </div> </div> <div class="row"> <div class="col-lg-6 col-md-6 col-sm-6	"> <label for="provincias">Provincia</label> <select name="provincias" id="'+y+'"  onChange="buscarCiudadSegunProvincia('+y+')" class="provincia-select'+y+' domicilio-provincia form-control"> <option value="" selected>Selecciona tu provincia</option> @foreach($provincias as $item) <option value="{{$item->id}}">{{$item->provincia_nombre}}</option> @endforeach </select> <div class="error" id="error-provincia-'+y+'">Ingrese una provincia</div> </div> <div class="col-lg-6 col-md-6 col-sm-6"> <label for="localidad">Localidad</label> <select name="establecimientos[establecimiento'+y+'][ciudad]" id="'+y+'" class="localidad-select'+y+' domicilio-localidad form-control"> <option value="">Seleccionas localidad</option> </select> <div class="error" id="error-localidad-'+y+'">Ingrese una localidad</div> </div> </div> <br> <input type="hidden" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'"> <input type="hidden" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'"> <div id="map-cont'+y+'"> <input id="pac-input'+y+'" class="controls gm-search-input" type="text" placeholder="Establece la direccion en el mapa.."></div> <a onClick="eliminarLocacion(null,'+y+')" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a </div></div>');
- 
+		$("form #content").append('<div class="locacion" id="locacion'+y+'"><input type="hidden" name="establecimientos[establecimiento'+y+'][establecimiento_ciudad_id]" value=""><h1>Locacion</h1> <div class="row"> <div class="col-lg-12 col-md-12 col-sm-12	"> <label>Domicilio</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][domicilio]" id="'+y+'" class="domicilio-domicilio form-control"> <div class="error" id="error-domicilio-'+y+'">Ingrese un domicilio</div> <label>Telefono</label> <br> <input type="text" name="establecimientos[establecimiento'+y+'][telefono]" id="'+y+'" class="domicilio-telefono form-control"> <div class="error" id="error-telefono-'+y+'">Ingrese un telefono</div> </div> </div> <div class="row"> <div class="col-lg-6 col-md-6 col-sm-6	"> <label for="provincias">Provincia</label> <select name="provincias" id="'+y+'"  onChange="buscarCiudadSegunProvincia('+y+')" class="provincia-select'+y+' domicilio-provincia form-control"> <option value="" selected>Selecciona tu provincia</option> @foreach($provincias as $item) <option value="{{$item->id}}">{{$item->provincia_nombre}}</option> @endforeach </select> <div class="error" id="error-provincia-'+y+'">Ingrese una provincia</div> </div> <div class="col-lg-6 col-md-6 col-sm-6"> <label for="localidad">Localidad</label> <select name="establecimientos[establecimiento'+y+'][ciudad]" id="'+y+'" class="localidad-select'+y+' domicilio-localidad form-control"> <option value="">Seleccionas localidad</option> </select> <div class="error" id="error-localidad-'+y+'">Ingrese una localidad</div> </div> </div> <br> <input type="hidden" name="establecimientos[establecimiento'+y+'][latitud]" id="latitud'+y+'"> <input type="hidden" name="establecimientos[establecimiento'+y+'][longitud]" id="longitud'+y+'"> <div id="map-cont'+y+'"> <input id="pac-input'+y+'" class="controls gm-search-input" type="text" placeholder="Establece la direccion en el mapa.."></div> <h1 class="margin-top-50">Añadir Servicios</h1> <div class="row margin-bottom-50"> <ul class="flex" id=""> <?php $k=0;  ?> @foreach($tipos as $tipo) <?php $k++; ?> <li id="tipo-li-{{$tipoExist}}"> <select name="establecimientos[establecimiento'+y+'][tipos][{{$k}}]" class="form-control" id=""> <option value="null">Seleccionas tipo</option> <option value="{{$tipo->id}}">{{$tipo->descripcion}}</option> </select> </li> @endforeach </ul> </div> <a onClick="eliminarLocacion(null,'+y+')" class="full-btn remove-locacion-btn"><i class="fas fa-ban"></i></a </div></div>');
 
 
 

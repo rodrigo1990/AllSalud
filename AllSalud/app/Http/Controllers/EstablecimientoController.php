@@ -54,7 +54,7 @@ class EstablecimientoController extends Controller
 
 
         if($session=="true")
-          return view('admin/altaEstablecimiento',compact('provincias','tipos','ciudades','estado','especialidades'));
+          return view('admin/altaEstablecimiento',compact('provincias','tipos','estado','especialidades'));
         else
           return "No esta autenticado en la aplicacion";
     }
@@ -104,7 +104,7 @@ class EstablecimientoController extends Controller
       $session = $this->sessionService->accessSessionData();
 
        if($session=="true")
-          return view('admin/detalleEstablecimiento',compact('establecimiento','provincias','tipos','ciudades','especialidades'));
+          return view('admin/detalleEstablecimiento',compact('establecimiento','provincias','tipos','especialidades'));
         else 
           return "No esta autenticado en la aplicacion";
 

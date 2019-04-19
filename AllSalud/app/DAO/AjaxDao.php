@@ -92,6 +92,8 @@ class AjaxDAO
 
       $domicilio->Tipo()->detach();
 
+      $domicilio->delete();
+
       return true;
 
     }
