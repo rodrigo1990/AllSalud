@@ -154,7 +154,7 @@
 							k++;					
 
 							$(".cartilla .establecimientos").append("<li class='animated fadeIn'><div class='col-sm-2 col-xs-2 nro'><span>"+k+"</span></div><div class='col-sm-10 col-xs-10'><p><b>"+
-								data[i].nombre+ "</b></p><p>"+data[i].domicilio+" "+data[i].ciudad_nombre+" </p><p>"+data[i].telefono+"</p><a class='float-left detalle-btn' onClick='zoomOnLocation("+data[i].latitud+","+data[i].longitud+")'>Ver mapa</a></div></li>");
+								toTitleCase(data[i].nombre)+ "</b></p><p>"+toTitleCase(data[i].domicilio)+", "+data[i].ciudad_nombre+" </p><p>"+data[i].telefono+"</p><a class='float-left detalle-btn' onClick='zoomOnLocation("+data[i].latitud+","+data[i].longitud+")'>Ver mapa</a></div></li>");
 
 							 locations.push([''+data[i].nombre+'<br>'+data[i].domicilio+' '+data[i].ciudad_nombre+'',data[i].latitud,data[i].longitud]);
 
@@ -365,6 +365,12 @@
 			$(this).css("background","white");
 		    
 		});
+
+
+
+		function toTitleCase(str) {
+  			return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+		}
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkne1gpPfJ0B3KrE4OQURwPi492LDjg8g&libraries=places">
