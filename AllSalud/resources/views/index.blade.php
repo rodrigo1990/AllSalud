@@ -82,7 +82,7 @@
 						<h1 class="margin-bottom-15">Atención al socio</h1>
 						<h3 class="margin-bottom-15">Contactate con un asesor comercional</h3>
 						<div class="nro">
-							<h1><img src="<?php echo asset("storage/img/nro-icon.png")?>"></img> 3320-8053</h1>
+							<h1><img src="<?php echo asset("storage/img/nro-icon.png")?>"></img> 3220-8053</h1>
 						</div>
 					</div>
 				</div>
@@ -357,7 +357,7 @@
 		}
 
 		//EVENT
-		$('ul.tipos li').click(function() {
+		$('ul.tipos li').not($("li.title")).click(function() {
 		    $("ul.tipos li .active").fadeOut();
 			$(this).children('.active').fadeIn();
 

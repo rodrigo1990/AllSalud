@@ -1226,6 +1226,14 @@ a.form-btn:active {
 
 }
 
+@media only screen and (width: 1024px){
+  
+.cartilla ul.tipos li.title h3{
+  font-size: 20px;
+}
+
+}
+
 
 
 
@@ -1261,6 +1269,10 @@ a.form-btn:active {
 
 .cartilla ul.tipos li {
     height: 60px;
+}
+
+.cartilla ul.tipos li:nth-child(2){
+  margin-top:60px;
 }
 
 .cartilla ul.tipos li div.active {
