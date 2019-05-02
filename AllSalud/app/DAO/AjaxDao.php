@@ -19,6 +19,7 @@ class AjaxDAO
                      
                       ->select('id','ciudad_nombre')
                       ->where('provincia_id','=',$request->provinciaId)
+                      ->orderBy('ciudad_nombre', 'asc')
                       
                       ->get();
 
