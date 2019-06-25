@@ -45,7 +45,60 @@ class AjaxDAO
 
    public function buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad(Request $request){
 
+
+    $ciudad_id = $request->ciudad_id;
+    $tipo_id = $request->tipo_id;
+    $especialidad_id = $request->especialidad_id;
+
     $establecimientos = DB::table('establecimientos')
+                            ->join('domicilios','establecimientos.id','domicilios.establecimiento_id')
+                            ->join('ciudades','domicilios.ciudad_id','ciudades.id')
+
+                            ->when($ciudad_id,function($query,$ciudad_id){
+                               return $query->where('domicilios.ciudad_id',$ciudad_id);  
+                            })
+
+                            ->when($especialidad_id,function($query,$especialidad_id){
+                               return $query->whereExists(function ($query) use ($especialidad_id) {
+                                      $query->select(DB::raw(1))
+                                            ->from('especialidades_establecimientos')
+                                            ->where('especialidades_establecimientos.especialidad_id',$especialidad_id)
+                                            ->whereRaw('especialidades_establecimientos.establecimiento_id = establecimientos.id');
+                                  });
+                            })
+
+                            ->when($tipo_id,function($query,$tipo_id){
+                               return $query->whereExists(function ($query) use ($tipo_id) {
+                                        $query->select(DB::raw(1))
+                                        ->from('tipo_establecimiento_domicilio')
+                                        ->where('tipo_establecimiento_domicilio.tipo_id',$tipo_id)
+                                        ->whereRaw('tipo_establecimiento_domicilio.domicilio_id = domicilios.id');
+                              });
+                            })
+                            ->get();
+
+
+
+                            /*->whereExists(function ($query) use ($request) {
+                                  $query->select(DB::raw(1))
+                                        ->from('tipo_establecimiento_domicilio')
+                                        ->where('tipo_establecimiento_domicilio.tipo_id',$request->tipo_id)
+                                        ->whereRaw('tipo_establecimiento_domicilio.domicilio_id = domicilios.id');
+                              })
+
+
+
+                            ->whereExists(function ($query) use ($request) {
+                                  $query->select(DB::raw(1))
+                                        ->from('especialidades_establecimientos')
+                                        ->where('especialidades_establecimientos.especialidad_id',$request->especialidad_id)
+                                        ->whereRaw('especialidades_establecimientos.establecimiento_id = establecimientos.id');
+                              })*/
+     
+
+
+
+     /*$establecimientos = DB::table('establecimientos')
                             ->join('domicilios','establecimientos.id','domicilios.establecimiento_id')
                             ->join('ciudades','domicilios.ciudad_id','ciudades.id')
                             ->where('domicilios.ciudad_id',$request->ciudad_id)
@@ -61,7 +114,7 @@ class AjaxDAO
                                         ->where('especialidades_establecimientos.especialidad_id',$request->especialidad_id)
                                         ->whereRaw('especialidades_establecimientos.establecimiento_id = establecimientos.id');
                               })
-                            ->get();
+                            ->get();*/
 
      return $establecimientos;
 

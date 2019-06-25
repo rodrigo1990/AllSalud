@@ -11,6 +11,17 @@
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<ul class="text-center tipos">
 						<li class="title text-left"><h3>BUSCÁ EN CARTILLA</h3></li>
+						
+						<li class="text-center filter">
+							<a onClick="ordenarCampos('especialidades');setTipo(0);">
+								<h4>Especialidades</h4>
+							</a>
+						</li>
+						<li class="text-center filter">
+							<a  onClick="ordenarCampos('zonas');setTipo(0);">
+								<h4>Zonas</h4>
+							</a>
+						</li>
 						@foreach($tipos as $tipo)
 							<li class="text-left">
 								<div class="active"></div>
@@ -24,8 +35,8 @@
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 form">
 					
-					<div class="row">
-						<select name="provincias" id="provincia-select1" class=' provincia-select1 form-control' onChange="buscarCiudadSegunProvincia(1);setProvincia();">
+					<div class="row campos_especialidades-zonas">
+						<!--  <select name="provincias" id="provincia-select1" class=' provincia-select1 form-control' onChange="buscarCiudadSegunProvincia(1);setProvincia();">
 							<option value="" selected>Provincia</option>
 							@foreach($provincias as $item)
 								<option value="{{$item->id}}">{{$item->provincia_nombre}}</option>
@@ -43,7 +54,7 @@
 							@endforeach
 						</select>
 
-						<a class="buscar-btn" onClick="buscar()"><i class="fas fa-search"></i></a>
+						<a class="buscar-btn" onClick="buscar()"><i class="fas fa-search"></i></a>-->
 					</div>
 					<div class="row">
 						<div class="col-sm-6 padding-left-0 padding-right-0">

@@ -126,8 +126,8 @@
 		
 		function buscar(){
 
-			if(tipoEstablecimientoGlobal!=0&&provinciaGlobal!=0&&ciudadGlobal!=0&&especialidadGlobal!=0)
-			{
+			/*if(tipoEstablecimientoGlobal!=0&&provinciaGlobal!=0&&ciudadGlobal!=0&&especialidadGlobal!=0)
+			{*/
 
 				$.ajax({
 				headers: {
@@ -148,6 +148,9 @@
 					
 
 					if(data.length!=0){
+							console.log(tipoEstablecimientoGlobal);
+						console.log(ciudadGlobal);
+						console.log(especialidadGlobal);
 						interaccionMapa++;
 						for(var i in data) {	
 							
@@ -169,6 +172,12 @@
 							updateZoom(5);
 
 					}else{
+
+						console.log(tipoEstablecimientoGlobal);
+						console.log(ciudadGlobal);
+						console.log(especialidadGlobal);
+
+
 						alertar("Disculpe, no hay resultados para esta búsqueda");
 						interaccionMapa=0;
 						$("#map-cont").fadeOut(function(){
@@ -184,11 +193,11 @@
 
 					}//success
 				});//
-			}//if
-			else{
+			//}//if
+			/*else{
 				alertar("Seleccione los campos marcados en rojo");
 				validarCampos();
-			}
+			}*/
 		}
 		
 	
@@ -378,6 +387,92 @@
 			   // Directly return the joined string
 			   return splitStr.join(' ');
 		}
+
+
+
+		function ordenarCampos(campo){
+
+
+			var especialidad = $("#especialidad-select").val();
+
+			var provincia = $("#provincia-select1").val();
+
+
+			var localidad = $("#localidad-select1").val();
+
+			console.log(provincia);
+
+			$(".campos_especialidades-zonas").hide();
+
+
+
+
+			
+			/*El campo que ingrese como parametro, va a ser colocado primero en la interface*/
+			if(campo=='zonas'){
+
+
+				
+
+				$(".campos_especialidades-zonas").html('<select name="provincias" id="provincia-select1" class=" provincia-select1 form-control" onChange="buscarCiudadSegunProvincia(1);setProvincia();"> <option value="" selected>Provincia</option> @foreach($provincias as $item) <option value="{{$item->id}}">{{$item->provincia_nombre}}</option> @endforeach </select> <select name="localidad" id="localidad-select1" class="localidad-select1 form-control" onChange="setCiudad()"> <option value="null">Seleccion localidad</option> </select><select name="especialidad" id="especialidad-select" class="form-control" onChange="setEspecialidad()"> <option value="">Seleccione una Especialidad</option> @foreach($especialidades as $especialidad) <option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option> @endforeach </select><a class="buscar-btn" onClick="buscar()"><i class="fas fa-search"></i></a>');
+
+					
+
+					$("#especialidad-select").val(especialidad);
+
+					$("#provincia-select1").val(provincia);
+					
+					
+
+					if(localidad!=undefined){
+
+						buscarCiudadSegunProvincia(1);
+
+						setTimeout(
+						  function() 
+						  {
+						    $(".localidad-select1").val(localidad);
+						  }, 1000);
+
+					}
+
+
+					$(".campos_especialidades-zonas").fadeIn();
+
+
+			}
+			else{
+
+
+				$(".campos_especialidades-zonas").html('<select name="especialidad" id="especialidad-select" class="form-control" onChange="setEspecialidad()"> <option value="">Seleccione una Especialidad</option> @foreach($especialidades as $especialidad) <option value="{{$especialidad->id}}">{{$especialidad->descripcion}}</option> @endforeach </select> <select name="provincias" id="provincia-select1" class=" provincia-select1 form-control" onChange="buscarCiudadSegunProvincia(1);setProvincia();"> <option value="" selected>Provincia</option> @foreach($provincias as $item) <option value="{{$item->id}}">{{$item->provincia_nombre}}</option> @endforeach </select> <select name="localidad" id="localidad-select1" class="localidad-select1 form-control" onChange="setCiudad()"> <option value="null">Seleccion localidad</option> </select><a class="buscar-btn" onClick="buscar()"><i class="fas fa-search"></i></a> ');
+					
+					$("#especialidad-select").val(especialidad);
+
+					$("#provincia-select1").val(provincia);
+					
+					if(localidad!=undefined){
+
+						console.log('especialidades undefined')
+
+						buscarCiudadSegunProvincia(1);
+
+						setTimeout(
+						  function() 
+						  {
+						    $(".localidad-select1").val(localidad);
+						  }, 1000);
+
+					}
+
+					$(".campos_especialidades-zonas").fadeIn();
+
+
+					
+
+					
+			}
+
+		}//ordenarCampos
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkne1gpPfJ0B3KrE4OQURwPi492LDjg8g&libraries=places">

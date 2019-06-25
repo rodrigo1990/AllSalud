@@ -666,6 +666,11 @@ header ul li a i:hover{
                 /*CARTILLA*/
 /*----------------------------------------------*/
 
+
+.campos_especialidades-zonas{
+  display:none;
+}
+
 #cartilla-panel{
       background: white;
     margin-top: 5px;
@@ -746,7 +751,7 @@ button.close{
     box-shadow: unset !important;
 }
 
-.cartilla ul.tipos li {
+.cartilla ul.tipos li:not(.filter) {
         padding: 0px 0;
     background: #F8F8F8;
     border-left: 1px solid #EDEDEE;
@@ -778,6 +783,19 @@ button.close{
   text-decoration: none;
 }
 
+
+
+.cartilla ul.tipos li.filter{
+  margin-top:5px;
+    border:2px solid #114980;
+      border-radius: 6px;
+}
+
+
+.cartilla ul.tipos li.filter h4{
+  margin-left:0;
+}
+
 .cartilla ul.tipos li h4 {
         margin: 0;
     line-height: 57px;
@@ -798,15 +816,25 @@ button.close{
 }
 
 .cartilla ul.establecimientos {
-    margin-top: 40px;
-    height: 100%;
+        margin-top: 40px;
+    height: 562px;
     overflow-y: auto;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.cartilla ul.establecimientos::-webkit-scrollbar {
+    width: 10px;
+}
+
+.cartilla ul.establecimientos::-webkit-scrollbar-thumb {
+    background: rgba(0, 188, 213, 0.25);
+    border-radius: 10px;
 }
 
 .cartilla ul.establecimientos li {
         width: 100%;
-    height: 144px;
+   /* height: 144px;*/
     border: 1px solid #f1e4e4;
     /* -webkit-box-shadow: 0px 1px 3px 2px rgba(184,178,184,1); */
     -moz-box-shadow: 0px 1px 3px 2px rgba(184,178,184,1);
@@ -847,7 +875,7 @@ button.close{
 
 #map{
     width: 100% !important;
-    height: 448px;
+    height: 571px;
     margin-top:40px;
 }
 
