@@ -36,11 +36,16 @@ class FrontController extends Controller
     {	
 
         $provincias = $this->provinciaService->getProvincias();
+        
+        $provinciasAsignadasEstablecimiento = $this->provinciaService->getProvinciasAsignadasEstablecimiento();
+
         $tipos =$this->tipoEstablecimientoService->getTipos();
-        $especialidades = $this->especialidadService->getEspecialidades();
+        
+        $especialidadesAsignadasEstablecimiento = $this->especialidadService->getEspecialidadesAsignadasEstablecimiento();
 
 
-        return view('index',compact('provincias','tipos','especialidades'));
+
+        return view('index',compact('provincias','tipos','especialidadesAsignadasEstablecimiento','provinciasAsignadasEstablecimiento'));
     }
 
 

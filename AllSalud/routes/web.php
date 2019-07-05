@@ -24,7 +24,7 @@ Route::post('/prueba/datos/','PruebaController@datos');
 /*AJAX ROUTES*/
 
 Route::post('/buscarCiudadSegunProvincia','AjaxController@buscarCiudadSegunProvincia');
-//Route::post('/buscarPorTipoEstablecimiento','AjaxController@buscarPorTipoEstablecimiento');
+Route::post('/buscarCiudadesAsignadasEstablecimientoSegunProvincia','AjaxController@buscarCiudadesAsignadasEstablecimientoSegunProvincia');
 
 Route::post('/buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad','AjaxController@buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad');
 

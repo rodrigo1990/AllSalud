@@ -21,6 +21,11 @@ class ProvinciaService
     }
 
 
+    public function getProvinciasAsignadasEstablecimiento(){
+    	return $this->provinciaDao->getProvinciasAsignadasEstablecimiento();
+    }
+
+
 
 
    

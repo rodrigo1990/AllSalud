@@ -29,6 +29,29 @@ class AjaxDAO
 
   }
 
+
+  public function buscarCiudadesAsignadasEstablecimientoSegunProvincia($request){
+
+
+      $ciudades = DB::table('ciudades')
+                      ->where('provincia_id','=',$request->provinciaId)
+                      ->whereExists(function ($query) {
+                      $query->select(DB::raw(1))
+                            ->from('domicilios')
+                            ->whereRaw('ciudades.id = domicilios.ciudad_id');
+                      })
+                    ->get(); 
+
+
+        return $ciudades;
+
+
+  }
+
+
+
+
+
   public function buscarPorTipoEstablecimiento($request){
   	$establecimientos = DB::table('establecimientos')
                       ->join('establecimiento_ciudad','establecimientos.id','establecimiento_ciudad.establecimiento_id')
@@ -43,16 +66,25 @@ class AjaxDAO
   }
 
 
+
+
+
    public function buscarEstablecimientoPorTipoProvinciaCiudadEspecialidad(Request $request){
 
 
     $ciudad_id = $request->ciudad_id;
     $tipo_id = $request->tipo_id;
     $especialidad_id = $request->especialidad_id;
+    $provincia_id = $request->provincia_id;
 
     $establecimientos = DB::table('establecimientos')
                             ->join('domicilios','establecimientos.id','domicilios.establecimiento_id')
                             ->join('ciudades','domicilios.ciudad_id','ciudades.id')
+                            ->join('provincias','ciudades.provincia_id','provincias.id')
+                            
+                            ->when($provincia_id,function($query,$provincia_id){
+                               return $query->where('provincias.id',$provincia_id);  
+                            })
 
                             ->when($ciudad_id,function($query,$ciudad_id){
                                return $query->where('domicilios.ciudad_id',$ciudad_id);  
@@ -75,6 +107,8 @@ class AjaxDAO
                                         ->whereRaw('tipo_establecimiento_domicilio.domicilio_id = domicilios.id');
                               });
                             })
+
+
                             ->get();
 
 

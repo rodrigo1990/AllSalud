@@ -20,6 +20,11 @@ class EspecialidadService
       return $this->especialidadDao->getEspecialidades();
     }
 
+
+    public function getEspecialidadesAsignadasEstablecimiento(){
+      return $this->especialidadDao->getEspecialidadesAsignadasEstablecimiento();
+    }
+
    
    
 }

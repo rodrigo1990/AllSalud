@@ -34,6 +34,13 @@ class AjaxController extends Controller
       
     }
 
+    public function buscarCiudadesAsignadasEstablecimientoSegunProvincia(Request $request){
+
+        return json_encode($this->ajaxService->buscarCiudadesAsignadasEstablecimientoSegunProvincia($request));
+    }
+
+    
+
     public function deleteEstablecimiento(Request $request){
       return json_encode($this->ajaxService->deleteEstablecimiento($request));
     }

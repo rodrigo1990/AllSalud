@@ -667,9 +667,9 @@ header ul li a i:hover{
 /*----------------------------------------------*/
 
 
-.campos_especialidades-zonas{
+/*.campos_especialidades-zonas{
   display:none;
-}
+}*/
 
 #cartilla-panel{
       background: white;
@@ -737,6 +737,23 @@ button.close{
 
 }
 
+#cartilla ul li.filter.selected{
+      background: #114980;
+        -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#cartilla ul li.filter.selected h4{
+    color: white;
+      -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
 
 .cartilla select{
       border-bottom-color: #00BCD5 ;
@@ -789,6 +806,11 @@ button.close{
   margin-top:5px;
     border:2px solid #114980;
       border-radius: 6px;
+          margin-top: 5px;
+    border: 2px solid #114980;
+    border-radius: 6px;
+    color: #114980;
+    background: transparent;
 }
 
 
