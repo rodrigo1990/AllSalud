@@ -24185,7 +24185,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'info@allsalud.com.ar', NULL, 'b7704e6fd0ad722fdd8092d9c9c36f4c', NULL, NULL, NULL),
+(1, 'admin', 'info@allsalud.com.ar', NULL, '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL),
 (2, '', 'mcd77.1990@gmail.com', NULL, 'ad98ebfac3fafaca8e31af71395c6544', NULL, NULL, NULL);
 
 --
