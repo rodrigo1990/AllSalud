@@ -6,3 +6,7 @@
   3.A Create a database called "allsalud"
   3.B Go to the root of the project->BD->allsalud_1 2.sql, use this file to generate all tables and take advantaje of the hundres of records already written =)
 4. Run php artisan serve and get fun =)
+
+PD: Going to localhost:8000/admin you can play with the administrator's interface, you can use for log in:
+    USERNAME: info@allsalud.com.ar
+    PASSWORD: 123
